@@ -1,0 +1,873 @@
+{
+  "meta": {
+    "version": "1.0",
+    "lastUpdated": "2026-03-18",
+    "regions": ["lofoten", "tromsø"],
+    "defaultCurrency": "NOK",
+    "season": "winter",
+    "seasonMonths": ["10", "11", "12", "01", "02", "03"]
+  },
+  "attractions": [
+    {
+      "id": "lof-001",
+      "name": {
+        "zh": "Haukland 海灘",
+        "en": "Haukland Beach (Hauklandstranda)"
+      },
+      "region": "lofoten",
+      "subRegion": "Vestvågøy",
+      "type": "nature",
+      "tags": ["beach", "photography", "hiking", "iconic"],
+      "coordinates": { "lat": 68.2467, "lng": 13.5381 },
+      "description": {
+        "zh": "被 Lonely Planet 評選為歐洲最美沙灘，白沙搭配壯闊山景，冬季更有獨特的極地荒涼之美。距離 Leknes 約 10 分鐘車程。",
+        "en": "Voted Europe's best beach by Lonely Planet. White sand against dramatic mountain backdrop, with a unique arctic desolation in winter. About 10 min drive from Leknes."
+      },
+      "practicalInfo": {
+        "suggestedDuration": 60,
+        "bestTimeOfDay": "morning",
+        "difficulty": "easy",
+        "fee": { "amount": 0, "note": "Parking 20 NOK/hr" },
+        "openMonths": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "winterNote": {
+          "zh": "冬季白天短，建議在 10:00-14:00 之間到訪以獲得最佳光線",
+          "en": "Short daylight in winter; visit between 10:00-14:00 for best light"
+        }
+      },
+      "transport": {
+        "fromLeknes": { "method": "car", "duration": 10, "route": "E10 轉 Offersøyveien" },
+        "fromSvolvær": { "method": "car", "duration": 75, "route": "沿 E10 西行" }
+      },
+      "aurora": { "suitable": true, "lightPollution": "very_low" },
+      "images": { "card": "haukland-beach.jpg" },
+      "insiderTip": {
+        "zh": "可沿步道走到隔壁的 Uttakleiv 海灘，翻過山脊的景觀非常壯觀",
+        "en": "Walk the coastal path to Uttakleiv Beach next door — the ridge views are spectacular"
+      }
+    },
+    {
+      "id": "lof-002",
+      "name": {
+        "zh": "Å 鎮 (奧鎮)",
+        "en": "Å i Lofoten"
+      },
+      "region": "lofoten",
+      "subRegion": "Moskenes",
+      "type": "village",
+      "tags": ["fishing_village", "photography", "culture", "stockfish"],
+      "coordinates": { "lat": 67.8770, "lng": 12.9830 },
+      "description": {
+        "zh": "E10 公路的盡頭，羅弗敦最南端的傳統漁村。保存完好的紅色漁屋群，是體驗挪威漁業文化的絕佳地點。",
+        "en": "The end of the E10 road and Lofoten's southernmost fishing village. Well-preserved red fishing cabins offer an authentic glimpse into Norwegian fishing culture."
+      },
+      "practicalInfo": {
+        "suggestedDuration": 60,
+        "bestTimeOfDay": "afternoon",
+        "difficulty": "easy",
+        "fee": { "amount": 0 },
+        "openMonths": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+      },
+      "transport": {
+        "fromLeknes": { "method": "car", "duration": 60, "route": "E10 往南" },
+        "fromReine": { "method": "car", "duration": 15, "route": "E10 往南" }
+      },
+      "aurora": { "suitable": true, "lightPollution": "very_low" },
+      "images": { "card": "a-lofoten.jpg" },
+      "insiderTip": {
+        "zh": "冬天 16:00 就天黑了，沿途有很多停車拍照的好點，建議預留時間",
+        "en": "It gets dark by 16:00 in winter — leave time to stop and photograph along the way"
+      }
+    },
+    {
+      "id": "lof-003",
+      "name": {
+        "zh": "Eliassen Rorbuer 漁屋",
+        "en": "Eliassen Rorbuer (Hamnøy)"
+      },
+      "region": "lofoten",
+      "subRegion": "Moskenes",
+      "type": "accommodation",
+      "tags": ["iconic", "photography", "rorbuer", "must_stay"],
+      "coordinates": { "lat": 68.0300, "lng": 13.1350 },
+      "description": {
+        "zh": "羅弗敦最具代表性的紅色漁屋住宿，曾登上《孤獨星球》封面。位於 Hamnøy 小島上，面對壯闊的 Reinefjord 峽灣。",
+        "en": "Lofoten's most iconic red fishermen's cabin resort, featured on Lonely Planet's cover. Located on Hamnøy island facing the spectacular Reinefjord."
+      },
+      "practicalInfo": {
+        "suggestedDuration": 720,
+        "bestTimeOfDay": "all_day",
+        "difficulty": "easy",
+        "fee": { "amount": 790, "note": "NOK/night 起（淡季標準一房）" },
+        "openMonths": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+      },
+      "transport": {
+        "fromLeknes": { "method": "car", "duration": 45, "route": "E10 往南至 Hamnøy" },
+        "fromReine": { "method": "car", "duration": 5, "route": "E10 北行" }
+      },
+      "aurora": { "suitable": true, "lightPollution": "very_low" },
+      "images": { "card": "eliassen-rorbuer.jpg" },
+      "insiderTip": {
+        "zh": "清晨到橋上拍攝漁屋倒影是經典角度，日出前的藍調時刻最美",
+        "en": "The classic shot is from the bridge at dawn — the blue hour reflection is magical"
+      }
+    },
+    {
+      "id": "lof-004",
+      "name": {
+        "zh": "Reine 雷訥",
+        "en": "Reine"
+      },
+      "region": "lofoten",
+      "subRegion": "Moskenes",
+      "type": "village",
+      "tags": ["fishing_village", "photography", "iconic", "scenic"],
+      "coordinates": { "lat": 68.0313, "lng": 13.1532 },
+      "description": {
+        "zh": "被譽為挪威最美的漁村，四周被險峻山峰和蔚藍峽灣環繞。紅色漁屋點綴其間，是羅弗敦的代表性畫面。",
+        "en": "Often called Norway's most beautiful village, surrounded by dramatic peaks and blue fjords. The red fishing cabins create Lofoten's most iconic imagery."
+      },
+      "practicalInfo": {
+        "suggestedDuration": 60,
+        "bestTimeOfDay": "morning",
+        "difficulty": "easy",
+        "fee": { "amount": 0 },
+        "openMonths": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+      },
+      "transport": {
+        "fromLeknes": { "method": "car", "duration": 40, "route": "E10 往南" },
+        "fromSvolvær": { "method": "car", "duration": 120, "route": "E10 西行" }
+      },
+      "aurora": { "suitable": true, "lightPollution": "very_low" },
+      "images": { "card": "reine.jpg" },
+      "insiderTip": {
+        "zh": "如果天氣好且體力允許，Reinebringen 步道的山頂俯瞰 Reine 是此生必看的景色",
+        "en": "If weather permits, the Reinebringen trail offers a once-in-a-lifetime view over Reine"
+      }
+    },
+    {
+      "id": "lof-005",
+      "name": {
+        "zh": "Anita's Sjømat 海鮮餐廳",
+        "en": "Anita's Sjømat (Seafood Restaurant)"
+      },
+      "region": "lofoten",
+      "subRegion": "Moskenes",
+      "type": "restaurant",
+      "tags": ["seafood", "local_food", "fish_burger", "must_eat"],
+      "coordinates": { "lat": 68.0640, "lng": 13.2240 },
+      "description": {
+        "zh": "羅弗敦最有名的海鮮餐廳之一，招牌魚漢堡（Classic 漢堡 199 NOK）是必吃。位於 Sakrisøy 小島上的黃色漁屋中。",
+        "en": "One of Lofoten's most famous seafood spots. The signature fish burger (Classic 199 NOK) is a must-try. Located in a yellow fishing cabin on Sakrisøy island."
+      },
+      "practicalInfo": {
+        "suggestedDuration": 45,
+        "bestTimeOfDay": "lunch",
+        "difficulty": "easy",
+        "fee": { "amount": 199, "note": "Classic 魚漢堡價格" },
+        "openMonths": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "winterNote": {
+          "zh": "冬季營業時間不固定，建議先上官網確認。作者第一次去撲空了！",
+          "en": "Winter hours vary — check their website first. We got caught by a closed day!"
+        }
+      },
+      "transport": {
+        "fromReine": { "method": "car", "duration": 5, "route": "E10 北行" },
+        "fromLeknes": { "method": "car", "duration": 35, "route": "E10 往南" }
+      },
+      "aurora": { "suitable": false, "lightPollution": "low" },
+      "images": { "card": "anitas-sjomat.jpg" },
+      "insiderTip": {
+        "zh": "Classic 魚漢堡是招牌必點，吃完可以在 Sakrisøy 小島上走走，黃色漁屋也是拍照熱點",
+        "en": "The Classic fish burger is the must-order. After eating, stroll around Sakrisøy — the yellow cabins are a photography hotspot"
+      }
+    },
+    {
+      "id": "lof-006",
+      "name": {
+        "zh": "Svolvær 斯沃爾維爾",
+        "en": "Svolvær Town Center"
+      },
+      "region": "lofoten",
+      "subRegion": "Austvågøy",
+      "type": "town",
+      "tags": ["town_center", "shopping", "base_camp"],
+      "coordinates": { "lat": 68.2343, "lng": 14.5682 },
+      "description": {
+        "zh": "羅弗敦最大的城鎮，也是東部的主要門戶。市中心有紀念品店、超市和各種餐廳，是補給和休息的好地方。",
+        "en": "Lofoten's largest town and eastern gateway. The center has souvenir shops, supermarkets, and restaurants — a good base for supplies and rest."
+      },
+      "practicalInfo": {
+        "suggestedDuration": 120,
+        "bestTimeOfDay": "afternoon",
+        "difficulty": "easy",
+        "fee": { "amount": 0 },
+        "openMonths": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+      },
+      "transport": {
+        "fromLeknes": { "method": "car", "duration": 70, "route": "E10 東行" }
+      },
+      "aurora": { "suitable": false, "lightPollution": "medium" },
+      "images": { "card": "svolvær.jpg" },
+      "insiderTip": {
+        "zh": "市中心的超市是長途自駕前最後的大型補給點，記得在這裡買齊食材",
+        "en": "The supermarkets here are your last major supply point — stock up before heading south"
+      }
+    },
+    {
+      "id": "lof-007",
+      "name": {
+        "zh": "Austnesfjorden 極光觀測點",
+        "en": "Austnesfjorden Rest Stop (Aurora Spot)"
+      },
+      "region": "lofoten",
+      "subRegion": "Austvågøy",
+      "type": "aurora_spot",
+      "tags": ["aurora", "photography", "night", "must_see"],
+      "coordinates": { "lat": 68.2700, "lng": 14.7500 },
+      "description": {
+        "zh": "Svolvær 附近最佳的極光觀測點之一，位於峽灣旁的停車場。遠離市區光害，水面倒影讓極光照片更加夢幻。",
+        "en": "One of the best aurora viewing spots near Svolvær. A fjord-side rest stop away from city light pollution — the water reflections make aurora photos magical."
+      },
+      "practicalInfo": {
+        "suggestedDuration": 120,
+        "bestTimeOfDay": "night",
+        "difficulty": "easy",
+        "fee": { "amount": 0 },
+        "openMonths": [9, 10, 11, 12, 1, 2, 3],
+        "winterNote": {
+          "zh": "建議凌晨 1-3 點前往，需注意保暖。可用極光預報 APP 確認 KP 值",
+          "en": "Best around 1-3 AM. Dress very warmly. Check aurora forecast apps for KP values"
+        }
+      },
+      "transport": {
+        "fromSvolvær": { "method": "car", "duration": 10, "route": "E10 東行" }
+      },
+      "aurora": { "suitable": true, "lightPollution": "very_low" },
+      "images": { "card": "austnesfjorden-aurora.jpg" },
+      "insiderTip": {
+        "zh": "作者凌晨三點從 Svolvær 開車過來成功看到極光！記得帶腳架和保暖裝備",
+        "en": "We drove here at 3 AM from Svolvær and caught the aurora! Bring a tripod and warm gear"
+      }
+    },
+    {
+      "id": "lof-008",
+      "name": {
+        "zh": "Kabelvåg 小鎮",
+        "en": "Kabelvåg Village"
+      },
+      "region": "lofoten",
+      "subRegion": "Austvågøy",
+      "type": "village",
+      "tags": ["fishing_village", "viewpoint", "culture"],
+      "coordinates": { "lat": 68.2117, "lng": 14.4833 },
+      "description": {
+        "zh": "歷史悠久的漁村，曾是羅弗敦的首府。鎮上有教堂和博物館，高處可俯瞰整個港灣風景。",
+        "en": "A historic fishing village that was once Lofoten's capital. Features a church and museum, with hilltop views overlooking the entire harbor."
+      },
+      "practicalInfo": {
+        "suggestedDuration": 60,
+        "bestTimeOfDay": "morning",
+        "difficulty": "easy",
+        "fee": { "amount": 0 },
+        "openMonths": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+      },
+      "transport": {
+        "fromSvolvær": { "method": "car", "duration": 10, "route": "E10 西行" }
+      },
+      "aurora": { "suitable": false, "lightPollution": "low" },
+      "images": { "card": "kabelvag.jpg" },
+      "insiderTip": {
+        "zh": "走到高處可以看到整個港灣的全景，是很棒的拍照點",
+        "en": "Walk up the hill for panoramic harbor views — a great photography spot"
+      }
+    },
+    {
+      "id": "lof-009",
+      "name": {
+        "zh": "Tjeldbergtind 登山步道",
+        "en": "Tjeldbergtind Hike"
+      },
+      "region": "lofoten",
+      "subRegion": "Austvågøy",
+      "type": "hiking",
+      "tags": ["hiking", "viewpoint", "easy_hike", "nature"],
+      "coordinates": { "lat": 68.2200, "lng": 14.4600 },
+      "description": {
+        "zh": "輕鬆的短程登山步道，來回約 45 分鐘。山頂可 360 度俯瞰羅弗敦群島和峽灣，難度低但風景一流。",
+        "en": "An easy short hike, about 45 minutes round trip. The summit offers 360° views over the Lofoten islands and fjords — low difficulty but top-tier scenery."
+      },
+      "practicalInfo": {
+        "suggestedDuration": 60,
+        "bestTimeOfDay": "morning",
+        "difficulty": "easy",
+        "fee": { "amount": 0 },
+        "openMonths": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "winterNote": {
+          "zh": "冬季步道可能結冰，建議穿防滑鞋或帶冰爪",
+          "en": "Trail may be icy in winter — wear grip shoes or bring micro-spikes"
+        }
+      },
+      "transport": {
+        "fromSvolvær": { "method": "car", "duration": 15, "route": "E10 西行至登山口" }
+      },
+      "aurora": { "suitable": false, "lightPollution": "low" },
+      "images": { "card": "tjeldbergtind.jpg" },
+      "insiderTip": {
+        "zh": "這是羅弗敦性價比最高的登山步道之一，不需要太多體力就能看到絕佳風景",
+        "en": "One of Lofoten's best effort-to-reward hikes — minimal effort, maximum views"
+      }
+    },
+    {
+      "id": "lof-010",
+      "name": {
+        "zh": "Henningsvær 亨寧斯維爾",
+        "en": "Henningsvær"
+      },
+      "region": "lofoten",
+      "subRegion": "Austvågøy",
+      "type": "village",
+      "tags": ["fishing_village", "photography", "football_pitch", "art_galleries"],
+      "coordinates": { "lat": 68.1542, "lng": 14.2073 },
+      "description": {
+        "zh": "號稱「羅弗敦的威尼斯」，坐落在群島最外端。除了經典的漁村風光，還有知名的岩島足球場和多家藝廊。",
+        "en": "Known as the 'Venice of Lofoten', perched on the outermost islands. Features the famous rock-island football pitch and several art galleries."
+      },
+      "practicalInfo": {
+        "suggestedDuration": 90,
+        "bestTimeOfDay": "afternoon",
+        "difficulty": "easy",
+        "fee": { "amount": 0 },
+        "openMonths": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+      },
+      "transport": {
+        "fromSvolvær": { "method": "car", "duration": 25, "route": "E10 轉 816 號公路" },
+        "fromKabelvåg": { "method": "car", "duration": 20, "route": "816 號公路" }
+      },
+      "aurora": { "suitable": true, "lightPollution": "low" },
+      "images": { "card": "henningsvaer.jpg" },
+      "insiderTip": {
+        "zh": "隨意在小鎮裡散步拍照就很滿足，不需要特別的計畫",
+        "en": "Just wander and photograph — no special plan needed, every corner is photogenic"
+      }
+    },
+    {
+      "id": "lof-011",
+      "name": {
+        "zh": "Uttakleiv 海灘",
+        "en": "Uttakleiv Beach (Uttakleiv Strand)"
+      },
+      "region": "lofoten",
+      "subRegion": "Vestvågøy",
+      "type": "nature",
+      "tags": ["beach", "photography", "aurora", "sunset"],
+      "coordinates": { "lat": 68.2500, "lng": 13.5100 },
+      "description": {
+        "zh": "Haukland 海灘的鄰居，以獨特的圓石灘和冬季極光聞名。攝影師的天堂，尤其在極光季節。",
+        "en": "Neighbor to Haukland Beach, famous for unique rounded stones and winter aurora viewing. A photographer's paradise, especially during aurora season."
+      },
+      "practicalInfo": {
+        "suggestedDuration": 60,
+        "bestTimeOfDay": "evening",
+        "difficulty": "easy",
+        "fee": { "amount": 0 },
+        "openMonths": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+      },
+      "transport": {
+        "fromLeknes": { "method": "car", "duration": 15, "route": "E10 轉隧道" },
+        "fromHaukland": { "method": "walk", "duration": 30, "route": "沿海步道" }
+      },
+      "aurora": { "suitable": true, "lightPollution": "very_low" },
+      "images": { "card": "uttakleiv.jpg" },
+      "insiderTip": {
+        "zh": "傍晚來這裡等極光，圓石配上綠光是經典構圖",
+        "en": "Come at dusk to wait for aurora — the rounded stones with green lights make a classic composition"
+      }
+    },
+    {
+      "id": "lof-012",
+      "name": {
+        "zh": "Flakstadøya 沙灘",
+        "en": "Flakstad Beach (Skagsanden)"
+      },
+      "region": "lofoten",
+      "subRegion": "Flakstad",
+      "type": "nature",
+      "tags": ["beach", "photography", "surfing"],
+      "coordinates": { "lat": 68.0900, "lng": 13.2300 },
+      "description": {
+        "zh": "Flakstad 島上的美麗沙灘，以黑金色沙子和壯闊山景聞名。冬季也有衝浪活動。",
+        "en": "A beautiful beach on Flakstad island, known for its dark golden sand and dramatic mountain views. Surfing available even in winter."
+      },
+      "practicalInfo": {
+        "suggestedDuration": 45,
+        "bestTimeOfDay": "morning",
+        "difficulty": "easy",
+        "fee": { "amount": 0 },
+        "openMonths": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+      },
+      "transport": {
+        "fromLeknes": { "method": "car", "duration": 25, "route": "E10 往南" }
+      },
+      "aurora": { "suitable": true, "lightPollution": "very_low" },
+      "images": { "card": "flakstad-beach.jpg" },
+      "insiderTip": {
+        "zh": "跟 Ramberg 沙灘可以安排在同一天，距離很近",
+        "en": "Combine with Ramberg Beach on the same day — they're very close to each other"
+      }
+    },
+    {
+      "id": "lof-013",
+      "name": {
+        "zh": "Ramberg 沙灘",
+        "en": "Ramberg Beach"
+      },
+      "region": "lofoten",
+      "subRegion": "Flakstad",
+      "type": "nature",
+      "tags": ["beach", "photography"],
+      "coordinates": { "lat": 68.1100, "lng": 13.2400 },
+      "description": {
+        "zh": "Flakstad 島北側的白色沙灘，從公路就能輕鬆到達。寧靜的氛圍搭配雪山倒影，是隱藏版美景。",
+        "en": "A white sand beach on the north side of Flakstad island, easily accessible from the road. A hidden gem with tranquil atmosphere and mountain reflections."
+      },
+      "practicalInfo": {
+        "suggestedDuration": 30,
+        "bestTimeOfDay": "morning",
+        "difficulty": "easy",
+        "fee": { "amount": 0 },
+        "openMonths": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+      },
+      "transport": {
+        "fromLeknes": { "method": "car", "duration": 20, "route": "E10 往南" }
+      },
+      "aurora": { "suitable": true, "lightPollution": "very_low" },
+      "images": { "card": "ramberg-beach.jpg" }
+    },
+    {
+      "id": "lof-014",
+      "name": {
+        "zh": "Fredvang 小鎮",
+        "en": "Fredvang Village"
+      },
+      "region": "lofoten",
+      "subRegion": "Flakstad",
+      "type": "village",
+      "tags": ["fishing_village", "bridges", "photography"],
+      "coordinates": { "lat": 68.0800, "lng": 13.1400 },
+      "description": {
+        "zh": "寧靜的小漁村，通往 Fredvang 的兩座跨海大橋本身就是一道風景。也是前往 Kvalvika 海灘徒步的起點。",
+        "en": "A tranquil fishing village — the two sea-crossing bridges leading here are a sight in themselves. Also the starting point for the Kvalvika Beach hike."
+      },
+      "practicalInfo": {
+        "suggestedDuration": 45,
+        "bestTimeOfDay": "afternoon",
+        "difficulty": "easy",
+        "fee": { "amount": 0 },
+        "openMonths": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+      },
+      "transport": {
+        "fromLeknes": { "method": "car", "duration": 30, "route": "E10 轉 Fredvangveien" }
+      },
+      "aurora": { "suitable": true, "lightPollution": "very_low" },
+      "images": { "card": "fredvang.jpg" }
+    },
+    {
+      "id": "lof-015",
+      "name": {
+        "zh": "Nappskaret 觀景台",
+        "en": "Nappskaret View Point"
+      },
+      "region": "lofoten",
+      "subRegion": "Flakstad",
+      "type": "viewpoint",
+      "tags": ["viewpoint", "photography", "roadside"],
+      "coordinates": { "lat": 68.1400, "lng": 13.4700 },
+      "description": {
+        "zh": "位於 E10 公路旁的觀景台，可俯瞰壯闊的峽灣和群山。是自駕途中最值得停車的觀景點之一。",
+        "en": "A roadside viewpoint on the E10 offering sweeping views of fjords and mountains. One of the best photo stops on the Lofoten driving route."
+      },
+      "practicalInfo": {
+        "suggestedDuration": 20,
+        "bestTimeOfDay": "any",
+        "difficulty": "easy",
+        "fee": { "amount": 0 },
+        "openMonths": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+      },
+      "transport": {
+        "fromLeknes": { "method": "car", "duration": 15, "route": "E10 東行" }
+      },
+      "aurora": { "suitable": false, "lightPollution": "low" },
+      "images": { "card": "nappskaret.jpg" }
+    },
+    {
+      "id": "tro-001",
+      "name": {
+        "zh": "Fjellheisen 纜車",
+        "en": "Fjellheisen Cable Car"
+      },
+      "region": "tromsø",
+      "subRegion": "Tromsdalen",
+      "type": "activity",
+      "tags": ["cable_car", "viewpoint", "aurora", "must_do", "night_view"],
+      "coordinates": { "lat": 69.6396, "lng": 19.0847 },
+      "description": {
+        "zh": "4 分鐘登上 421 公尺高的 Storsteinen 山，俯瞰整個特羅姆瑟市區、峽灣和周圍群山。冬季是極佳的極光觀賞點。",
+        "en": "A 4-minute ride to 421m Storsteinen mountain, overlooking all of Tromsø, the fjords, and surrounding peaks. An excellent aurora viewing spot in winter."
+      },
+      "practicalInfo": {
+        "suggestedDuration": 90,
+        "bestTimeOfDay": "evening",
+        "difficulty": "easy",
+        "fee": { "amount": 350, "note": "NOK 成人來回票（約）" },
+        "openMonths": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "winterNote": {
+          "zh": "冬季營運時間 10:00-22:00，天氣不好可能停駛。山上比市區冷 5 度以上",
+          "en": "Winter hours 10:00-22:00, may close in bad weather. ~5°C colder on top than in the city"
+        }
+      },
+      "transport": {
+        "fromTromsøCenter": { "method": "bus", "duration": 20, "route": "26 號公車至 Fjellheisen 站" },
+        "fromArcticCathedral": { "method": "walk", "duration": 15 }
+      },
+      "aurora": { "suitable": true, "lightPollution": "low" },
+      "images": { "card": "fjellheisen.jpg" },
+      "insiderTip": {
+        "zh": "傍晚上去看夜景再等極光，一次搞定兩個願望。山上咖啡廳可以邊喝熱飲邊等",
+        "en": "Go in the evening for night views then wait for aurora — two wishes in one trip. The café at the top has hot drinks"
+      }
+    },
+    {
+      "id": "tro-002",
+      "name": {
+        "zh": "北極大教堂",
+        "en": "Arctic Cathedral (Ishavskatedralen)"
+      },
+      "region": "tromsø",
+      "subRegion": "Tromsdalen",
+      "type": "landmark",
+      "tags": ["architecture", "church", "iconic", "culture"],
+      "coordinates": { "lat": 69.6493, "lng": 19.0623 },
+      "description": {
+        "zh": "特羅姆瑟最具代表性的建築，三角形的現代設計靈感來自北極冰山和極地帳篷。巨大的彩色玻璃窗是亮點。",
+        "en": "Tromsø's most iconic building — the triangular modern design is inspired by Arctic icebergs and polar tents. The massive stained-glass window is a highlight."
+      },
+      "practicalInfo": {
+        "suggestedDuration": 30,
+        "bestTimeOfDay": "afternoon",
+        "difficulty": "easy",
+        "fee": { "amount": 75, "note": "NOK 成人" },
+        "openMonths": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+      },
+      "transport": {
+        "fromTromsøCenter": { "method": "bus", "duration": 15, "route": "20/24/26/28 號公車" },
+        "fromTromsøCenter_walk": { "method": "walk", "duration": 25, "route": "過橋步行" }
+      },
+      "aurora": { "suitable": false, "lightPollution": "medium" },
+      "images": { "card": "arctic-cathedral.jpg" },
+      "insiderTip": {
+        "zh": "去纜車的路上會經過，可以順路參觀。外觀拍照不需要門票",
+        "en": "On the way to the cable car — stop by for a visit. No ticket needed for exterior photos"
+      }
+    },
+    {
+      "id": "tro-003",
+      "name": {
+        "zh": "賞鯨行程",
+        "en": "Whale Watching Tour"
+      },
+      "region": "tromsø",
+      "subRegion": "Tromsø",
+      "type": "activity",
+      "tags": ["wildlife", "whale", "boat", "must_do", "winter_activity"],
+      "coordinates": { "lat": 69.6489, "lng": 18.9551 },
+      "description": {
+        "zh": "冬季（11月-1月）特羅姆瑟周邊海域有大量鯨魚覓食。行程約 7-8 小時，可看到座頭鯨和虎鯨。",
+        "en": "In winter (Nov-Jan), whales feed in waters near Tromsø. Tours last 7-8 hours with chances to see humpback and orca whales."
+      },
+      "practicalInfo": {
+        "suggestedDuration": 480,
+        "bestTimeOfDay": "morning",
+        "difficulty": "easy",
+        "fee": { "amount": 1500, "note": "NOK 約（透過 Get Your Guide 預訂）" },
+        "openMonths": [11, 12, 1],
+        "winterNote": {
+          "zh": "透過 Get Your Guide APP 預訂，好處是可以臨時取消。8:15 集合，約 15:45 返回",
+          "en": "Book via Get Your Guide app — flexible cancellation. Meet at 8:15, return ~15:45"
+        }
+      },
+      "transport": {
+        "fromTromsøCenter": { "method": "walk", "duration": 10, "route": "步行至港口集合點" }
+      },
+      "aurora": { "suitable": false, "lightPollution": "n/a" },
+      "images": { "card": "whale-watching.jpg" },
+      "insiderTip": {
+        "zh": "會暈船的人記得吃暈船藥！船上通常有熱飲供應。穿最保暖的衣服",
+        "en": "Take seasickness meds if needed! Hot drinks usually available on board. Wear your warmest layers"
+      }
+    },
+    {
+      "id": "tro-004",
+      "name": {
+        "zh": "峽灣遊船",
+        "en": "Fjord Cruise"
+      },
+      "region": "tromsø",
+      "subRegion": "Tromsø",
+      "type": "activity",
+      "tags": ["fjord", "boat", "nature", "scenic"],
+      "coordinates": { "lat": 69.6489, "lng": 18.9551 },
+      "description": {
+        "zh": "乘船遊覽特羅姆瑟周邊的峽灣風光，約 5.5 小時。沿途可欣賞雪山、瀑布和偶爾出現的野生動物。",
+        "en": "A 5.5-hour boat cruise through Tromsø's surrounding fjords. Enjoy snow-capped mountains, waterfalls, and occasional wildlife sightings along the way."
+      },
+      "practicalInfo": {
+        "suggestedDuration": 330,
+        "bestTimeOfDay": "morning",
+        "difficulty": "easy",
+        "fee": { "amount": 900, "note": "NOK 約" },
+        "openMonths": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+      },
+      "transport": {
+        "fromTromsøCenter": { "method": "walk", "duration": 10, "route": "步行至港口" }
+      },
+      "aurora": { "suitable": false, "lightPollution": "n/a" },
+      "images": { "card": "fjord-cruise.jpg" },
+      "insiderTip": {
+        "zh": "10:00 出發，15:30 返回。比賞鯨短一些，適合不想花一整天在船上的人",
+        "en": "Departs 10:00, returns 15:30. Shorter than whale watching — good for those who prefer a half-day activity"
+      }
+    },
+    {
+      "id": "tro-005",
+      "name": {
+        "zh": "Tromsø 港口市中心",
+        "en": "Tromsø Harbor & City Center"
+      },
+      "region": "tromsø",
+      "subRegion": "Tromsø",
+      "type": "town",
+      "tags": ["town_center", "shopping", "harbor", "base_camp"],
+      "coordinates": { "lat": 69.6489, "lng": 18.9568 },
+      "description": {
+        "zh": "北極圈內最大的城市中心。港口邊的 Tromsø Havn 景色優美，市區有豐富的餐廳、酒吧和紀念品店。",
+        "en": "The largest city center within the Arctic Circle. Tromsø Havn offers beautiful harbor views, with plenty of restaurants, bars, and souvenir shops nearby."
+      },
+      "practicalInfo": {
+        "suggestedDuration": 120,
+        "bestTimeOfDay": "afternoon",
+        "difficulty": "easy",
+        "fee": { "amount": 0 },
+        "openMonths": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+      },
+      "transport": {
+        "publicTransport": { "method": "bus", "note": "三天公車 PASS 約 858 NTD，非常划算" }
+      },
+      "aurora": { "suitable": false, "lightPollution": "high" },
+      "images": { "card": "tromso-center.jpg" },
+      "insiderTip": {
+        "zh": "買三天公車 PASS 是在特羅姆瑟最省交通費的方式",
+        "en": "A 3-day bus pass is the most cost-effective way to get around Tromsø"
+      }
+    },
+    {
+      "id": "tro-006",
+      "name": {
+        "zh": "Raketten Bar & Pølse 鹿肉熱狗",
+        "en": "Raketten Bar & Pølse (Reindeer Hot Dog)"
+      },
+      "region": "tromsø",
+      "subRegion": "Tromsø",
+      "type": "restaurant",
+      "tags": ["street_food", "local_food", "reindeer", "quick_bite"],
+      "coordinates": { "lat": 69.6500, "lng": 18.9560 },
+      "description": {
+        "zh": "特羅姆瑟的必吃街頭小吃——鹿肉熱狗。價格親民，是體驗北極特色食物的最佳入門。",
+        "en": "Tromsø's must-try street food — reindeer hot dogs. Affordable and the best introduction to Arctic cuisine."
+      },
+      "practicalInfo": {
+        "suggestedDuration": 15,
+        "bestTimeOfDay": "lunch",
+        "difficulty": "easy",
+        "fee": { "amount": 89, "note": "NOK 約" },
+        "openMonths": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+      },
+      "transport": {
+        "fromTromsøCenter": { "method": "walk", "duration": 5 }
+      },
+      "aurora": { "suitable": false, "lightPollution": "high" },
+      "images": { "card": "raketten.jpg" },
+      "insiderTip": {
+        "zh": "鹿肉熱狗配上洋蔥和芥末醬是經典吃法",
+        "en": "Classic combo: reindeer hot dog with onions and mustard"
+      }
+    },
+    {
+      "id": "tro-007",
+      "name": {
+        "zh": "Ølhallen 酒吧",
+        "en": "Ølhallen (Mack Brewery Pub)"
+      },
+      "region": "tromsø",
+      "subRegion": "Tromsø",
+      "type": "restaurant",
+      "tags": ["bar", "beer", "local", "historic"],
+      "coordinates": { "lat": 69.6515, "lng": 18.9580 },
+      "description": {
+        "zh": "世界最北的釀酒廠 Mack 旗下的酒吧，創立於 1877 年。提供多種在地精釀啤酒，氣氛溫馨。",
+        "en": "The pub of the world's northernmost brewery Mack, established in 1877. Offers a wide range of local craft beers in a cozy atmosphere."
+      },
+      "practicalInfo": {
+        "suggestedDuration": 60,
+        "bestTimeOfDay": "evening",
+        "difficulty": "easy",
+        "fee": { "amount": 100, "note": "NOK 一杯啤酒約" },
+        "openMonths": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+      },
+      "transport": {
+        "fromTromsøCenter": { "method": "walk", "duration": 5 }
+      },
+      "aurora": { "suitable": false, "lightPollution": "high" },
+      "images": { "card": "olhallen.jpg" },
+      "insiderTip": {
+        "zh": "點一杯 Mack 的招牌啤酒，在世界最北的酒吧喝一杯是很特別的體驗",
+        "en": "Order Mack's signature beer — drinking at the world's northernmost brewery pub is a unique experience"
+      }
+    },
+    {
+      "id": "tro-008",
+      "name": {
+        "zh": "Bubba Foodbar 炸鱈魚",
+        "en": "Bubba Foodbar (Fish & Chips)"
+      },
+      "region": "tromsø",
+      "subRegion": "Tromsø",
+      "type": "restaurant",
+      "tags": ["restaurant", "fish_and_chips", "local_food"],
+      "coordinates": { "lat": 69.6492, "lng": 18.9555 },
+      "description": {
+        "zh": "特羅姆瑟人氣餐廳，招牌炸鱈魚和薯條廣受好評。用料新鮮，份量實在。",
+        "en": "A popular Tromsø restaurant known for its excellent fried cod and chips. Fresh ingredients, generous portions."
+      },
+      "practicalInfo": {
+        "suggestedDuration": 60,
+        "bestTimeOfDay": "dinner",
+        "difficulty": "easy",
+        "fee": { "amount": 250, "note": "NOK 主餐約" },
+        "openMonths": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+      },
+      "transport": {
+        "fromTromsøCenter": { "method": "walk", "duration": 5 }
+      },
+      "aurora": { "suitable": false, "lightPollution": "high" },
+      "images": { "card": "bubba-foodbar.jpg" },
+      "insiderTip": {
+        "zh": "炸鱈魚配薯條是這裡的招牌，份量很大可以兩人分享",
+        "en": "The fish and chips is the star — portions are large enough to share between two"
+      }
+    },
+    {
+      "id": "tro-009",
+      "name": {
+        "zh": "Tromsø 圖書館",
+        "en": "Tromsø City Library (Tromsø bibliotek og byarkiv)"
+      },
+      "region": "tromsø",
+      "subRegion": "Tromsø",
+      "type": "landmark",
+      "tags": ["culture", "architecture", "free", "rainy_day"],
+      "coordinates": { "lat": 69.6497, "lng": 18.9562 },
+      "description": {
+        "zh": "特羅姆瑟市立圖書館，現代化的建築設計很值得一看。天氣不好時的好去處，免費入場。",
+        "en": "Tromsø's public library with impressive modern architecture. A great rainy-day destination, free entry."
+      },
+      "practicalInfo": {
+        "suggestedDuration": 30,
+        "bestTimeOfDay": "afternoon",
+        "difficulty": "easy",
+        "fee": { "amount": 0 },
+        "openMonths": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+      },
+      "transport": {
+        "fromTromsøCenter": { "method": "walk", "duration": 5 }
+      },
+      "aurora": { "suitable": false, "lightPollution": "high" },
+      "images": { "card": "tromso-library.jpg" }
+    }
+  ],
+  "transportRoutes": [
+    {
+      "id": "route-001",
+      "from": "Leknes Airport (LKN)",
+      "to": "Å i Lofoten",
+      "method": "car",
+      "duration": 60,
+      "distance": "68 km",
+      "route": "E10 往南",
+      "note": {
+        "zh": "E10 是羅弗敦唯一的主要公路，沿途風景壯觀，建議預留停車拍照的時間",
+        "en": "E10 is Lofoten's only main road — scenery is spectacular, allow extra time for photo stops"
+      }
+    },
+    {
+      "id": "route-002",
+      "from": "Å i Lofoten",
+      "to": "Svolvær",
+      "method": "car",
+      "duration": 150,
+      "distance": "127 km",
+      "route": "E10 北行/東行",
+      "note": {
+        "zh": "全程約 2.5 小時，但沿途會經過 Reine、Henningsvær 等景點，建議安排一整天",
+        "en": "About 2.5 hours straight, but passes through Reine, Henningsvær etc. — plan a full day"
+      }
+    },
+    {
+      "id": "route-003",
+      "from": "Leknes (LKN)",
+      "to": "Bodø (BOO)",
+      "method": "flight",
+      "duration": 25,
+      "airline": "Widerøe (WF802)",
+      "note": {
+        "zh": "早班機 06:35 起飛，記得提前到小型機場",
+        "en": "Early flight at 06:35 — arrive early at this small airport"
+      }
+    },
+    {
+      "id": "route-004",
+      "from": "Bodø (BOO)",
+      "to": "Tromsø (TOS)",
+      "method": "flight",
+      "duration": 60,
+      "airline": "Widerøe (WF801)",
+      "note": {
+        "zh": "Bodø 轉機到 Tromsø 約 1 小時",
+        "en": "Connection via Bodø to Tromsø, about 1 hour flight"
+      }
+    }
+  ],
+  "rentalCarInfo": {
+    "lofoten": {
+      "pickupLocation": "Leknes Airport (LKN)",
+      "company": "Sixt",
+      "duration": "3 days",
+      "approximateCost": "3800 NTD",
+      "tips": {
+        "zh": "注意當地限速規定，租的車子通常有限速提示。冬季路面可能結冰，開慢一點。E10 是唯一主要道路。",
+        "en": "Mind speed limits — rental cars usually have alerts. Roads may be icy in winter, drive slowly. E10 is the only main road."
+      }
+    }
+  },
+  "publicTransportInfo": {
+    "tromsø": {
+      "busPass": {
+        "duration": "3 days",
+        "approximateCost": "858 NTD",
+        "note": {
+          "zh": "在特羅姆瑟市區搭公車是最方便的交通方式，三天 PASS 非常划算",
+          "en": "Bus is the most convenient way around Tromsø — the 3-day pass is great value"
+        }
+      }
+    }
+  }
+}
