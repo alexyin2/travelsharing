@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import { useSanityData } from "./hooks/useSanityData";
 
 const TYPE_COLORS = {
@@ -51,13 +51,30 @@ const TYPE_EMOJI_FALLBACK = {
   day_trip: "🚐",
 };
 
+const COUNTRY_CONFIG = {
+  Norway: {
+    emoji: "🇳🇴", color: "#6ee7b7", bg: "#064e3b", zhName: "挪威",
+    description: { zh: "極光、峽灣、漁村與壯闊的北歐自然", en: "Aurora, fjords, fishing villages & Nordic nature" }
+  },
+  "United Kingdom": {
+    emoji: "🇬🇧", color: "#fbbf24", bg: "#78350f", zhName: "英國",
+    description: { zh: "皇宮、博物館、劇院與歷史街區", en: "Palaces, museums, theatres & historic neighborhoods" }
+  },
+  "NZ South Island": {
+    emoji: "🇳🇿", color: "#86efac", bg: "#14532d", zhName: "紐西蘭南島",
+    description: { zh: "冰川、湖泊、步道與壯麗自然景觀", en: "Glaciers, lakes, trails & dramatic landscapes" }
+  },
+};
+
+const STEP_ORDER = ["landing", "destinationPicker", "attractions", "config", "itinerary"];
+
 function Stars() {
   const stars = Array.from({ length: 60 }, (_, i) => ({
     id: i, left: Math.random() * 100, top: Math.random() * 100,
     size: Math.random() * 2 + 0.5, delay: Math.random() * 5, dur: Math.random() * 3 + 2
   }));
   return (
-    <div style={{ position: "fixed", inset: 0, pointerEvents: "none", zIndex: 0 }}>
+    <div style={{ position: "fixed", inset: 0, pointerEvents: "none", zIndex: 0, opacity: 0.4 }}>
       {stars.map(s => (
         <div key={s.id} style={{
           position: "absolute", left: `${s.left}%`, top: `${s.top}%`,
@@ -74,7 +91,8 @@ function AttractionCard({ item, lang, selected, onToggle }) {
   const isSelected = selected.includes(item._id);
   const emoji = TYPE_EMOJI_FALLBACK[item.type] || "📍";
   const name = lang === "zh" ? item.nameZh : item.nameEn;
-  const desc = lang === "zh" ? item.descriptionZh : item.descriptionEn;
+  const rawDesc = lang === "zh" ? item.descriptionZh : item.descriptionEn;
+  const desc = rawDesc && rawDesc.length > 50 ? rawDesc.slice(0, 50) + "..." : rawDesc;
   const tip = lang === "zh" ? item.insiderTipZh : item.insiderTipEn;
   const regionName = item.region ? (lang === "zh" ? item.region.nameZh : item.region.nameEn) : "";
   const duration = item.suggestedDuration;
@@ -251,8 +269,9 @@ function ItineraryPreview({ lang, itinerary, locked }) {
 export default function App() {
   const { attractions, regions, loading, error } = useSanityData();
   const [lang, setLang] = useState("zh");
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState("landing");
   const [selected, setSelected] = useState([]);
+  const [selectedRegions, setSelectedRegions] = useState([]);
   const [regionFilter, setRegionFilter] = useState("all");
   const [config, setConfig] = useState({ days: 5, arrival: "morning", departure: "morning", transport: "mixed" });
   const [generating, setGenerating] = useState(false);
@@ -263,7 +282,25 @@ export default function App() {
     setSelected(prev => prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]);
   };
 
-  const filtered = attractions.filter(a => regionFilter === "all" || a.region?.slug === regionFilter);
+  const destinationGroups = useMemo(() => {
+    const groups = {};
+    regions.forEach(region => {
+      const country = region.country || "Other";
+      if (!groups[country]) groups[country] = { regions: [], attractionCount: 0 };
+      const count = attractions.filter(a => a.region?.slug === region.slug).length;
+      groups[country].regions.push({ ...region, attractionCount: count });
+      groups[country].attractionCount += count;
+    });
+    return groups;
+  }, [regions, attractions]);
+
+  const filtered = attractions.filter(a => {
+    const regionPool = selectedRegions.length > 0
+      ? selectedRegions
+      : (regionFilter === "all" ? null : [regionFilter]);
+    if (!regionPool) return true;
+    return regionPool.includes(a.region?.slug);
+  });
 
   const generateItinerary = () => {
     setGenerating(true);
@@ -290,23 +327,13 @@ export default function App() {
       }
       setItinerary(days);
       setGenerating(false);
-      setStep(3);
+      setStep("itinerary");
     }, 2000);
   };
 
   useEffect(() => {
     if (contentRef.current) contentRef.current.scrollTo({ top: 0, behavior: "smooth" });
   }, [step]);
-
-  // Build dynamic region filter options
-  const regionOptions = [
-    { val: "all", zh: "全部", en: "All" },
-    ...regions.map(r => ({
-      val: r.slug,
-      zh: r.nameZh,
-      en: r.nameEn,
-    }))
-  ];
 
   if (loading) {
     return (
@@ -341,18 +368,22 @@ export default function App() {
   }
 
   const titles = {
-    0: { zh: "探索挪威極光之旅", en: "Discover Norway's Northern Lights" },
-    1: { zh: "選擇你的夢想景點", en: "Choose Your Dream Destinations" },
-    2: { zh: "設定旅行條件", en: "Set Your Trip Details" },
-    3: { zh: "你的專屬行程", en: "Your Custom Itinerary" }
+    landing: { zh: "AlexTravelSharing", en: "AlexTravelSharing" },
+    destinationPicker: { zh: "選擇目的地區域", en: "Choose Your Destinations" },
+    attractions: { zh: "選擇你的夢想景點", en: "Choose Your Dream Spots" },
+    config: { zh: "設定旅行條件", en: "Set Your Trip Details" },
+    itinerary: { zh: "你的專屬行程", en: "Your Custom Itinerary" },
   };
 
   const subtitles = {
-    0: { zh: "AI 為你量身打造完美的特羅姆瑟 & 羅弗敦旅程", en: "AI-crafted perfect Tromsø & Lofoten journey, just for you" },
-    1: { zh: `已選擇 ${selected.length} 個景點`, en: `${selected.length} destinations selected` },
-    2: { zh: "告訴我們你的旅行偏好", en: "Tell us your travel preferences" },
-    3: { zh: "根據你的選擇，AI 已生成最佳行程", en: "Based on your picks, AI generated the optimal route" }
+    landing: { zh: "真實旅行故事，AI 智能規劃", en: "Real travel stories, AI-powered planning" },
+    destinationPicker: { zh: "選擇想探索的區域，可跨國多選", en: "Select regions to explore, multi-select across countries" },
+    attractions: { zh: `已選擇 ${selected.length} 個景點`, en: `${selected.length} destinations selected` },
+    config: { zh: "告訴我們你的旅行偏好", en: "Tell us your travel preferences" },
+    itinerary: { zh: "根據你的選擇，AI 已生成最佳行程", en: "Based on your picks, AI generated the optimal route" },
   };
+
+  const stepIndex = STEP_ORDER.indexOf(step);
 
   return (
     <div style={{ height: "100vh", display: "flex", flexDirection: "column", background: "#030712", color: "#f9fafb", fontFamily: "'Outfit', 'Noto Sans TC', sans-serif", position: "relative", overflow: "hidden" }}>
@@ -373,9 +404,9 @@ export default function App() {
       {/* Header */}
       <div style={{ padding: "16px 24px", display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: "1px solid #1f293766", position: "relative", zIndex: 10, backdropFilter: "blur(12px)" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-          <span style={{ fontSize: 24 }}>🌌</span>
+          <span style={{ fontSize: 24 }}>✈️</span>
           <span style={{ fontSize: 18, fontWeight: 800, letterSpacing: "-0.03em", background: "linear-gradient(135deg, #6ee7b7, #7dd3fc)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
-            AuroraTrip
+            AlexTravelSharing
           </span>
         </div>
         <button onClick={() => setLang(l => l === "zh" ? "en" : "zh")} style={{
@@ -386,10 +417,10 @@ export default function App() {
 
       {/* Progress */}
       <div style={{ padding: "12px 24px", display: "flex", gap: 6, position: "relative", zIndex: 10 }}>
-        {[0, 1, 2, 3].map(s => (
+        {STEP_ORDER.map((s, i) => (
           <div key={s} style={{
             flex: 1, height: 3, borderRadius: 2, transition: "all 0.5s",
-            background: s <= step ? "linear-gradient(90deg, #6ee7b7, #3b82f6)" : "#1f2937"
+            background: i <= stepIndex ? "linear-gradient(90deg, #6ee7b7, #3b82f6)" : "#1f2937"
           }} />
         ))}
       </div>
@@ -404,25 +435,49 @@ export default function App() {
 
       {/* Content */}
       <div ref={contentRef} style={{ flex: 1, overflow: "auto", padding: "0 24px 120px", position: "relative", zIndex: 10 }}>
-        {step === 0 && (
-          <div style={{ display: "flex", flexDirection: "column", gap: 20, animation: "slideUp 0.6s ease" }}>
-            <div style={{ borderRadius: 20, overflow: "hidden", position: "relative", height: 280 }}>
-              <img src="https://images.unsplash.com/photo-1483347756197-71ef80e95f73?w=800&h=400&fit=crop" alt="Aurora"
-                style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(transparent 40%, rgba(3,7,18,0.95))", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: 24 }}>
-                <h2 style={{ margin: 0, fontSize: 22, fontWeight: 800 }}>Tromsø & Lofoten</h2>
-                <p style={{ margin: "6px 0 0", fontSize: 14, color: "#9ca3af", lineHeight: 1.5 }}>
-                  {lang === "zh"
-                    ? "探索北極圈內的極光、峽灣、漁村與壯闘的自然景觀。由真實旅行經驗打造的在地攻略，搭配 AI 為你量身規劃最佳路線。"
-                    : "Explore aurora, fjords, fishing villages and dramatic nature within the Arctic Circle. Real travel experience meets AI-powered route planning."}
-                </p>
-              </div>
+        {/* Step: Landing */}
+        {step === "landing" && (
+          <div style={{ display: "flex", flexDirection: "column", gap: 24, animation: "slideUp 0.6s ease" }}>
+            <div style={{ textAlign: "center", padding: "20px 0 0" }}>
+              <h2 style={{ margin: 0, fontSize: 28, fontWeight: 900, letterSpacing: "-0.03em",
+                background: "linear-gradient(135deg, #6ee7b7, #7dd3fc)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+                AlexTravelSharing
+              </h2>
+              <p style={{ margin: "8px 0 0", fontSize: 15, color: "#9ca3af" }}>
+                {lang === "zh" ? "真實旅行故事，AI 智能規劃" : "Real travel stories, AI-powered planning"}
+              </p>
             </div>
+
+            <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+              {Object.entries(COUNTRY_CONFIG).map(([countryKey, cfg]) => {
+                const count = destinationGroups[countryKey]?.attractionCount || 0;
+                return (
+                  <div key={countryKey} style={{
+                    borderRadius: 16, padding: 20, background: `linear-gradient(135deg, ${cfg.bg}, #111827)`,
+                    border: `1px solid ${cfg.color}33`, display: "flex", alignItems: "center", gap: 16, transition: "all 0.3s"
+                  }}>
+                    <span style={{ fontSize: 40 }}>{cfg.emoji}</span>
+                    <div style={{ flex: 1 }}>
+                      <h3 style={{ margin: 0, fontSize: 18, fontWeight: 700, color: cfg.color }}>
+                        {lang === "zh" ? cfg.zhName : countryKey}
+                      </h3>
+                      <p style={{ margin: "4px 0 0", fontSize: 13, color: "#9ca3af", lineHeight: 1.4 }}>
+                        {cfg.description[lang]}
+                      </p>
+                      <span style={{ fontSize: 12, color: "#6b7280", marginTop: 4, display: "inline-block" }}>
+                        {count} {lang === "zh" ? "個景點" : "attractions"}
+                      </span>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 10 }}>
               {[
-                { emoji: "🌌", zh: "極光觀測", en: "Aurora Spots", num: "4+" },
-                { emoji: "🏔️", zh: "精選景點", en: "Curated Spots", num: `${attractions.length}` },
-                { emoji: "🤖", zh: "AI 行程", en: "AI Itinerary", num: "∞" }
+                { emoji: "📍", zh: "精選景點", en: "Attractions", num: `${attractions.length}` },
+                { emoji: "🌍", zh: "目的地", en: "Destinations", num: "3" },
+                { emoji: "🤖", zh: "AI 行程", en: "AI Itinerary", num: "∞" },
               ].map((f, i) => (
                 <div key={i} style={{ background: "#111827", borderRadius: 14, padding: "16px 12px", textAlign: "center", border: "1px solid #1f2937" }}>
                   <div style={{ fontSize: 28 }}>{f.emoji}</div>
@@ -434,17 +489,101 @@ export default function App() {
           </div>
         )}
 
-        {step === 1 && (
+        {/* Step: Destination Picker */}
+        {step === "destinationPicker" && (
+          <div style={{ display: "flex", flexDirection: "column", gap: 20, animation: "slideUp 0.5s ease" }}>
+            {Object.entries(destinationGroups).map(([country, group]) => {
+              const cfg = COUNTRY_CONFIG[country] || { emoji: "🌍", color: "#9ca3af", bg: "#1f2937", zhName: country };
+              const allSlugs = group.regions.map(r => r.slug);
+              const allSelected = allSlugs.length > 0 && allSlugs.every(s => selectedRegions.includes(s));
+
+              return (
+                <div key={country} style={{ borderRadius: 16, background: "#111827", border: "1px solid #1f2937", overflow: "hidden" }}>
+                  <div style={{
+                    padding: "16px 20px", display: "flex", justifyContent: "space-between", alignItems: "center",
+                    background: `linear-gradient(135deg, ${cfg.bg}, #111827)`, borderBottom: "1px solid #1f293766"
+                  }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                      <span style={{ fontSize: 28 }}>{cfg.emoji}</span>
+                      <div>
+                        <h3 style={{ margin: 0, fontSize: 16, fontWeight: 700, color: cfg.color }}>
+                          {lang === "zh" ? (cfg.zhName || country) : country}
+                        </h3>
+                        <span style={{ fontSize: 12, color: "#6b7280" }}>
+                          {group.attractionCount} {lang === "zh" ? "個景點" : "attractions"}
+                        </span>
+                      </div>
+                    </div>
+                    <button onClick={() => {
+                      if (allSelected) {
+                        setSelectedRegions(prev => prev.filter(s => !allSlugs.includes(s)));
+                      } else {
+                        setSelectedRegions(prev => [...new Set([...prev, ...allSlugs])]);
+                      }
+                    }} style={{
+                      padding: "6px 14px", borderRadius: 20, border: `1px solid ${cfg.color}66`,
+                      background: allSelected ? cfg.color : "transparent",
+                      color: allSelected ? "#030712" : cfg.color,
+                      cursor: "pointer", fontSize: 12, fontWeight: 600, transition: "all 0.2s"
+                    }}>
+                      {allSelected
+                        ? (lang === "zh" ? "取消全選" : "Deselect All")
+                        : (lang === "zh" ? "全選" : "Select All")}
+                    </button>
+                  </div>
+
+                  <div style={{ padding: "12px 16px", display: "flex", flexWrap: "wrap", gap: 8 }}>
+                    {group.regions.map(region => {
+                      const isSelected = selectedRegions.includes(region.slug);
+                      return (
+                        <button key={region.slug} onClick={() => {
+                          setSelectedRegions(prev =>
+                            isSelected ? prev.filter(s => s !== region.slug) : [...prev, region.slug]
+                          );
+                        }} style={{
+                          padding: "8px 14px", borderRadius: 20, border: "none", cursor: "pointer",
+                          background: isSelected ? cfg.color : "#1f2937",
+                          color: isSelected ? "#030712" : "#9ca3af",
+                          fontWeight: 600, fontSize: 13, transition: "all 0.2s"
+                        }}>
+                          {lang === "zh" ? region.nameZh : region.nameEn} ({region.attractionCount})
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
+
+        {/* Step: Attraction Selection */}
+        {step === "attractions" && (
           <div style={{ animation: "slideUp 0.5s ease" }}>
             <div style={{ display: "flex", gap: 6, marginBottom: 16, flexWrap: "wrap" }}>
-              {regionOptions.map(r => (
-                <button key={r.val} onClick={() => setRegionFilter(r.val)} style={{
-                  padding: "8px 16px", borderRadius: 20, border: "none", cursor: "pointer",
-                  background: regionFilter === r.val ? "#6ee7b7" : "#1f2937",
-                  color: regionFilter === r.val ? "#064e3b" : "#9ca3af",
-                  fontWeight: 600, fontSize: 13, transition: "all 0.2s"
-                }}>{r[lang]}</button>
-              ))}
+              <button onClick={() => setRegionFilter("all")} style={{
+                padding: "8px 16px", borderRadius: 20, border: "none", cursor: "pointer",
+                background: regionFilter === "all" ? "#6ee7b7" : "#1f2937",
+                color: regionFilter === "all" ? "#064e3b" : "#9ca3af",
+                fontWeight: 600, fontSize: 13
+              }}>{lang === "zh" ? "全部" : "All"}</button>
+              {Object.entries(destinationGroups).map(([country, group]) => {
+                const cfg = COUNTRY_CONFIG[country] || { emoji: "🌍" };
+                const visibleRegions = selectedRegions.length > 0
+                  ? group.regions.filter(r => selectedRegions.includes(r.slug))
+                  : group.regions;
+                if (visibleRegions.length === 0) return null;
+                return visibleRegions.map(r => (
+                  <button key={r.slug} onClick={() => setRegionFilter(r.slug)} style={{
+                    padding: "8px 16px", borderRadius: 20, border: "none", cursor: "pointer",
+                    background: regionFilter === r.slug ? "#6ee7b7" : "#1f2937",
+                    color: regionFilter === r.slug ? "#064e3b" : "#9ca3af",
+                    fontWeight: 600, fontSize: 13, transition: "all 0.2s"
+                  }}>
+                    {cfg.emoji} {lang === "zh" ? r.nameZh : r.nameEn} ({r.attractionCount})
+                  </button>
+                ));
+              })}
             </div>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: 16 }}>
               {filtered.map(a => (
@@ -454,7 +593,8 @@ export default function App() {
           </div>
         )}
 
-        {step === 2 && (
+        {/* Step: Config */}
+        {step === "config" && (
           <div style={{ maxWidth: 500, animation: "slideUp 0.5s ease" }}>
             <TripForm lang={lang} config={config} setConfig={setConfig} />
             <div style={{ marginTop: 24, padding: 16, borderRadius: 14, background: "#111827", border: "1px solid #1f2937" }}>
@@ -472,7 +612,8 @@ export default function App() {
           </div>
         )}
 
-        {step === 3 && (
+        {/* Step: Itinerary */}
+        {step === "itinerary" && (
           <div style={{ maxWidth: 600, animation: "slideUp 0.5s ease" }}>
             <ItineraryPreview lang={lang} itinerary={itinerary} locked={true} />
             <div style={{ marginTop: 24, padding: 20, borderRadius: 16, background: "linear-gradient(135deg, #064e3b, #1e3a5f)", textAlign: "center" }}>
@@ -499,20 +640,37 @@ export default function App() {
         position: "absolute", bottom: 0, left: 0, right: 0, padding: "16px 24px",
         background: "linear-gradient(transparent, #030712 30%)", zIndex: 20, paddingTop: 40
       }}>
-        {step === 0 && (
-          <button onClick={() => setStep(1)} style={{
+        {step === "landing" && (
+          <button onClick={() => setStep("destinationPicker")} style={{
             width: "100%", padding: "16px", borderRadius: 14, border: "none", cursor: "pointer",
             background: "linear-gradient(135deg, #6ee7b7, #3b82f6)", color: "#030712",
             fontWeight: 800, fontSize: 16, letterSpacing: "-0.02em", animation: "glow 2s infinite"
-          }}>{lang === "zh" ? "開始規劃我的極光之旅 →" : "Start Planning My Aurora Trip →"}</button>
+          }}>{lang === "zh" ? "開始規劃我的旅行 →" : "Start Planning My Trip →"}</button>
         )}
-        {step === 1 && (
+        {step === "destinationPicker" && (
           <div style={{ display: "flex", gap: 10 }}>
-            <button onClick={() => setStep(0)} style={{
+            <button onClick={() => setStep("landing")} style={{
               padding: "16px 20px", borderRadius: 14, border: "1px solid #374151",
               background: "#111827", color: "#9ca3af", cursor: "pointer", fontWeight: 600, fontSize: 14
             }}>←</button>
-            <button onClick={() => setStep(2)} disabled={selected.length === 0} style={{
+            <button onClick={() => setStep("attractions")} style={{
+              flex: 1, padding: "16px", borderRadius: 14, border: "none", cursor: "pointer",
+              background: "linear-gradient(135deg, #6ee7b7, #3b82f6)", color: "#030712",
+              fontWeight: 800, fontSize: 16, transition: "all 0.3s"
+            }}>
+              {selectedRegions.length > 0
+                ? (lang === "zh" ? `繼續 — 已選 ${selectedRegions.length} 個區域` : `Continue — ${selectedRegions.length} regions`)
+                : (lang === "zh" ? "跳過，瀏覽全部景點 →" : "Skip, browse all →")}
+            </button>
+          </div>
+        )}
+        {step === "attractions" && (
+          <div style={{ display: "flex", gap: 10 }}>
+            <button onClick={() => setStep("destinationPicker")} style={{
+              padding: "16px 20px", borderRadius: 14, border: "1px solid #374151",
+              background: "#111827", color: "#9ca3af", cursor: "pointer", fontWeight: 600, fontSize: 14
+            }}>←</button>
+            <button onClick={() => setStep("config")} disabled={selected.length === 0} style={{
               flex: 1, padding: "16px", borderRadius: 14, border: "none", cursor: selected.length > 0 ? "pointer" : "not-allowed",
               background: selected.length > 0 ? "linear-gradient(135deg, #6ee7b7, #3b82f6)" : "#374151",
               color: selected.length > 0 ? "#030712" : "#6b7280",
@@ -520,9 +678,9 @@ export default function App() {
             }}>{lang === "zh" ? `繼續 — 已選 ${selected.length} 個景點` : `Continue — ${selected.length} spots selected`}</button>
           </div>
         )}
-        {step === 2 && (
+        {step === "config" && (
           <div style={{ display: "flex", gap: 10 }}>
-            <button onClick={() => setStep(1)} style={{
+            <button onClick={() => setStep("attractions")} style={{
               padding: "16px 20px", borderRadius: 14, border: "1px solid #374151",
               background: "#111827", color: "#9ca3af", cursor: "pointer", fontWeight: 600, fontSize: 14
             }}>←</button>
@@ -536,9 +694,9 @@ export default function App() {
               : (lang === "zh" ? "🚀 生成我的專屬行程" : "🚀 Generate My Itinerary")}</button>
           </div>
         )}
-        {step === 3 && (
+        {step === "itinerary" && (
           <div style={{ display: "flex", gap: 10 }}>
-            <button onClick={() => { setStep(1); setItinerary(null); }} style={{
+            <button onClick={() => { setStep("attractions"); setItinerary(null); setSelectedRegions([]); setSelected([]); }} style={{
               padding: "16px 20px", borderRadius: 14, border: "1px solid #374151",
               background: "#111827", color: "#9ca3af", cursor: "pointer", fontWeight: 600, fontSize: 14
             }}>{lang === "zh" ? "重新選擇" : "Reselect"}</button>
