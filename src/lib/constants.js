@@ -1,5 +1,4 @@
 import norwayImage from "../assets/destinations/norway-fjord.jpg";
-import unitedKingdomImage from "../assets/destinations/london-street.jpg";
 import newZealandImage from "../assets/destinations/new-zealand-mountains.jpg";
 
 export const TYPE_COLORS = {
@@ -77,7 +76,7 @@ export const TYPE_EMOJI_FALLBACK = {
   day_trip: "🚐",
 };
 
-export const COUNTRY_ORDER = ["Norway", "United Kingdom", "New Zealand"];
+export const COUNTRY_ORDER = ["Norway", "New Zealand"];
 
 export const COUNTRY_CONFIG = {
   Norway: {
@@ -93,19 +92,6 @@ export const COUNTRY_CONFIG = {
     },
     image: norwayImage,
   },
-  "United Kingdom": {
-    emoji: "🇬🇧",
-    accent: "#9b5f2e",
-    accentSoft: "#efe2d4",
-    zhName: "英國",
-    enName: "United Kingdom",
-    marketingEn: "London culture and city chapters",
-    description: {
-      zh: "博物館、街區、劇院與城市散策，濃縮成可直接出發的倫敦指南。",
-      en: "Museums, neighborhoods, and theatre nights distilled into a city guide you can actually use.",
-    },
-    image: unitedKingdomImage,
-  },
   "New Zealand": {
     emoji: "🇳🇿",
     accent: "#38616f",
@@ -120,6 +106,49 @@ export const COUNTRY_CONFIG = {
     image: newZealandImage,
   },
 };
+
+export const PURPOSE_OPTIONS = [
+  { val: "leisure", zh: "休閒放鬆", en: "Leisure", icon: "🌿" },
+  { val: "see_all", zh: "景點全攻略", en: "See All Attractions", icon: "📸" },
+  { val: "adventure", zh: "冒險探索", en: "Adventure", icon: "🧗" },
+];
+
+export const TRANSPORT_OPTIONS = [
+  { val: "car", zh: "租車自駕", en: "Rent a car", icon: "🚗" },
+  { val: "bus", zh: "大眾運輸", en: "Public transit", icon: "🚌" },
+  { val: "mixed", zh: "混合", en: "Mixed", icon: "🔀" },
+];
+
+export const PACE_OPTIONS = [
+  { val: "relaxed", zh: "悠閒", en: "Relaxed", icon: "🐢" },
+  { val: "moderate", zh: "適中", en: "Moderate", icon: "🚶" },
+  { val: "intensive", zh: "緊湊", en: "Intensive", icon: "🏃" },
+];
+
+export const BUDGET_OPTIONS = [
+  { val: "budget", zh: "平價", en: "Budget", icon: "💰" },
+  { val: "mid_range", zh: "中等", en: "Mid-range", icon: "💳" },
+  { val: "premium", zh: "高級", en: "Premium", icon: "💎" },
+];
+
+export const SEASON_OPTIONS = [
+  { val: "spring", zh: "春季 (3-5月)", en: "Spring (Mar-May)", icon: "🌸" },
+  { val: "summer", zh: "夏季 (6-8月)", en: "Summer (Jun-Aug)", icon: "☀️" },
+  { val: "autumn", zh: "秋季 (9-11月)", en: "Autumn (Sep-Nov)", icon: "🍂" },
+  { val: "winter", zh: "冬季 (12-2月)", en: "Winter (Dec-Feb)", icon: "❄️" },
+];
+
+export const ARRIVAL_DEPARTURE_OPTIONS = [
+  { val: "morning", zh: "上午 (06-12)", en: "Morning (06-12)", icon: "🌅" },
+  { val: "noon", zh: "中午 (12-15)", en: "Noon (12-15)", icon: "☀️" },
+  { val: "night", zh: "晚上 (18-24)", en: "Night (18-24)", icon: "🌙" },
+];
+
+export const DURATION_OPTIONS = [
+  { val: "short", zh: "3-4 天", en: "3-4 days", min: 3, max: 4 },
+  { val: "medium", zh: "5-7 天", en: "5-7 days", min: 5, max: 7 },
+  { val: "long", zh: "8+ 天", en: "8+ days", min: 8, max: 99 },
+];
 
 export function getCountryName(countryKey, lang) {
   const config = COUNTRY_CONFIG[countryKey];

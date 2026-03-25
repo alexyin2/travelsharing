@@ -1314,6 +1314,148 @@ img {
   font-size: clamp(2rem, 6vw, 3rem);
 }
 
+/* ── Filters page ── */
+
+.filters-heading {
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  margin-bottom: 8px;
+}
+
+.filter-reset-button {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 6px 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--muted);
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.filter-reset-button:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.summary-card__preview {
+  margin-top: 14px;
+  padding: 14px;
+  background: var(--surface-muted);
+  border-radius: var(--radius-sm);
+}
+
+.summary-card__preview strong {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.summary-card__preview span {
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.summary-card__preview p {
+  margin-top: 8px;
+  font-size: 0.85rem;
+  color: var(--muted-strong);
+  line-height: 1.5;
+}
+
+/* ── Itinerary meta tags ── */
+
+.itinerary-meta-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 16px 0 28px;
+}
+
+.itinerary-meta-tag {
+  display: inline-block;
+  padding: 4px 12px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  text-transform: capitalize;
+  background: var(--surface-muted);
+  border-radius: 100px;
+  color: var(--muted-strong);
+}
+
+/* ── Premium lock ── */
+
+.itinerary-stop__premium {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.itinerary-stop__region {
+  font-weight: 400;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.itinerary-stop__locked-note {
+  font-size: 0.85rem;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.itinerary-stop__duration {
+  display: inline-block;
+  margin-top: 4px;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+.premium-lock {
+  position: relative;
+  border-radius: var(--radius-sm);
+  background: var(--surface-muted);
+  padding: 10px 14px;
+  overflow: hidden;
+}
+
+.premium-lock__label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--muted-strong);
+  margin-bottom: 4px;
+}
+
+.premium-lock__content {
+  position: relative;
+}
+
+.premium-lock__text {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--muted);
+  filter: blur(4px);
+  user-select: none;
+}
+
+.premium-lock__overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: rgba(246, 241, 232, 0.6);
+  border-radius: var(--radius-sm);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.premium-lock__icon {
+  font-size: 1rem;
+}
+
 @media (max-width: 1280px) {
   .hero-grid {
     grid-template-columns: minmax(320px, 0.9fr) minmax(520px, 1.1fr);

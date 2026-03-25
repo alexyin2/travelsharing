@@ -1,65 +1,31 @@
-import { COUNTRY_CONFIG, TYPE_COLORS, TYPE_EMOJI_FALLBACK, getCountryName, getTypeLabel } from "../lib/constants";
 import SectionIntro from "./SectionIntro";
+import ItineraryCard from "./ItineraryCard";
 
-export default function FeaturedSection({ attractions, lang, onCountryClick }) {
-  const featured = attractions.slice(0, 6);
-
-  if (featured.length === 0) return null;
+export default function FeaturedSection({ itineraries, lang, onCountryClick }) {
+  if (!itineraries || itineraries.length === 0) return null;
 
   return (
     <section className="canvas-section">
       <div className="page-container">
         <SectionIntro
-          eyebrow={lang === "zh" ? "精選段落" : "Featured Notes"}
-          title={lang === "zh" ? "精選段落，先感受每個地方的旅行語氣" : "A few featured chapters to feel each destination first"}
+          eyebrow={lang === "zh" ? "精選行程" : "Featured Itineraries"}
+          title={lang === "zh" ? "精選行程，感受每條路線的旅行節奏" : "Featured itineraries to feel the rhythm of each route"}
           description={
             lang === "zh"
-              ? "即使目前 Sanity 還沒有上傳景點圖片，首頁仍用策展方式把內容感先做出來。"
-              : "Even without attraction photos in Sanity yet, the homepage still frames the content with an editorial rhythm."
+              ? "作者親身走過的路線，整理成可以直接參考的行程規劃。"
+              : "Routes shaped from firsthand trips, ready to inspire your own itinerary."
           }
         />
 
         <div className="editorial-grid">
-          {featured.map((item) => {
-            const countryKey = item.region?.country;
-            const country = COUNTRY_CONFIG[countryKey];
-            const color = TYPE_COLORS[item.type] || TYPE_COLORS.nature;
-            const name = lang === "zh" ? item.nameZh : item.nameEn;
-            const description = lang === "zh" ? item.descriptionZh : item.descriptionEn;
-
-            return (
-              <article
-                key={item._id}
-                className="editorial-card"
-                onClick={() => onCountryClick(countryKey)}
-                onKeyDown={(event) => {
-                  if (event.key === "Enter" || event.key === " ") {
-                    event.preventDefault();
-                    onCountryClick(countryKey);
-                  }
-                }}
-                role="button"
-                tabIndex={0}
-              >
-                <div className="editorial-card__image">
-                  <img alt="" src={country?.image} />
-                  <div className="editorial-card__overlay" />
-                  <span className="editorial-card__flag">{country?.emoji}</span>
-                </div>
-
-                <div className="editorial-card__body">
-                  <div className="editorial-card__chips">
-                    <span className="type-chip" style={{ background: color.bg, color: color.text }}>
-                      {getTypeLabel(item.type, lang)}
-                    </span>
-                    <span className="editorial-card__country">{getCountryName(countryKey, lang)}</span>
-                  </div>
-                  <h3>{TYPE_EMOJI_FALLBACK[item.type] || "📍"} {name}</h3>
-                  <p>{description}</p>
-                </div>
-              </article>
-            );
-          })}
+          {itineraries.map((itinerary) => (
+            <ItineraryCard
+              key={itinerary._id}
+              itinerary={itinerary}
+              lang={lang}
+              onClick={() => onCountryClick(itinerary.country)}
+            />
+          ))}
         </div>
       </div>
     </section>

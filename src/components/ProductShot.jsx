@@ -1,6 +1,6 @@
 import { COUNTRY_CONFIG, COUNTRY_ORDER } from "../lib/constants";
 
-export default function ProductShot({ lang, preview = [] }) {
+export default function ProductShot({ lang }) {
   const countries = COUNTRY_ORDER.map((countryKey) => COUNTRY_CONFIG[countryKey]);
 
   return (
@@ -32,31 +32,10 @@ export default function ProductShot({ lang, preview = [] }) {
           <div className="product-shot__panel">
             <div className="product-shot__panel-header">
               <div>
-                <p className="eyebrow">{lang === "zh" ? "挑選流程" : "Selection Flow"}</p>
-                <h4>{lang === "zh" ? "景點挑選與行程預覽" : "Spot selection and itinerary preview"}</h4>
+                <p className="eyebrow">{lang === "zh" ? "行程預覽" : "Itinerary Flow"}</p>
+                <h4>{lang === "zh" ? "篩選偏好，找到最佳行程" : "Filter preferences, find the best itinerary"}</h4>
               </div>
-              <span className="product-shot__badge">{lang === "zh" ? "AI 草稿" : "AI Draft"}</span>
-            </div>
-
-            <div className="product-shot__cards">
-              {preview.map((item, index) => (
-                <div key={`${item.name}-${index}`} className="product-shot__card">
-                  <span>{index + 1}</span>
-                  <div>
-                    <strong>{item.name}</strong>
-                    <small>{item.country}</small>
-                  </div>
-                </div>
-              ))}
-              {preview.length === 0 ? (
-                <div className="product-shot__card">
-                  <span>•</span>
-                  <div>
-                    <strong>{lang === "zh" ? "正在準備內容" : "Preparing content"}</strong>
-                    <small>{lang === "zh" ? "即將載入目的地章節" : "Destination chapters are loading in"}</small>
-                  </div>
-                </div>
-              ) : null}
+              <span className="product-shot__badge">{lang === "zh" ? "精選路線" : "Curated"}</span>
             </div>
 
             <div className="product-shot__timeline">
@@ -70,7 +49,7 @@ export default function ProductShot({ lang, preview = [] }) {
               </div>
               <div>
                 <strong>Day 3</strong>
-                <span>{lang === "zh" ? "拉出順路路線" : "Route optimization pass"}</span>
+                <span>{lang === "zh" ? "深入探索與順路路線" : "Deep exploration and route flow"}</span>
               </div>
             </div>
           </div>

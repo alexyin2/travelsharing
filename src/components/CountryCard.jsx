@@ -35,7 +35,7 @@ export default function CountryCard({ countryKey, config, attractionCount, regio
 
         <div className="destination-card__footer">
           <span className="destination-card__marketing">
-            {lang === "zh" ? "進入策展章節" : "Open the destination chapter"}
+            {lang === "zh" ? "瀏覽行程" : "Browse itineraries"}
           </span>
           <span className="destination-card__arrow">↗</span>
         </div>

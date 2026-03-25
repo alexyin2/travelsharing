@@ -16,11 +16,11 @@ const PROPS = [
     icon: "02",
     zh: {
       title: "策展感與產品感並存",
-      desc: "不是只有好看照片，而是能直接往下接景點選擇、行程條件與 itinerary preview。",
+      desc: "不是只有好看照片，而是能直接往下接篩選偏好、行程配對與完整路線預覽。",
     },
     en: {
       title: "Editorial feel, product-grade flow",
-      desc: "It is not just visual inspiration. You can move directly into spot selection and itinerary setup.",
+      desc: "It is not just visual inspiration. You can move directly into filter-based itinerary matching and route preview.",
     },
   },
   {

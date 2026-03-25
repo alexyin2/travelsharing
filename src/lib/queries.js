@@ -60,3 +60,71 @@ export const ALL_ROUTES_QUERY = `
     noteEn
   }
 `
+
+// 取得指定國家的所有行程
+export const ITINERARIES_BY_COUNTRY_QUERY = `
+  *[_type == "itinerary" && country == $country] | order(durationDays asc) {
+    _id,
+    titleZh,
+    titleEn,
+    "slug": slug.current,
+    descriptionZh,
+    descriptionEn,
+    country,
+    purpose,
+    transportMode,
+    pace,
+    budget,
+    seasons,
+    arrivalTime,
+    departureTime,
+    durationDays,
+    featured,
+    "coverImageUrl": coverImage.asset->url,
+    days[] {
+      dayNumber,
+      titleZh,
+      titleEn,
+      summaryZh,
+      summaryEn,
+      stops[] {
+        time,
+        "attraction": attraction->{
+          _id, nameZh, nameEn, type,
+          "cardImageUrl": cardImage.asset->url,
+          "region": region->{ nameZh, nameEn, "slug": slug.current }
+        },
+        labelZh,
+        labelEn,
+        noteZh,
+        noteEn,
+        durationMinutes,
+        photoTipZh,
+        photoTipEn,
+        mealAdviceZh,
+        mealAdviceEn,
+        hotelAdviceZh,
+        hotelAdviceEn,
+        personalAdviceZh,
+        personalAdviceEn
+      }
+    }
+  }
+`
+
+// 取得精選行程（首頁用）
+export const FEATURED_ITINERARIES_QUERY = `
+  *[_type == "itinerary" && featured == true] | order(country asc) [0...4] {
+    _id,
+    titleZh,
+    titleEn,
+    "slug": slug.current,
+    descriptionZh,
+    descriptionEn,
+    country,
+    durationDays,
+    purpose,
+    "coverImageUrl": coverImage.asset->url,
+    "stopCount": count(days[].stops[])
+  }
+`

@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import { COUNTRY_CONFIG, COUNTRY_ORDER } from "../lib/constants";
+import { useFeaturedItineraries } from "../hooks/useItineraries";
 import CountryCard from "./CountryCard";
 import FeaturedSection from "./FeaturedSection";
 import Footer from "./Footer";
@@ -9,6 +10,8 @@ import StatsBar from "./StatsBar";
 import ValueProps from "./ValueProps";
 
 export default function LandingPage({ lang, attractions, regions, onCountryClick }) {
+  const { featured: featuredItineraries } = useFeaturedItineraries();
+
   const destinationGroups = useMemo(() => {
     const groups = {};
     regions.forEach((region) => {
@@ -28,20 +31,13 @@ export default function LandingPage({ lang, attractions, regions, onCountryClick
     return groups;
   }, [regions, attractions]);
 
-  const featuredPreview = useMemo(() => {
-    return attractions.slice(0, 5).map((item) => ({
-      name: lang === "zh" ? item.nameZh : item.nameEn,
-      country: item.region?.country,
-    }));
-  }, [attractions, lang]);
-
   return (
     <div className="landing-page">
       <section className="canvas-section hero-section">
         <div className="page-container hero-grid">
           <div className="hero-heading">
             <p className="eyebrow">
-              {lang === "zh" ? "旅程策展 / AI 行程規劃" : "Editorial travel / AI itinerary studio"}
+              {lang === "zh" ? "旅程策展 / 精選行程規劃" : "Editorial travel / Curated itinerary studio"}
             </p>
             <h1 className={`hero-title ${lang === "zh" ? "hero-title--zh" : ""}`}>
               {lang === "zh"
@@ -54,8 +50,8 @@ export default function LandingPage({ lang, attractions, regions, onCountryClick
             <div className="hero-sidecopy">
               <p className="lead">
                 {lang === "zh"
-                  ? "從挪威峽灣、倫敦街區到紐西蘭南島，AlexTravelSharing 把作者的實際經驗、景點篩選與 AI 行程編排整合成一個更有節奏的旅行入口。"
-                  : "From Norwegian fjords to London streets and New Zealand drives, AlexTravelSharing blends firsthand notes, destination curation, and AI itinerary planning into one polished travel workflow."}
+                  ? "從挪威峽灣到紐西蘭南島，AlexTravelSharing 把作者的實際經驗、景點篩選與行程編排整合成一個更有節奏的旅行入口。"
+                  : "From Norwegian fjords to New Zealand drives, AlexTravelSharing blends firsthand notes, destination curation, and curated itinerary planning into one polished travel workflow."}
               </p>
               <div className="hero-actions">
                 <button className="button-shell button-shell--accent" onClick={() => onCountryClick("Norway")} type="button">
@@ -75,7 +71,7 @@ export default function LandingPage({ lang, attractions, regions, onCountryClick
               </div>
             </div>
             <div className="screenshot-well screenshot-well--hero">
-              <ProductShot lang={lang} preview={featuredPreview} />
+              <ProductShot lang={lang} />
             </div>
           </div>
         </div>
@@ -85,11 +81,11 @@ export default function LandingPage({ lang, attractions, regions, onCountryClick
         <div className="page-container">
           <SectionIntro
             eyebrow={lang === "zh" ? "Destinations" : "Destinations"}
-            title={lang === "zh" ? "三個目的地，一套更有品味的規劃流程" : "Three destinations, one sharper planning flow"}
+            title={lang === "zh" ? "兩個目的地，一套更有品味的規劃流程" : "Two destinations, one sharper planning flow"}
             description={
               lang === "zh"
-                ? "每個章節都保留旅遊內容的故事性，同時讓你能快速進入篩選、選點與 itinerary 規劃。"
-                : "Each destination keeps the editorial storytelling, then moves you quickly into curation, selection, and itinerary planning."
+                ? "每個章節都保留旅遊內容的故事性，同時讓你能快速進入篩選與行程規劃。"
+                : "Each destination keeps the editorial storytelling, then moves you quickly into filtering and itinerary matching."
             }
           />
 
@@ -112,7 +108,7 @@ export default function LandingPage({ lang, attractions, regions, onCountryClick
         </div>
       </section>
 
-      <FeaturedSection attractions={attractions} lang={lang} onCountryClick={onCountryClick} />
+      <FeaturedSection itineraries={featuredItineraries} lang={lang} onCountryClick={onCountryClick} />
       <ValueProps lang={lang} />
       <StatsBar attractionCount={attractions.length} regionCount={regions.length} lang={lang} />
       <Footer lang={lang} />
