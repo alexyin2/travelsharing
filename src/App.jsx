@@ -1,70 +1,77 @@
-import { useState, useEffect, useRef } from "react";
-import { useSanityData } from "./hooks/useSanityData";
-import { TYPE_EMOJI_FALLBACK } from "./lib/constants";
+import { useEffect, useMemo, useRef, useState } from "react";
+import AttractionsPage from "./components/AttractionsPage";
 import Header from "./components/Header";
 import LandingPage from "./components/LandingPage";
-import AttractionsPage from "./components/AttractionsPage";
+import { TYPE_EMOJI_FALLBACK } from "./lib/constants";
+import { useSanityData } from "./hooks/useSanityData";
 
 function TripForm({ lang, config, setConfig }) {
+  const durationOptions = [3, 4, 5, 6, 7];
+  const transportOptions = [
+    { val: "car", zh: "租車自駕", en: "Rent a car", icon: "🚗" },
+    { val: "bus", zh: "大眾運輸", en: "Public transit", icon: "🚌" },
+    { val: "mixed", zh: "混合節奏", en: "Mixed pace", icon: "🔀" },
+  ];
+
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
-      <div>
-        <label style={{ display: "block", fontSize: 13, color: "#6b7280", marginBottom: 6, fontWeight: 500 }}>
-          {lang === "zh" ? "旅行天數" : "Trip Duration"}
-        </label>
-        <div style={{ display: "flex", gap: 8 }}>
-          {[3, 4, 5, 6, 7].map(d => (
-            <button key={d} onClick={() => setConfig({ ...config, days: d })} style={{
-              flex: 1, padding: "12px 0", borderRadius: 10, border: "none", cursor: "pointer",
-              background: config.days === d ? "#059669" : "#f3f4f6",
-              color: config.days === d ? "#fff" : "#6b7280",
-              fontWeight: 700, fontSize: 15, transition: "all 0.2s"
-            }}>{d} {lang === "zh" ? "天" : "days"}</button>
+    <div className="form-stack">
+      <div className="field-group">
+        <label>{lang === "zh" ? "旅行天數" : "Trip duration"}</label>
+        <div className="choice-row">
+          {durationOptions.map((days) => (
+            <button
+              key={days}
+              className={`choice-chip ${config.days === days ? "choice-chip--active" : ""}`}
+              onClick={() => setConfig({ ...config, days })}
+              type="button"
+            >
+              {days} {lang === "zh" ? "天" : "days"}
+            </button>
           ))}
         </div>
       </div>
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
-        <div>
-          <label style={{ display: "block", fontSize: 13, color: "#6b7280", marginBottom: 6, fontWeight: 500 }}>
-            {lang === "zh" ? "抵達時間" : "Arrival Time"}
-          </label>
-          <select value={config.arrival} onChange={e => setConfig({ ...config, arrival: e.target.value })}
-            style={{ width: "100%", padding: "12px", borderRadius: 10, border: "1px solid #d1d5db",
-              background: "#f9fafb", color: "#111827", fontSize: 14, appearance: "none" }}>
+
+      <div className="form-grid">
+        <div className="field-group">
+          <label>{lang === "zh" ? "抵達時間" : "Arrival time"}</label>
+          <select
+            className="field-select"
+            onChange={(event) => setConfig({ ...config, arrival: event.target.value })}
+            value={config.arrival}
+          >
             <option value="morning">{lang === "zh" ? "上午 (06-12)" : "Morning (06-12)"}</option>
             <option value="afternoon">{lang === "zh" ? "下午 (12-18)" : "Afternoon (12-18)"}</option>
             <option value="evening">{lang === "zh" ? "晚上 (18-24)" : "Evening (18-24)"}</option>
           </select>
         </div>
-        <div>
-          <label style={{ display: "block", fontSize: 13, color: "#6b7280", marginBottom: 6, fontWeight: 500 }}>
-            {lang === "zh" ? "離開時間" : "Departure Time"}
-          </label>
-          <select value={config.departure} onChange={e => setConfig({ ...config, departure: e.target.value })}
-            style={{ width: "100%", padding: "12px", borderRadius: 10, border: "1px solid #d1d5db",
-              background: "#f9fafb", color: "#111827", fontSize: 14, appearance: "none" }}>
+
+        <div className="field-group">
+          <label>{lang === "zh" ? "離開時間" : "Departure time"}</label>
+          <select
+            className="field-select"
+            onChange={(event) => setConfig({ ...config, departure: event.target.value })}
+            value={config.departure}
+          >
             <option value="morning">{lang === "zh" ? "上午 (06-12)" : "Morning (06-12)"}</option>
             <option value="afternoon">{lang === "zh" ? "下午 (12-18)" : "Afternoon (12-18)"}</option>
             <option value="evening">{lang === "zh" ? "晚上 (18-24)" : "Evening (18-24)"}</option>
           </select>
         </div>
       </div>
-      <div>
-        <label style={{ display: "block", fontSize: 13, color: "#6b7280", marginBottom: 6, fontWeight: 500 }}>
-          {lang === "zh" ? "交通方式" : "Transportation"}
-        </label>
-        <div style={{ display: "flex", gap: 8 }}>
-          {[
-            { val: "car", zh: "🚗 租車自駕", en: "🚗 Rent a Car" },
-            { val: "bus", zh: "🚌 大眾運輸", en: "🚌 Public Transit" },
-            { val: "mixed", zh: "🔀 混合", en: "🔀 Mixed" }
-          ].map(t => (
-            <button key={t.val} onClick={() => setConfig({ ...config, transport: t.val })} style={{
-              flex: 1, padding: "12px 8px", borderRadius: 10, border: "none", cursor: "pointer",
-              background: config.transport === t.val ? "#059669" : "#f3f4f6",
-              color: config.transport === t.val ? "#fff" : "#6b7280",
-              fontWeight: 600, fontSize: 13, transition: "all 0.2s"
-            }}>{t[lang]}</button>
+
+      <div className="field-group">
+        <label>{lang === "zh" ? "交通方式" : "Transportation"}</label>
+        <div className="choice-row choice-row--wide">
+          {transportOptions.map((transport) => (
+            <button
+              key={transport.val}
+              className={`choice-chip choice-chip--wide ${config.transport === transport.val ? "choice-chip--active" : ""}`}
+              onClick={() => setConfig({ ...config, transport: transport.val })}
+              type="button"
+            >
+              <span>{transport.icon}</span>
+              <span>{transport[lang]}</span>
+            </button>
           ))}
         </div>
       </div>
@@ -74,47 +81,48 @@ function TripForm({ lang, config, setConfig }) {
 
 function ItineraryPreview({ lang, itinerary, locked }) {
   if (!itinerary) return null;
+
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-      {itinerary.map((day, i) => (
-        <div key={i} style={{
-          background: "#ffffff", borderRadius: 16, padding: 20, border: "1px solid #e5e7eb",
-          position: "relative", overflow: "hidden", boxShadow: "0 1px 3px rgba(0,0,0,0.06)"
-        }}>
-          {locked && i > 0 && (
-            <div style={{
-              position: "absolute", inset: 0, background: "rgba(255,255,255,0.9)",
-              backdropFilter: "blur(6px)", display: "flex", alignItems: "center", justifyContent: "center",
-              zIndex: 2, flexDirection: "column", gap: 8
-            }}>
-              <span style={{ fontSize: 32 }}>🔒</span>
-              <span style={{ color: "#6b7280", fontSize: 13 }}>
-                {lang === "zh" ? "付費解鎖完整行程" : "Unlock full itinerary"}
-              </span>
+    <div className="itinerary-board">
+      {itinerary.map((day, index) => (
+        <article key={day.title} className="itinerary-day">
+          {locked && index > 0 ? (
+            <div className="itinerary-day__lock">
+              <strong>{lang === "zh" ? "付費後解鎖完整日程" : "Unlock the full itinerary"}</strong>
+              <span>{lang === "zh" ? "目前僅顯示第一天作為預覽。" : "Only day one is revealed in preview mode."}</span>
             </div>
-          )}
-          <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 14 }}>
-            <div style={{
-              width: 36, height: 36, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center",
-              background: "#059669", color: "#fff", fontWeight: 800, fontSize: 15
-            }}>D{i + 1}</div>
-            <h3 style={{ margin: 0, fontSize: 16, fontWeight: 700, color: "#111827" }}>{day.title}</h3>
+          ) : null}
+
+          <div className="itinerary-day__header">
+            <span className="itinerary-day__index">D{index + 1}</span>
+            <div>
+              <h3>{day.title}</h3>
+              <p>{lang === "zh" ? "按時間順序排列的旅程節奏" : "A time-based rhythm for the day"}</p>
+            </div>
           </div>
-          <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-            {day.items.map((item, j) => (
-              <div key={j} style={{
-                display: "flex", gap: 12, alignItems: "flex-start", padding: "10px 12px",
-                borderRadius: 10, background: "#f9fafb"
-              }}>
-                <span style={{ fontSize: 10, color: "#9ca3af", fontWeight: 600, minWidth: 50, paddingTop: 2 }}>{item.time}</span>
-                <div>
-                  <div style={{ fontSize: 14, fontWeight: 600, color: "#111827" }}>{item.emoji} {item.name}</div>
-                  <div style={{ fontSize: 12, color: "#6b7280", marginTop: 2 }}>{item.note}</div>
+
+          <div className="itinerary-day__items">
+            {day.items.length > 0 ? (
+              day.items.map((item) => (
+                <div key={`${day.title}-${item.time}-${item.name}`} className="itinerary-stop">
+                  <span className="itinerary-stop__time">{item.time}</span>
+                  <div className="itinerary-stop__body">
+                    <strong>{item.emoji} {item.name}</strong>
+                    <p>{item.note}</p>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div className="itinerary-stop itinerary-stop--empty">
+                <span className="itinerary-stop__time">TBD</span>
+                <div className="itinerary-stop__body">
+                  <strong>{lang === "zh" ? "保留自由活動" : "Reserved for free time"}</strong>
+                  <p>{lang === "zh" ? "這一天會依照更多偏好繼續補齊。" : "This day can be filled out once more preferences are added."}</p>
                 </div>
               </div>
-            ))}
+            )}
           </div>
-        </div>
+        </article>
       ))}
     </div>
   );
@@ -132,13 +140,20 @@ export default function App() {
   const [itinerary, setItinerary] = useState(null);
   const contentRef = useRef(null);
 
+  const selectedAttractions = useMemo(
+    () => attractions.filter((attraction) => selected.includes(attraction._id)),
+    [attractions, selected],
+  );
+
   const toggleSelect = (id) => {
-    setSelected(prev => prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]);
+    setSelected((previous) => (previous.includes(id) ? previous.filter((item) => item !== id) : [...previous, id]));
   };
 
   const handleCountryClick = (countryKey) => {
     setSelectedCountry(countryKey);
     setRegionFilter("all");
+    setSelected([]);
+    setItinerary(null);
     setStep("attractions");
   };
 
@@ -157,31 +172,31 @@ export default function App() {
 
   const generateItinerary = () => {
     setGenerating(true);
-    const selectedAttractions = attractions.filter(a => selected.includes(a._id));
     setTimeout(() => {
       const days = [];
-      const perDay = Math.ceil(selectedAttractions.length / config.days);
-      for (let d = 0; d < config.days; d++) {
-        const dayAttractions = selectedAttractions.slice(d * perDay, (d + 1) * perDay);
-        const timeSlots = ["08:00", "10:00", "12:00", "14:00", "16:00", "18:00", "20:00"];
-        const getName = (a) => lang === "zh" ? a.nameZh : a.nameEn;
-        const getDesc = (a) => lang === "zh" ? a.descriptionZh : a.descriptionEn;
+      const perDay = Math.max(1, Math.ceil(selectedAttractions.length / config.days));
+      const timeSlots = ["08:00", "10:00", "12:00", "14:00", "16:00", "18:00", "20:00"];
+
+      for (let dayIndex = 0; dayIndex < config.days; dayIndex += 1) {
+        const dayAttractions = selectedAttractions.slice(dayIndex * perDay, (dayIndex + 1) * perDay);
+        const firstAttraction = dayAttractions[0];
         days.push({
           title: lang === "zh"
-            ? `第 ${d + 1} 天 — ${dayAttractions[0] ? getName(dayAttractions[0]) : "自由活動"}`
-            : `Day ${d + 1} — ${dayAttractions[0] ? getName(dayAttractions[0]) : "Free Time"}`,
-          items: dayAttractions.map((a, i) => ({
-            time: timeSlots[i] || "TBD",
-            emoji: TYPE_EMOJI_FALLBACK[a.type] || "📍",
-            name: getName(a),
-            note: getDesc(a)
-          }))
+            ? `第 ${dayIndex + 1} 天 · ${firstAttraction ? firstAttraction.nameZh : "自由安排"}`
+            : `Day ${dayIndex + 1} · ${firstAttraction ? firstAttraction.nameEn : "Open Schedule"}`,
+          items: dayAttractions.map((attraction, attractionIndex) => ({
+            time: timeSlots[attractionIndex] || "TBD",
+            emoji: TYPE_EMOJI_FALLBACK[attraction.type] || "📍",
+            name: lang === "zh" ? attraction.nameZh : attraction.nameEn,
+            note: lang === "zh" ? attraction.descriptionZh : attraction.descriptionEn,
+          })),
         });
       }
+
       setItinerary(days);
       setGenerating(false);
       setStep("itinerary");
-    }, 2000);
+    }, 1600);
   };
 
   useEffect(() => {
@@ -194,182 +209,177 @@ export default function App() {
 
   if (loading) {
     return (
-      <div style={{
-        minHeight: "100vh", background: "#ffffff",
-        display: "flex", alignItems: "center", justifyContent: "center",
-        color: "#6b7280", fontSize: 18,
-        fontFamily: "'Outfit', 'Noto Sans TC', sans-serif"
-      }}>
-        Loading...
+      <div className="state-screen">
+        <div className="state-screen__card">
+          <p className="eyebrow">Loading</p>
+          <h1>{lang === "zh" ? "正在整理旅程章節" : "Preparing the travel chapters"}</h1>
+          <p>{lang === "zh" ? "我們正在從 Sanity 載入景點與區域資料。" : "Attractions and regional content are loading from Sanity."}</p>
+        </div>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div style={{
-        minHeight: "100vh", background: "#ffffff",
-        display: "flex", alignItems: "center", justifyContent: "center",
-        color: "#ef4444", fontSize: 16,
-        fontFamily: "'Outfit', 'Noto Sans TC', sans-serif"
-      }}>
-        Failed to load data. Please try again later.
+      <div className="state-screen">
+        <div className="state-screen__card">
+          <p className="eyebrow">Load Error</p>
+          <h1>{lang === "zh" ? "目前無法載入內容" : "Unable to load the content right now"}</h1>
+          <p>{lang === "zh" ? "請稍後再試一次。" : "Please try again in a moment."}</p>
+        </div>
       </div>
     );
   }
 
-  // Landing page uses full-page scroll
   if (step === "landing") {
     return (
-      <div style={{ fontFamily: "'Outfit', 'Noto Sans TC', sans-serif", color: "#111827" }}>
-        <style>{`
-          @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
-          @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-          * { box-sizing: border-box; scrollbar-width: thin; scrollbar-color: #d1d5db transparent; }
-          ::-webkit-scrollbar { width: 6px; }
-          ::-webkit-scrollbar-track { background: transparent; }
-          ::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 3px; }
-        `}</style>
-        <div style={{ position: "sticky", top: 0, zIndex: 50, background: "#ffffff" }}>
-          <Header lang={lang} setLang={setLang} step={step} selectedCountry={selectedCountry} onBack={handleBack} />
-        </div>
-        <LandingPage
-          lang={lang}
-          attractions={attractions}
-          regions={regions}
-          onCountryClick={handleCountryClick}
-        />
+      <div className="app-shell">
+        <Header lang={lang} onBack={handleBack} selectedCountry={selectedCountry} setLang={setLang} step={step} />
+        <LandingPage attractions={attractions} lang={lang} onCountryClick={handleCountryClick} regions={regions} />
       </div>
     );
   }
 
-  // Inner pages use contained scroll with bottom CTA
   return (
-    <div style={{
-      height: "100vh", display: "flex", flexDirection: "column",
-      background: "#ffffff", color: "#111827",
-      fontFamily: "'Outfit', 'Noto Sans TC', sans-serif",
-      position: "relative", overflow: "hidden"
-    }}>
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
-        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
-        * { box-sizing: border-box; scrollbar-width: thin; scrollbar-color: #d1d5db transparent; }
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 3px; }
-      `}</style>
+    <div className="app-shell app-shell--inner">
+      <Header lang={lang} onBack={handleBack} selectedCountry={selectedCountry} setLang={setLang} step={step} />
 
-      <Header lang={lang} setLang={setLang} step={step} selectedCountry={selectedCountry} onBack={handleBack} />
-
-      {/* Content */}
-      <div ref={contentRef} style={{ flex: 1, overflow: "auto", paddingBottom: 100 }}>
-        {step === "attractions" && (
+      <div ref={contentRef} className="inner-scroll">
+        {step === "attractions" ? (
           <AttractionsPage
-            lang={lang}
             attractions={attractions}
-            regions={regions}
-            selectedCountry={selectedCountry}
-            selected={selected}
+            lang={lang}
             onToggle={toggleSelect}
             regionFilter={regionFilter}
+            regions={regions}
+            selected={selected}
+            selectedCountry={selectedCountry}
             setRegionFilter={setRegionFilter}
           />
-        )}
+        ) : null}
 
-        {step === "config" && (
-          <div style={{ maxWidth: 500, padding: "24px", animation: "slideUp 0.5s ease" }}>
-            <h1 style={{ margin: "0 0 4px", fontSize: 24, fontWeight: 800, color: "#111827" }}>
-              {lang === "zh" ? "設定旅行條件" : "Set Your Trip Details"}
-            </h1>
-            <p style={{ margin: "0 0 20px", fontSize: 14, color: "#6b7280" }}>
-              {lang === "zh" ? "告訴我們你的旅行偏好" : "Tell us your travel preferences"}
-            </p>
-            <TripForm lang={lang} config={config} setConfig={setConfig} />
-            <div style={{ marginTop: 24, padding: 16, borderRadius: 14, background: "#f9fafb", border: "1px solid #e5e7eb" }}>
-              <h4 style={{ margin: "0 0 10px", fontSize: 14, fontWeight: 600, color: "#059669" }}>
-                {lang === "zh" ? "📋 你選擇的景點" : "📋 Your Selected Spots"}
-              </h4>
-              <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
-                {attractions.filter(a => selected.includes(a._id)).map(a => (
-                  <span key={a._id} style={{ padding: "4px 10px", borderRadius: 20, background: "#e5e7eb", fontSize: 12, color: "#374151" }}>
-                    {TYPE_EMOJI_FALLBACK[a.type] || "📍"} {lang === "zh" ? a.nameZh : a.nameEn}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
-
-        {step === "itinerary" && (
-          <div style={{ maxWidth: 600, padding: "24px", animation: "slideUp 0.5s ease" }}>
-            <h1 style={{ margin: "0 0 4px", fontSize: 24, fontWeight: 800, color: "#111827" }}>
-              {lang === "zh" ? "你的專屬行程" : "Your Custom Itinerary"}
-            </h1>
-            <p style={{ margin: "0 0 20px", fontSize: 14, color: "#6b7280" }}>
-              {lang === "zh" ? "根據你的選擇，AI 已生成最佳行程" : "Based on your picks, AI generated the optimal route"}
-            </p>
-            <ItineraryPreview lang={lang} itinerary={itinerary} locked={true} />
-            <div style={{
-              marginTop: 24, padding: 20, borderRadius: 16,
-              background: "linear-gradient(135deg, #ecfdf5, #eff6ff)", textAlign: "center",
-              border: "1px solid #e5e7eb"
-            }}>
-              <span style={{ fontSize: 32 }}>✨</span>
-              <h3 style={{ margin: "8px 0 6px", fontSize: 18, fontWeight: 700, color: "#111827" }}>
-                {lang === "zh" ? "解鎖完整行程" : "Unlock Full Itinerary"}
-              </h3>
-              <p style={{ margin: 0, fontSize: 13, color: "#6b7280" }}>
+        {step === "config" ? (
+          <section className="page-container composer-layout">
+            <div className="composer-panel">
+              <p className="eyebrow">{lang === "zh" ? "Trip Composer" : "Trip Composer"}</p>
+              <h1>{lang === "zh" ? "設定你的旅行條件" : "Set the trip parameters"}</h1>
+              <p className="composer-panel__lead">
                 {lang === "zh"
-                  ? "包含每日詳細時間表、交通接駁指南、順路景點推薦、餐廳預訂建議"
-                  : "Includes daily schedules, transport guides, route optimization, restaurant bookings"}
+                  ? "在這裡決定旅程天數、到達節奏與交通方式，系統會把你選的景點整理成更順的 itinerary。"
+                  : "Set your duration, arrival rhythm, and transportation style here so the itinerary can be shaped around your picks."}
               </p>
-              <button style={{
-                marginTop: 16, padding: "12px 32px", borderRadius: 12, border: "none",
-                background: "#059669", color: "#fff", fontWeight: 700, fontSize: 15, cursor: "pointer"
-              }}>{lang === "zh" ? "NT$299 解鎖" : "$9.99 Unlock"}</button>
+              <TripForm config={config} lang={lang} setConfig={setConfig} />
             </div>
-          </div>
-        )}
+
+            <aside className="composer-sidebar">
+              <div className="summary-card">
+                <p className="eyebrow">{lang === "zh" ? "已選景點" : "Selected Spots"}</p>
+                <h2>{lang === "zh" ? "這次準備放進行程的景點" : "What is going into this draft"}</h2>
+                <div className="selected-chip-list">
+                  {selectedAttractions.length > 0 ? (
+                    selectedAttractions.map((attraction) => (
+                      <span key={attraction._id} className="selected-chip">
+                        {TYPE_EMOJI_FALLBACK[attraction.type] || "📍"} {lang === "zh" ? attraction.nameZh : attraction.nameEn}
+                      </span>
+                    ))
+                  ) : (
+                    <p className="summary-card__empty">
+                      {lang === "zh" ? "還沒有選任何景點，回上一頁加入幾個你想去的地方。" : "No spots selected yet. Go back and add a few places first."}
+                    </p>
+                  )}
+                </div>
+              </div>
+
+              <div className="summary-card summary-card--soft">
+                <p className="eyebrow">{lang === "zh" ? "預覽規則" : "Preview Rules"}</p>
+                <ul className="summary-list">
+                  <li>{lang === "zh" ? "行程會依你選的景點平均分配到每天。" : "Selected spots are distributed evenly across the trip."}</li>
+                  <li>{lang === "zh" ? "目前仍為 demo flow，付款與正式解鎖尚未接上。" : "This is still a demo flow; payments and unlocking are placeholders."}</li>
+                  <li>{lang === "zh" ? "你可以回上一頁繼續增減景點。" : "You can always go back and refine the selection."}</li>
+                </ul>
+              </div>
+            </aside>
+          </section>
+        ) : null}
+
+        {step === "itinerary" ? (
+          <section className="page-container itinerary-layout">
+            <div className="composer-panel">
+              <p className="eyebrow">{lang === "zh" ? "Itinerary Preview" : "Itinerary Preview"}</p>
+              <h1>{lang === "zh" ? "你的專屬 itinerary 已經成形" : "Your itinerary draft is taking shape"}</h1>
+              <p className="composer-panel__lead">
+                {lang === "zh"
+                  ? "目前先顯示第一天與整體節奏，完整版本會包含交通串接、順路排序與更多餐廳建議。"
+                  : "You can preview day one and the overall rhythm now; the full version would include transport flow, route ordering, and more dining suggestions."}
+              </p>
+              <ItineraryPreview itinerary={itinerary} lang={lang} locked />
+            </div>
+
+            <aside className="composer-sidebar">
+              <div className="paywall-card">
+                <p className="eyebrow">{lang === "zh" ? "解鎖完整內容" : "Unlock"}</p>
+                <h2>{lang === "zh" ? "升級成完整路線包" : "Upgrade to the full route pack"}</h2>
+                <p>
+                  {lang === "zh"
+                    ? "包含每日詳細時間表、交通接駁指引、順路調整與餐廳建議。"
+                    : "Includes daily schedules, transport guidance, route optimization, and dining suggestions."}
+                </p>
+                <div className="paywall-card__price">{lang === "zh" ? "NT$299" : "$9.99"}</div>
+                <div className="paywall-card__bullets">
+                  <span>{lang === "zh" ? "逐日時間表" : "Day-by-day schedule"}</span>
+                  <span>{lang === "zh" ? "順路與節奏註記" : "Route flow notes"}</span>
+                  <span>{lang === "zh" ? "交通串接指南" : "Transport guide"}</span>
+                </div>
+              </div>
+            </aside>
+          </section>
+        ) : null}
       </div>
 
-      {/* Bottom CTA */}
-      <div style={{
-        position: "absolute", bottom: 0, left: 0, right: 0, padding: "16px 24px",
-        background: "linear-gradient(transparent, #ffffff 30%)", zIndex: 20, paddingTop: 40
-      }}>
-        {step === "attractions" && (
-          <button onClick={() => setStep("config")} disabled={selected.length === 0} style={{
-            width: "100%", padding: "16px", borderRadius: 14, border: "none",
-            cursor: selected.length > 0 ? "pointer" : "not-allowed",
-            background: selected.length > 0 ? "#059669" : "#e5e7eb",
-            color: selected.length > 0 ? "#fff" : "#9ca3af",
-            fontWeight: 800, fontSize: 16, transition: "all 0.3s"
-          }}>{lang === "zh" ? `繼續 — 已選 ${selected.length} 個景點` : `Continue — ${selected.length} spots selected`}</button>
-        )}
-        {step === "config" && (
-          <button onClick={generateItinerary} disabled={generating} style={{
-            width: "100%", padding: "16px", borderRadius: 14, border: "none", cursor: "pointer",
-            background: generating ? "#e5e7eb" : "#059669",
-            color: generating ? "#9ca3af" : "#fff",
-            fontWeight: 800, fontSize: 16, animation: generating ? "pulse 1.5s infinite" : "none"
-          }}>{generating
-            ? (lang === "zh" ? "🤖 AI 正在規劃中..." : "🤖 AI is planning...")
-            : (lang === "zh" ? "🚀 生成我的專屬行程" : "🚀 Generate My Itinerary")}</button>
-        )}
-        {step === "itinerary" && (
-          <div style={{ display: "flex", gap: 10 }}>
-            <button onClick={() => { setStep("attractions"); setItinerary(null); setSelected([]); }} style={{
-              padding: "16px 20px", borderRadius: 14, border: "1px solid #e5e7eb",
-              background: "#f9fafb", color: "#6b7280", cursor: "pointer", fontWeight: 600, fontSize: 14
-            }}>{lang === "zh" ? "重新選擇" : "Reselect"}</button>
-            <button onClick={() => alert(lang === "zh" ? "付費功能開發中！" : "Payment coming soon!")} style={{
-              flex: 1, padding: "16px", borderRadius: 14, border: "none", cursor: "pointer",
-              background: "#059669", color: "#fff", fontWeight: 800, fontSize: 16
-            }}>{lang === "zh" ? "💎 解鎖完整行程 NT$299" : "💎 Unlock Full Itinerary $9.99"}</button>
-          </div>
-        )}
+      <div className="cta-dock-wrap">
+        <div className="cta-dock">
+          {step === "attractions" ? (
+            <button
+              className="cta-button"
+              disabled={selected.length === 0}
+              onClick={() => setStep("config")}
+              type="button"
+            >
+              {lang === "zh" ? `下一步 · 已選 ${selected.length} 個景點` : `Continue · ${selected.length} spots selected`}
+            </button>
+          ) : null}
+
+          {step === "config" ? (
+            <button className="cta-button" disabled={generating} onClick={generateItinerary} type="button">
+              {generating
+                ? (lang === "zh" ? "AI 正在生成 itinerary..." : "AI is generating the itinerary...")
+                : (lang === "zh" ? "生成我的專屬 itinerary" : "Generate my itinerary")}
+            </button>
+          ) : null}
+
+          {step === "itinerary" ? (
+            <div className="cta-dock__split">
+              <button
+                className="secondary-button"
+                onClick={() => {
+                  setStep("attractions");
+                  setItinerary(null);
+                  setSelected([]);
+                }}
+                type="button"
+              >
+                {lang === "zh" ? "重新選景點" : "Reselect spots"}
+              </button>
+              <button
+                className="cta-button"
+                onClick={() => window.alert(lang === "zh" ? "付費解鎖功能開發中。" : "Unlock flow is coming soon.")}
+                type="button"
+              >
+                {lang === "zh" ? "解鎖完整行程" : "Unlock full itinerary"}
+              </button>
+            </div>
+          ) : null}
+        </div>
       </div>
     </div>
   );

@@ -1,13 +1,18 @@
 export default function Footer({ lang }) {
   return (
-    <div style={{
-      padding: "24px", textAlign: "center",
-      borderTop: "1px solid #e5e7eb", color: "#9ca3af", fontSize: 13
-    }}>
-      {lang === "zh"
-        ? `© ${new Date().getFullYear()} AlexTravelSharing — 真實旅行故事，AI 智能規劃`
-        : `© ${new Date().getFullYear()} AlexTravelSharing — Real travel stories, AI-powered planning`
-      }
-    </div>
+    <footer className="site-footer">
+      <div className="page-container site-footer__inner">
+        <p>
+          {lang === "zh"
+            ? `© ${new Date().getFullYear()} AlexTravelSharing`
+            : `© ${new Date().getFullYear()} AlexTravelSharing`}
+        </p>
+        <p>
+          {lang === "zh"
+            ? "真實旅行故事，整理成可以出發的行程。"
+            : "Real travel stories, shaped into itineraries you can leave with."}
+        </p>
+      </div>
+    </footer>
   );
 }

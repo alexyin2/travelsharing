@@ -1,85 +1,120 @@
 import { useMemo } from "react";
-import { COUNTRY_CONFIG } from "../lib/constants";
+import { COUNTRY_CONFIG, COUNTRY_ORDER } from "../lib/constants";
 import CountryCard from "./CountryCard";
 import FeaturedSection from "./FeaturedSection";
-import ValueProps from "./ValueProps";
-import StatsBar from "./StatsBar";
 import Footer from "./Footer";
-
-const STAGGER_DELAYS = [0, 1300, 2600];
+import ProductShot from "./ProductShot";
+import SectionIntro from "./SectionIntro";
+import StatsBar from "./StatsBar";
+import ValueProps from "./ValueProps";
 
 export default function LandingPage({ lang, attractions, regions, onCountryClick }) {
   const destinationGroups = useMemo(() => {
     const groups = {};
-    regions.forEach(region => {
-      const country = region.country || "Other";
-      if (!groups[country]) groups[country] = { regions: [], attractionCount: 0 };
-      const count = attractions.filter(a => a.region?.slug === region.slug).length;
-      groups[country].regions.push({ ...region, attractionCount: count });
-      groups[country].attractionCount += count;
+    regions.forEach((region) => {
+      const country = region.country;
+      if (!country) return;
+      if (!groups[country]) groups[country] = { regionCount: 0, attractionCount: 0 };
+      groups[country].regionCount += 1;
     });
+
+    attractions.forEach((attraction) => {
+      const country = attraction.region?.country;
+      if (!country) return;
+      if (!groups[country]) groups[country] = { regionCount: 0, attractionCount: 0 };
+      groups[country].attractionCount += 1;
+    });
+
     return groups;
   }, [regions, attractions]);
 
-  const countryImages = useMemo(() => {
-    const map = {};
-    Object.keys(COUNTRY_CONFIG).forEach(country => {
-      map[country] = attractions
-        .filter(a => a.region?.country === country && a.cardImageUrl)
-        .slice(0, 6)
-        .map(a => a.cardImageUrl);
-    });
-    return map;
-  }, [attractions]);
+  const featuredPreview = useMemo(() => {
+    return attractions.slice(0, 5).map((item) => ({
+      name: lang === "zh" ? item.nameZh : item.nameEn,
+      country: item.region?.country,
+    }));
+  }, [attractions, lang]);
 
   return (
-    <div style={{ minHeight: "100vh", background: "#ffffff" }}>
-      {/* Hero */}
-      <div style={{ textAlign: "center", padding: "48px 24px 24px" }}>
-        <h1 style={{
-          margin: 0, fontSize: 40, fontWeight: 900, color: "#111827",
-          letterSpacing: "-0.03em"
-        }}>
-          AlexTravelSharing
-        </h1>
-        <p style={{ margin: "10px 0 0", fontSize: 17, color: "#6b7280" }}>
-          {lang === "zh" ? "真實旅行故事，AI 智能規劃" : "Real travel stories, AI-powered planning"}
-        </p>
-      </div>
+    <div className="landing-page">
+      <section className="canvas-section hero-section">
+        <div className="page-container hero-grid">
+          <div className="hero-copy">
+            <p className="eyebrow">
+              {lang === "zh" ? "旅程策展 / AI 行程規劃" : "Editorial travel / AI itinerary studio"}
+            </p>
+            <h1 className="hero-title">
+              {lang === "zh"
+                ? "把真實旅行故事，整理成可以直接出發的路線。"
+                : "Turn firsthand travel stories into routes you can actually take."}
+            </h1>
+            <div className="hero-sidecopy">
+              <p className="lead">
+                {lang === "zh"
+                  ? "從挪威峽灣、倫敦街區到紐西蘭南島，AlexTravelSharing 把作者的實際經驗、景點篩選與 AI 行程編排整合成一個更有節奏的旅行入口。"
+                  : "From Norwegian fjords to London streets and New Zealand drives, AlexTravelSharing blends firsthand notes, destination curation, and AI itinerary planning into one polished travel workflow."}
+              </p>
+              <div className="hero-actions">
+                <button className="button-shell button-shell--accent" onClick={() => onCountryClick("Norway")} type="button">
+                  <span className="pill-button pill-button--accent">
+                    {lang === "zh" ? "開始規劃旅程" : "Start Planning"}
+                  </span>
+                </button>
+                <button
+                  className="button-shell button-shell--ring"
+                  onClick={() => document.getElementById("destinations")?.scrollIntoView({ behavior: "smooth" })}
+                  type="button"
+                >
+                  <span className="pill-button pill-button--ghost">
+                    {lang === "zh" ? "瀏覽目的地" : "Browse Destinations"}
+                  </span>
+                </button>
+              </div>
+            </div>
+          </div>
 
-      {/* Country Cards */}
-      <div style={{
-        maxWidth: 1200, margin: "0 auto", padding: "32px 24px 0",
-        display: "grid",
-        gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
-        gap: 24
-      }}>
-        {Object.entries(COUNTRY_CONFIG).map(([countryKey, cfg], i) => (
-          <CountryCard
-            key={countryKey}
-            countryKey={countryKey}
-            config={cfg}
-            images={countryImages[countryKey] || []}
-            attractionCount={destinationGroups[countryKey]?.attractionCount || 0}
-            lang={lang}
-            onClick={() => onCountryClick(countryKey)}
-            delay={STAGGER_DELAYS[i] || 0}
+          <div className="hero-visual">
+            <div className="screenshot-well screenshot-well--hero">
+              <ProductShot lang={lang} preview={featuredPreview} />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="destinations" className="canvas-section">
+        <div className="page-container">
+          <SectionIntro
+            eyebrow={lang === "zh" ? "Destinations" : "Destinations"}
+            title={lang === "zh" ? "三個目的地，一套更有品味的規劃流程" : "Three destinations, one sharper planning flow"}
+            description={
+              lang === "zh"
+                ? "每個章節都保留旅遊內容的故事性，同時讓你能快速進入篩選、選點與 itinerary 規劃。"
+                : "Each destination keeps the editorial storytelling, then moves you quickly into curation, selection, and itinerary planning."
+            }
           />
-        ))}
-      </div>
 
-      {/* Featured Attractions */}
-      <div style={{ marginTop: 60 }}>
-        <FeaturedSection attractions={attractions} lang={lang} onCountryClick={onCountryClick} />
-      </div>
+          <div className="destination-grid">
+            {COUNTRY_ORDER.map((countryKey) => {
+              const stats = destinationGroups[countryKey] || { regionCount: 0, attractionCount: 0 };
+              return (
+                <CountryCard
+                  key={countryKey}
+                  countryKey={countryKey}
+                  config={COUNTRY_CONFIG[countryKey]}
+                  attractionCount={stats.attractionCount}
+                  regionCount={stats.regionCount}
+                  lang={lang}
+                  onClick={() => onCountryClick(countryKey)}
+                />
+              );
+            })}
+          </div>
+        </div>
+      </section>
 
-      {/* Value Props */}
+      <FeaturedSection attractions={attractions} lang={lang} onCountryClick={onCountryClick} />
       <ValueProps lang={lang} />
-
-      {/* Stats */}
-      <StatsBar attractionCount={attractions.length} lang={lang} />
-
-      {/* Footer */}
+      <StatsBar attractionCount={attractions.length} regionCount={regions.length} lang={lang} />
       <Footer lang={lang} />
     </div>
   );

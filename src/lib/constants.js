@@ -1,26 +1,55 @@
+import norwayImage from "../assets/destinations/norway-fjord.jpg";
+import unitedKingdomImage from "../assets/destinations/london-street.jpg";
+import newZealandImage from "../assets/destinations/new-zealand-mountains.jpg";
+
 export const TYPE_COLORS = {
-  nature: { bg: "#0f4c3a", text: "#6ee7b7", label: "自然景觀" },
-  village: { bg: "#4a2c17", text: "#fbbf24", label: "漁村小鎮" },
-  accommodation: { bg: "#3b1f4a", text: "#c4b5fd", label: "特色住宿" },
-  restaurant: { bg: "#4a1d1d", text: "#fca5a5", label: "美食餐廳" },
-  activity: { bg: "#1e3a5f", text: "#7dd3fc", label: "體驗活動" },
-  town: { bg: "#374151", text: "#d1d5db", label: "城鎮市區" },
-  aurora_spot: { bg: "#1a1a3e", text: "#a78bfa", label: "極光觀測" },
-  landmark: { bg: "#3d2e1f", text: "#fcd34d", label: "地標景點" },
-  hiking: { bg: "#1a3a2a", text: "#86efac", label: "登山步道" },
-  viewpoint: { bg: "#2d2d4e", text: "#93c5fd", label: "觀景台" },
-  museum: { bg: "#3d2e1f", text: "#fcd34d", label: "博物館" },
-  market: { bg: "#4a2c17", text: "#fbbf24", label: "市集" },
-  palace: { bg: "#3b1f4a", text: "#c4b5fd", label: "宮殿" },
-  park: { bg: "#0f4c3a", text: "#6ee7b7", label: "公園" },
-  gallery: { bg: "#3b1f4a", text: "#c4b5fd", label: "藝廊" },
-  theatre: { bg: "#4a1d1d", text: "#fca5a5", label: "劇院" },
-  shopping: { bg: "#4a2c17", text: "#fbbf24", label: "購物" },
-  neighborhood: { bg: "#374151", text: "#d1d5db", label: "街區" },
-  day_trip: { bg: "#1e3a5f", text: "#7dd3fc", label: "一日遊" },
-  beach: { bg: "#1e3a5f", text: "#7dd3fc", label: "海灘" },
-  lake: { bg: "#1a1a3e", text: "#a78bfa", label: "湖泊" },
-  glacier: { bg: "#2d2d4e", text: "#93c5fd", label: "冰川" },
+  nature: { bg: "#12382f", text: "#b9f4d0" },
+  village: { bg: "#4c2e1c", text: "#f4c98a" },
+  accommodation: { bg: "#352346", text: "#dbccff" },
+  restaurant: { bg: "#4d1f26", text: "#ffc0c8" },
+  activity: { bg: "#1d3d59", text: "#b4e3ff" },
+  town: { bg: "#334155", text: "#dbe5f1" },
+  aurora_spot: { bg: "#20224f", text: "#d2c5ff" },
+  landmark: { bg: "#584423", text: "#f8df9c" },
+  hiking: { bg: "#183629", text: "#c9f2a7" },
+  viewpoint: { bg: "#2b3356", text: "#c7d7ff" },
+  museum: { bg: "#5a4531", text: "#f2d7b2" },
+  market: { bg: "#5b3b20", text: "#ffd38c" },
+  palace: { bg: "#453158", text: "#e4d5ff" },
+  park: { bg: "#1b4235", text: "#c0f0d1" },
+  gallery: { bg: "#3f3152", text: "#dfd0ff" },
+  theatre: { bg: "#512530", text: "#ffc7d0" },
+  shopping: { bg: "#5a391a", text: "#ffd58d" },
+  neighborhood: { bg: "#3f4a59", text: "#d9e3ef" },
+  day_trip: { bg: "#1f4565", text: "#bae2ff" },
+  beach: { bg: "#21506d", text: "#bde6ff" },
+  lake: { bg: "#24365e", text: "#cad6ff" },
+  glacier: { bg: "#2f4870", text: "#d1e1ff" },
+};
+
+export const TYPE_LABELS = {
+  nature: { zh: "自然景觀", en: "Nature" },
+  village: { zh: "漁村小鎮", en: "Village" },
+  accommodation: { zh: "特色住宿", en: "Stay" },
+  restaurant: { zh: "美食餐廳", en: "Dining" },
+  activity: { zh: "體驗活動", en: "Activity" },
+  town: { zh: "城鎮市區", en: "Town" },
+  aurora_spot: { zh: "極光觀測", en: "Aurora" },
+  landmark: { zh: "地標景點", en: "Landmark" },
+  hiking: { zh: "登山步道", en: "Hiking" },
+  viewpoint: { zh: "觀景台", en: "Viewpoint" },
+  museum: { zh: "博物館", en: "Museum" },
+  market: { zh: "市集", en: "Market" },
+  palace: { zh: "宮殿", en: "Palace" },
+  park: { zh: "公園", en: "Park" },
+  gallery: { zh: "藝廊", en: "Gallery" },
+  theatre: { zh: "劇院", en: "Theatre" },
+  shopping: { zh: "購物", en: "Shopping" },
+  neighborhood: { zh: "街區", en: "Neighborhood" },
+  day_trip: { zh: "一日遊", en: "Day Trip" },
+  beach: { zh: "海灘", en: "Beach" },
+  lake: { zh: "湖泊", en: "Lake" },
+  glacier: { zh: "冰川", en: "Glacier" },
 };
 
 export const TYPE_EMOJI_FALLBACK = {
@@ -48,17 +77,58 @@ export const TYPE_EMOJI_FALLBACK = {
   day_trip: "🚐",
 };
 
+export const COUNTRY_ORDER = ["Norway", "United Kingdom", "New Zealand"];
+
 export const COUNTRY_CONFIG = {
   Norway: {
-    emoji: "🇳🇴", color: "#059669", bg: "#064e3b", zhName: "挪威",
-    description: { zh: "極光、峽灣、漁村與壯闘的北歐自然", en: "Aurora, fjords, fishing villages & Nordic nature" }
+    emoji: "🇳🇴",
+    accent: "#1c6d57",
+    accentSoft: "#d5ebe3",
+    zhName: "挪威",
+    enName: "Norway",
+    marketingEn: "Arctic fjords and aurora routes",
+    description: {
+      zh: "極光、峽灣、漁村與北歐路線感最強的實戰旅行地圖。",
+      en: "Aurora routes, fjords, and fishing villages shaped into a practical Nordic playbook.",
+    },
+    image: norwayImage,
   },
   "United Kingdom": {
-    emoji: "🇬🇧", color: "#d97706", bg: "#78350f", zhName: "英國",
-    description: { zh: "皇宮、博物館、劇院與歷史街區", en: "Palaces, museums, theatres & historic neighborhoods" }
+    emoji: "🇬🇧",
+    accent: "#9b5f2e",
+    accentSoft: "#efe2d4",
+    zhName: "英國",
+    enName: "United Kingdom",
+    marketingEn: "London culture and city chapters",
+    description: {
+      zh: "博物館、街區、劇院與城市散策，濃縮成可直接出發的倫敦指南。",
+      en: "Museums, neighborhoods, and theatre nights distilled into a city guide you can actually use.",
+    },
+    image: unitedKingdomImage,
   },
-  "NZ South Island": {
-    emoji: "🇳🇿", color: "#059669", bg: "#14532d", zhName: "紐西蘭南島",
-    description: { zh: "冰川、湖泊、步道與壯麗自然景觀", en: "Glaciers, lakes, trails & dramatic landscapes" }
+  "New Zealand": {
+    emoji: "🇳🇿",
+    accent: "#38616f",
+    accentSoft: "#d8e6ea",
+    zhName: "紐西蘭南島",
+    enName: "New Zealand South Island",
+    marketingEn: "Lakes, peaks, and slow scenic drives",
+    description: {
+      zh: "冰川、湖泊、步道與長距離自駕節奏，專為南島行程編排而設計。",
+      en: "Glaciers, lakes, trails, and long scenic drives curated for South Island itineraries.",
+    },
+    image: newZealandImage,
   },
 };
+
+export function getCountryName(countryKey, lang) {
+  const config = COUNTRY_CONFIG[countryKey];
+  if (!config) return countryKey;
+  return lang === "zh" ? config.zhName : config.enName;
+}
+
+export function getTypeLabel(type, lang) {
+  const label = TYPE_LABELS[type];
+  if (!label) return lang === "zh" ? "精選景點" : "Featured";
+  return lang === "zh" ? label.zh : label.en;
+}

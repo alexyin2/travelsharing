@@ -1,42 +1,53 @@
-import { COUNTRY_CONFIG } from "../lib/constants";
+import { COUNTRY_CONFIG, getCountryName } from "../lib/constants";
 
 export default function Header({ lang, setLang, step, selectedCountry, onBack }) {
   const showBack = step !== "landing";
-  const cfg = selectedCountry ? COUNTRY_CONFIG[selectedCountry] : null;
+  const currentCountry = selectedCountry ? COUNTRY_CONFIG[selectedCountry] : null;
 
   return (
-    <div style={{
-      padding: "16px 24px", display: "flex", justifyContent: "space-between", alignItems: "center",
-      borderBottom: "1px solid #e5e7eb", position: "relative", zIndex: 10, background: "#ffffff"
-    }}>
-      <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-        {showBack && (
-          <button onClick={onBack} style={{
-            padding: "6px 12px", borderRadius: 8, border: "1px solid #e5e7eb",
-            background: "#f9fafb", color: "#374151", cursor: "pointer", fontSize: 14, fontWeight: 600,
-            marginRight: 8, display: "flex", alignItems: "center"
-          }}>
-            ←
-          </button>
-        )}
-        {showBack && cfg ? (
-          <span style={{ fontSize: 18, fontWeight: 700, color: "#111827", display: "flex", alignItems: "center", gap: 8 }}>
-            <span style={{ fontSize: 22 }}>{cfg.emoji}</span>
-            {lang === "zh" ? cfg.zhName : selectedCountry}
+    <header className="site-header">
+      <div className="site-header__inner">
+        <div className="site-header__brand">
+          {showBack ? (
+            <button className="button-shell button-shell--ring" onClick={onBack} type="button">
+              <span className="pill-button pill-button--ghost">
+                <span className="pill-button__icon">←</span>
+                {lang === "zh" ? "返回" : "Back"}
+              </span>
+            </button>
+          ) : (
+            <span className="site-header__seal">{lang === "zh" ? "旅" : "AT"}</span>
+          )}
+
+          <div>
+            <div className="site-header__eyebrow">AlexTravelSharing</div>
+            <div className="site-header__title">
+              {showBack && currentCountry ? (
+                <>
+                  <span>{currentCountry.emoji}</span>
+                  <span>{getCountryName(selectedCountry, lang)}</span>
+                </>
+              ) : (
+                <>
+                  <span>Editorial itineraries</span>
+                  <span className="site-header__dot" />
+                  <span>{lang === "zh" ? "真實旅行故事" : "Real travel stories"}</span>
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+
+        <button
+          className="button-shell button-shell--ring"
+          onClick={() => setLang((currentLang) => (currentLang === "zh" ? "en" : "zh"))}
+          type="button"
+        >
+          <span className="pill-button pill-button--ghost">
+            {lang === "zh" ? "EN" : "中文"}
           </span>
-        ) : (
-          <>
-            <span style={{ fontSize: 24 }}>✈️</span>
-            <span style={{ fontSize: 18, fontWeight: 800, letterSpacing: "-0.03em", color: "#111827" }}>
-              AlexTravelSharing
-            </span>
-          </>
-        )}
+        </button>
       </div>
-      <button onClick={() => setLang(l => l === "zh" ? "en" : "zh")} style={{
-        padding: "6px 14px", borderRadius: 20, border: "1px solid #e5e7eb", background: "#f9fafb",
-        color: "#6b7280", cursor: "pointer", fontSize: 12, fontWeight: 600
-      }}>{lang === "zh" ? "EN" : "中文"}</button>
-    </div>
+    </header>
   );
 }

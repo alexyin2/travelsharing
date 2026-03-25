@@ -1,68 +1,83 @@
 import { useMemo } from "react";
-import { COUNTRY_CONFIG } from "../lib/constants";
+import { COUNTRY_CONFIG, getCountryName } from "../lib/constants";
 import AttractionCard from "./AttractionCard";
 
-export default function AttractionsPage({ lang, attractions, regions, selectedCountry, selected, onToggle, regionFilter, setRegionFilter }) {
+export default function AttractionsPage({
+  lang,
+  attractions,
+  regions,
+  selectedCountry,
+  selected,
+  onToggle,
+  regionFilter,
+  setRegionFilter,
+}) {
   const countryRegions = useMemo(() => {
     return regions
-      .filter(r => r.country === selectedCountry)
-      .map(r => ({
-        ...r,
-        attractionCount: attractions.filter(a => a.region?.slug === r.slug).length
+      .filter((region) => region.country === selectedCountry)
+      .map((region) => ({
+        ...region,
+        attractionCount: attractions.filter((attraction) => attraction.region?.slug === region.slug).length,
       }));
   }, [regions, selectedCountry, attractions]);
 
   const filtered = useMemo(() => {
-    const countryAttractions = attractions.filter(a => a.region?.country === selectedCountry);
+    const countryAttractions = attractions.filter((attraction) => attraction.region?.country === selectedCountry);
     if (regionFilter === "all") return countryAttractions;
-    return countryAttractions.filter(a => a.region?.slug === regionFilter);
+    return countryAttractions.filter((attraction) => attraction.region?.slug === regionFilter);
   }, [attractions, selectedCountry, regionFilter]);
 
-  const cfg = COUNTRY_CONFIG[selectedCountry] || { emoji: "🌍" };
+  const currentCountry = COUNTRY_CONFIG[selectedCountry];
 
   return (
-    <div style={{ animation: "slideUp 0.5s ease" }}>
-      {/* Title */}
-      <div style={{ padding: "16px 24px 0" }}>
-        <h1 style={{ margin: 0, fontSize: 24, fontWeight: 800, color: "#111827", letterSpacing: "-0.03em" }}>
-          {lang === "zh" ? "選擇你的夢想景點" : "Choose Your Dream Spots"}
-        </h1>
-        <p style={{ margin: "4px 0 0", fontSize: 14, color: "#6b7280" }}>
-          {lang === "zh" ? `已選擇 ${selected.length} 個景點` : `${selected.length} spots selected`}
-        </p>
-      </div>
+    <div className="inner-page">
+      <section className="inner-hero">
+        <div className="inner-hero__media">
+          <img alt="" src={currentCountry?.image} />
+        </div>
+        <div className="inner-hero__overlay" />
+        <div className="inner-hero__content">
+          <p className="eyebrow">{selectedCountry}</p>
+          <h1>{getCountryName(selectedCountry, lang)}</h1>
+          <p>
+            {lang === "zh"
+              ? "先從區域與景點挑選開始，系統會把你偏好的節奏整理成可閱讀的 itinerary。"
+              : "Start by curating regions and spots, then let the system shape them into a readable itinerary."}
+          </p>
+          <div className="inner-hero__meta">
+            <span>{countryRegions.length} {lang === "zh" ? "個區域" : "regions"}</span>
+            <span>{selected.length} {lang === "zh" ? "個已選景點" : "selected spots"}</span>
+          </div>
+        </div>
+      </section>
 
-      {/* Region filter tabs */}
-      <div style={{ padding: "12px 24px", display: "flex", gap: 6, flexWrap: "wrap" }}>
-        <button onClick={() => setRegionFilter("all")} style={{
-          padding: "8px 16px", borderRadius: 20, border: "none", cursor: "pointer",
-          background: regionFilter === "all" ? "#059669" : "#f3f4f6",
-          color: regionFilter === "all" ? "#fff" : "#6b7280",
-          fontWeight: 600, fontSize: 13, transition: "all 0.2s"
-        }}>{lang === "zh" ? "全部" : "All"}</button>
-        {countryRegions.map(r => (
-          <button key={r.slug} onClick={() => setRegionFilter(r.slug)} style={{
-            padding: "8px 16px", borderRadius: 20, border: "none", cursor: "pointer",
-            background: regionFilter === r.slug ? "#059669" : "#f3f4f6",
-            color: regionFilter === r.slug ? "#fff" : "#6b7280",
-            fontWeight: 600, fontSize: 13, transition: "all 0.2s"
-          }}>
-            {cfg.emoji} {lang === "zh" ? r.nameZh : r.nameEn} ({r.attractionCount})
+      <section className="page-container inner-content">
+        <div className="filter-bar">
+          <button
+            className={`filter-pill ${regionFilter === "all" ? "filter-pill--active" : ""}`}
+            onClick={() => setRegionFilter("all")}
+            type="button"
+          >
+            {lang === "zh" ? "全部區域" : "All regions"}
           </button>
-        ))}
-      </div>
+          {countryRegions.map((region) => (
+            <button
+              key={region.slug}
+              className={`filter-pill ${regionFilter === region.slug ? "filter-pill--active" : ""}`}
+              onClick={() => setRegionFilter(region.slug)}
+              type="button"
+            >
+              {lang === "zh" ? region.nameZh : region.nameEn} <span>{region.attractionCount}</span>
+            </button>
+          ))}
+        </div>
 
-      {/* Attraction cards grid */}
-      <div style={{
-        padding: "8px 24px 24px",
-        display: "grid",
-        gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
-        gap: 16
-      }}>
-        {filtered.map(a => (
-          <AttractionCard key={a._id} item={a} lang={lang} selected={selected} onToggle={onToggle} />
-        ))}
-      </div>
+        <div className="attractions-grid">
+          {filtered.map((attraction) => (
+            <AttractionCard key={attraction._id} item={attraction} lang={lang} selected={selected} onToggle={onToggle} />
+          ))}
+        </div>
+      </section>
     </div>
   );
 }
