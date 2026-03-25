@@ -135,37 +135,39 @@ img {
 
 .hero-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(460px, 0.95fr);
-  gap: 40px;
+  grid-template-columns: minmax(360px, 0.82fr) minmax(680px, 1.18fr);
+  gap: 56px;
   align-items: start;
 }
 
 .hero-heading {
   display: grid;
-  gap: 18px;
+  gap: 16px;
   min-width: 0;
   align-self: start;
-  padding-top: 118px;
+  max-width: 34rem;
+  padding-top: 104px;
 }
 
 .hero-title {
-  max-width: 7ch;
-  font-size: clamp(3.35rem, 6.8vw, 6rem);
-  font-weight: 720;
-  line-height: 0.94;
-  letter-spacing: -0.075em;
+  max-width: 8.5ch;
+  font-size: clamp(2.8rem, 4.8vw, 4.9rem);
+  font-weight: 690;
+  line-height: 0.98;
+  letter-spacing: -0.06em;
   text-wrap: balance;
 }
 
 .hero-title--zh {
-  max-width: 6.2ch;
-  line-height: 0.98;
-  font-size: clamp(3.1rem, 6vw, 5.25rem);
+  max-width: 8.2ch;
+  line-height: 1.02;
+  font-size: clamp(2.65rem, 4.2vw, 4.5rem);
 }
 
 .hero-sidecopy {
   padding-top: 12px;
   min-width: 0;
+  max-width: 38rem;
 }
 
 .lead,
@@ -333,8 +335,8 @@ img {
 }
 
 .screenshot-well--hero {
-  min-height: 540px;
-  padding: 48px;
+  min-height: 620px;
+  padding: 34px;
 }
 
 .product-shot {
@@ -366,12 +368,12 @@ img {
 
 .product-shot__canvas {
   display: grid;
-  grid-template-columns: 280px minmax(0, 1fr);
-  min-height: 470px;
+  grid-template-columns: 220px minmax(0, 1fr);
+  min-height: 520px;
 }
 
 .product-shot__sidebar {
-  padding: 26px;
+  padding: 20px;
   background: rgba(255, 255, 255, 0.75);
   border-right: 1px solid rgba(23, 20, 17, 0.08);
 }
@@ -425,7 +427,7 @@ img {
 }
 
 .product-shot__content {
-  padding: 26px;
+  padding: 18px;
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(255, 255, 255, 0.62)),
     linear-gradient(135deg, rgba(20, 84, 67, 0.08), rgba(56, 97, 111, 0.08));
@@ -436,7 +438,7 @@ img {
   flex-direction: column;
   gap: 18px;
   height: 100%;
-  padding: 22px;
+  padding: 18px;
   border-radius: 24px;
   background: rgba(255, 255, 255, 0.88);
   box-shadow: inset 0 0 0 1px rgba(23, 20, 17, 0.08);
@@ -1311,12 +1313,13 @@ img {
 
 @media (max-width: 1280px) {
   .hero-grid {
-    grid-template-columns: minmax(0, 0.95fr) minmax(360px, 0.98fr);
-    gap: 28px;
+    grid-template-columns: minmax(320px, 0.9fr) minmax(520px, 1.1fr);
+    gap: 32px;
   }
 
   .hero-heading {
-    padding-top: 52px;
+    max-width: 28rem;
+    padding-top: 48px;
   }
 
   .hero-title,
@@ -1329,8 +1332,8 @@ img {
   }
 
   .screenshot-well--hero {
-    min-height: 480px;
-    padding: 28px;
+    min-height: 520px;
+    padding: 22px;
   }
 }
 
