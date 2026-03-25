@@ -147,8 +147,14 @@ img {
   align-items: start;
 }
 
+.hero-heading {
+  display: grid;
+  gap: 18px;
+  min-width: 0;
+}
+
 .hero-title {
-  max-width: 9ch;
+  max-width: 8ch;
   font-size: clamp(3.5rem, 8vw, 6.6rem);
   font-weight: 720;
   line-height: 0.92;
@@ -156,8 +162,14 @@ img {
   text-wrap: balance;
 }
 
+.hero-title--zh {
+  max-width: 6ch;
+  line-height: 0.98;
+}
+
 .hero-sidecopy {
   padding-top: 18px;
+  min-width: 0;
 }
 
 .lead,
@@ -1347,8 +1359,25 @@ img {
   }
 
   .hero-title,
+  .hero-title--zh,
   .inner-hero__content h1 {
     max-width: none;
+  }
+
+  .hero-title {
+    font-size: clamp(2.8rem, 11vw, 4.8rem);
+  }
+
+  .hero-sidecopy {
+    padding-top: 0;
+  }
+
+  .hero-visual {
+    order: -1;
+  }
+
+  .screenshot-well--hero {
+    padding: 14px;
   }
 
   .section-intro__line {
