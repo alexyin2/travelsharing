@@ -39,17 +39,18 @@ export default function LandingPage({ lang, attractions, regions, onCountryClick
     <div className="landing-page">
       <section className="canvas-section hero-section">
         <div className="page-container hero-grid">
-          <div className="hero-copy">
-            <div className="hero-heading">
-              <p className="eyebrow">
-                {lang === "zh" ? "旅程策展 / AI 行程規劃" : "Editorial travel / AI itinerary studio"}
-              </p>
-              <h1 className={`hero-title ${lang === "zh" ? "hero-title--zh" : ""}`}>
-                {lang === "zh"
-                  ? "把真實旅行故事，整理成可以直接出發的路線。"
-                  : "Turn firsthand travel stories into routes you can actually take."}
-              </h1>
-            </div>
+          <div className="hero-heading">
+            <p className="eyebrow">
+              {lang === "zh" ? "旅程策展 / AI 行程規劃" : "Editorial travel / AI itinerary studio"}
+            </p>
+            <h1 className={`hero-title ${lang === "zh" ? "hero-title--zh" : ""}`}>
+              {lang === "zh"
+                ? "把真實旅行故事，整理成可以直接出發的路線。"
+                : "Turn firsthand travel stories into routes you can actually take."}
+            </h1>
+          </div>
+
+          <div className="hero-visual">
             <div className="hero-sidecopy">
               <p className="lead">
                 {lang === "zh"
@@ -73,9 +74,6 @@ export default function LandingPage({ lang, attractions, regions, onCountryClick
                 </button>
               </div>
             </div>
-          </div>
-
-          <div className="hero-visual">
             <div className="screenshot-well screenshot-well--hero">
               <ProductShot lang={lang} preview={featuredPreview} />
             </div>
