@@ -1,164 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-
-const ATTRACTIONS_DATA = [
-  {
-    id: "lof-001", name: { zh: "Haukland 海灘", en: "Haukland Beach" }, region: "lofoten", type: "nature",
-    tags: ["beach", "photography", "hiking"], coordinates: { lat: 68.2467, lng: 13.5381 },
-    desc: { zh: "Lonely Planet 歐洲最美沙灘，白沙搭配壯闊山景", en: "Europe's best beach by Lonely Planet. White sand against dramatic peaks." },
-    duration: 60, difficulty: "easy", emoji: "🏖️",
-    tip: { zh: "沿步道走到 Uttakleiv 海灘，翻過山脊的景觀非常壯觀", en: "Walk the coastal path to Uttakleiv Beach — the ridge views are spectacular" }
-  },
-  {
-    id: "lof-002", name: { zh: "Å 鎮 (奧鎮)", en: "Å i Lofoten" }, region: "lofoten", type: "village",
-    tags: ["fishing_village", "photography", "culture"], coordinates: { lat: 67.877, lng: 12.983 },
-    desc: { zh: "E10 公路盡頭，羅弗敦最南端的傳統漁村", en: "End of the E10 road — Lofoten's southernmost traditional fishing village." },
-    duration: 60, difficulty: "easy", emoji: "🏘️",
-    tip: { zh: "冬天 16:00 天黑，沿途很多停車拍照好點", en: "Dark by 16:00 in winter — lots of great photo stops along the way" }
-  },
-  {
-    id: "lof-003", name: { zh: "Eliassen Rorbuer 漁屋", en: "Eliassen Rorbuer" }, region: "lofoten", type: "accommodation",
-    tags: ["iconic", "photography", "rorbuer"], coordinates: { lat: 68.03, lng: 13.135 },
-    desc: { zh: "孤獨星球封面背景！Hamnøy 島上的經典紅色漁屋", en: "Lonely Planet cover location! Iconic red fishermen's cabins on Hamnøy island." },
-    duration: 720, difficulty: "easy", emoji: "🛖",
-    tip: { zh: "清晨到橋上拍漁屋倒影，藍調時刻最美", en: "Photograph from the bridge at dawn — the blue hour reflection is magical" }
-  },
-  {
-    id: "lof-004", name: { zh: "Reine 雷訥", en: "Reine" }, region: "lofoten", type: "village",
-    tags: ["fishing_village", "photography", "iconic"], coordinates: { lat: 68.0313, lng: 13.1532 },
-    desc: { zh: "挪威最美漁村，四周被險峻山峰和蔚藍峽灣環繞", en: "Norway's most beautiful village, surrounded by dramatic peaks and blue fjords." },
-    duration: 60, difficulty: "easy", emoji: "⛰️",
-    tip: { zh: "天氣好時 Reinebringen 步道的山頂俯瞰是此生必看", en: "Reinebringen trail summit view is a once-in-a-lifetime sight" }
-  },
-  {
-    id: "lof-005", name: { zh: "Anita's Sjømat 海鮮餐廳", en: "Anita's Sjømat" }, region: "lofoten", type: "restaurant",
-    tags: ["seafood", "fish_burger", "must_eat"], coordinates: { lat: 68.064, lng: 13.224 },
-    desc: { zh: "羅弗敦必吃！招牌魚漢堡 199 NOK", en: "Lofoten's must-eat! Signature fish burger 199 NOK." },
-    duration: 45, difficulty: "easy", emoji: "🐟",
-    tip: { zh: "冬季營業時間不固定，記得先確認！我們第一次就撲空了", en: "Winter hours vary — check first! We got caught by a closed day" }
-  },
-  {
-    id: "lof-006", name: { zh: "Svolvær 市中心", en: "Svolvær Town" }, region: "lofoten", type: "town",
-    tags: ["town_center", "shopping"], coordinates: { lat: 68.2343, lng: 14.5682 },
-    desc: { zh: "羅弗敦最大城鎮，紀念品店和超市的補給站", en: "Lofoten's largest town — your supply stop for souvenirs and groceries." },
-    duration: 120, difficulty: "easy", emoji: "🏙️",
-    tip: { zh: "這裡是長途自駕前最後的大型補給點", en: "Last major supply point before heading south" }
-  },
-  {
-    id: "lof-007", name: { zh: "Austnesfjorden 極光點", en: "Austnesfjorden Aurora Spot" }, region: "lofoten", type: "aurora_spot",
-    tags: ["aurora", "photography", "night"], coordinates: { lat: 68.27, lng: 14.75 },
-    desc: { zh: "Svolvær 附近最佳極光觀測點，峽灣倒影超夢幻", en: "Best aurora spot near Svolvær — fjord reflections make magical photos." },
-    duration: 120, difficulty: "easy", emoji: "🌌",
-    tip: { zh: "凌晨三點成功看到極光！記得帶腳架和保暖裝備", en: "We caught aurora at 3 AM! Bring tripod and warm gear" }
-  },
-  {
-    id: "lof-008", name: { zh: "Kabelvåg 小鎮", en: "Kabelvåg Village" }, region: "lofoten", type: "village",
-    tags: ["fishing_village", "viewpoint"], coordinates: { lat: 68.2117, lng: 14.4833 },
-    desc: { zh: "歷史悠久的前羅弗敦首府，高處可俯瞰港灣", en: "Historic former capital of Lofoten — hilltop views over the harbor." },
-    duration: 60, difficulty: "easy", emoji: "🏘️",
-    tip: { zh: "走到高處看港灣全景，很棒的拍照點", en: "Walk uphill for panoramic harbor views" }
-  },
-  {
-    id: "lof-009", name: { zh: "Tjeldbergtind 登山", en: "Tjeldbergtind Hike" }, region: "lofoten", type: "hiking",
-    tags: ["hiking", "viewpoint", "easy_hike"], coordinates: { lat: 68.22, lng: 14.46 },
-    desc: { zh: "來回僅 45 分鐘的輕鬆步道，360° 俯瞰羅弗敦", en: "Easy 45-min round trip with 360° views over Lofoten." },
-    duration: 60, difficulty: "easy", emoji: "🥾",
-    tip: { zh: "性價比最高的登山步道，不費力就能看絕佳風景", en: "Best effort-to-reward hike — minimal effort, maximum views" }
-  },
-  {
-    id: "lof-010", name: { zh: "Henningsvær", en: "Henningsvær" }, region: "lofoten", type: "village",
-    tags: ["fishing_village", "art_galleries", "football_pitch"], coordinates: { lat: 68.1542, lng: 14.2073 },
-    desc: { zh: "「羅弗敦的威尼斯」，有知名的岩島足球場", en: "The 'Venice of Lofoten' with the famous rock-island football pitch." },
-    duration: 90, difficulty: "easy", emoji: "🎨",
-    tip: { zh: "隨意散步拍照就很滿足，每個角落都很上鏡", en: "Just wander and photograph — every corner is photogenic" }
-  },
-  {
-    id: "lof-011", name: { zh: "Uttakleiv 海灘", en: "Uttakleiv Beach" }, region: "lofoten", type: "nature",
-    tags: ["beach", "aurora", "photography"], coordinates: { lat: 68.25, lng: 13.51 },
-    desc: { zh: "以獨特圓石灘和冬季極光聞名的攝影天堂", en: "Famous for unique rounded stones and winter aurora — photographer's paradise." },
-    duration: 60, difficulty: "easy", emoji: "🪨",
-    tip: { zh: "傍晚來等極光，圓石配綠光是經典構圖", en: "Come at dusk for aurora — stones with green lights make a classic composition" }
-  },
-  {
-    id: "lof-012", name: { zh: "Flakstad 沙灘", en: "Flakstad Beach" }, region: "lofoten", type: "nature",
-    tags: ["beach", "photography"], coordinates: { lat: 68.09, lng: 13.23 },
-    desc: { zh: "黑金色沙子搭配壯闊山景的美麗沙灘", en: "Beautiful beach with dark golden sand and dramatic mountain views." },
-    duration: 45, difficulty: "easy", emoji: "🏖️",
-    tip: { zh: "跟 Ramberg 沙灘安排同一天，距離很近", en: "Combine with Ramberg Beach — they're very close" }
-  },
-  {
-    id: "lof-013", name: { zh: "Ramberg 沙灘", en: "Ramberg Beach" }, region: "lofoten", type: "nature",
-    tags: ["beach", "photography"], coordinates: { lat: 68.11, lng: 13.24 },
-    desc: { zh: "寧靜的白色沙灘，從公路就能輕鬆到達", en: "Tranquil white sand beach, easily accessible from the road." },
-    duration: 30, difficulty: "easy", emoji: "🏖️"
-  },
-  {
-    id: "lof-014", name: { zh: "Fredvang 小鎮", en: "Fredvang Village" }, region: "lofoten", type: "village",
-    tags: ["fishing_village", "bridges"], coordinates: { lat: 68.08, lng: 13.14 },
-    desc: { zh: "兩座跨海大橋本身就是一道風景", en: "The two sea-crossing bridges are a sight in themselves." },
-    duration: 45, difficulty: "easy", emoji: "🌉"
-  },
-  {
-    id: "lof-015", name: { zh: "Nappskaret 觀景台", en: "Nappskaret Viewpoint" }, region: "lofoten", type: "viewpoint",
-    tags: ["viewpoint", "photography"], coordinates: { lat: 68.14, lng: 13.47 },
-    desc: { zh: "E10 公路旁最值得停車的觀景點之一", en: "One of the best photo stops on the E10 driving route." },
-    duration: 20, difficulty: "easy", emoji: "📸"
-  },
-  {
-    id: "tro-001", name: { zh: "Fjellheisen 纜車", en: "Fjellheisen Cable Car" }, region: "tromsø", type: "activity",
-    tags: ["cable_car", "viewpoint", "aurora", "night_view"], coordinates: { lat: 69.6396, lng: 19.0847 },
-    desc: { zh: "4 分鐘登上 421m，俯瞰特羅姆瑟全景和極光", en: "4-min ride to 421m — panoramic views of Tromsø and aurora watching." },
-    duration: 90, difficulty: "easy", emoji: "🚡",
-    tip: { zh: "傍晚上去看夜景再等極光，一次搞定兩個願望", en: "Go evening for night views + aurora — two wishes in one trip" }
-  },
-  {
-    id: "tro-002", name: { zh: "北極大教堂", en: "Arctic Cathedral" }, region: "tromsø", type: "landmark",
-    tags: ["architecture", "church", "iconic"], coordinates: { lat: 69.6493, lng: 19.0623 },
-    desc: { zh: "三角形現代設計靈感來自北極冰山，巨大彩色玻璃窗是亮點", en: "Triangular modern design inspired by Arctic icebergs. Massive stained-glass window." },
-    duration: 30, difficulty: "easy", emoji: "⛪",
-    tip: { zh: "去纜車的路上會經過，順路參觀", en: "On the way to the cable car — stop by en route" }
-  },
-  {
-    id: "tro-003", name: { zh: "賞鯨行程", en: "Whale Watching Tour" }, region: "tromsø", type: "activity",
-    tags: ["wildlife", "whale", "must_do"], coordinates: { lat: 69.6489, lng: 18.9551 },
-    desc: { zh: "冬季限定！7-8 小時行程，可看座頭鯨和虎鯨", en: "Winter exclusive! 7-8 hour tour to see humpback and orca whales." },
-    duration: 480, difficulty: "easy", emoji: "🐋",
-    tip: { zh: "透過 Get Your Guide 預訂可臨時取消，記得吃暈船藥", en: "Book via Get Your Guide for flexible cancellation. Take seasickness meds!" }
-  },
-  {
-    id: "tro-004", name: { zh: "峽灣遊船", en: "Fjord Cruise" }, region: "tromsø", type: "activity",
-    tags: ["fjord", "boat", "scenic"], coordinates: { lat: 69.6489, lng: 18.9551 },
-    desc: { zh: "5.5 小時遊覽特羅姆瑟周邊峽灣，雪山瀑布美不勝收", en: "5.5-hour cruise through Tromsø's fjords. Snow mountains and waterfalls." },
-    duration: 330, difficulty: "easy", emoji: "⛵",
-    tip: { zh: "比賞鯨短，適合不想花一整天在船上的人", en: "Shorter than whale watching — good for half-day preference" }
-  },
-  {
-    id: "tro-005", name: { zh: "Tromsø 市中心", en: "Tromsø City Center" }, region: "tromsø", type: "town",
-    tags: ["town_center", "harbor", "shopping"], coordinates: { lat: 69.6489, lng: 18.9568 },
-    desc: { zh: "北極圈內最大城市，港口景色優美", en: "Largest city within the Arctic Circle — beautiful harbor views." },
-    duration: 120, difficulty: "easy", emoji: "🏙️",
-    tip: { zh: "三天公車 PASS 是最省交通費的方式", en: "3-day bus pass is the most cost-effective transport" }
-  },
-  {
-    id: "tro-006", name: { zh: "Raketten 鹿肉熱狗", en: "Raketten Bar & Pølse" }, region: "tromsø", type: "restaurant",
-    tags: ["street_food", "reindeer", "must_eat"], coordinates: { lat: 69.65, lng: 18.956 },
-    desc: { zh: "特羅姆瑟必吃鹿肉熱狗，北極特色街頭小吃", en: "Tromsø's must-try reindeer hot dogs — iconic Arctic street food." },
-    duration: 15, difficulty: "easy", emoji: "🌭"
-  },
-  {
-    id: "tro-007", name: { zh: "Ølhallen 酒吧", en: "Ølhallen Brewery Pub" }, region: "tromsø", type: "restaurant",
-    tags: ["bar", "beer", "historic"], coordinates: { lat: 69.6515, lng: 18.958 },
-    desc: { zh: "世界最北釀酒廠 Mack 旗下酒吧，1877 年創立", en: "World's northernmost brewery Mack's pub, est. 1877." },
-    duration: 60, difficulty: "easy", emoji: "🍺",
-    tip: { zh: "在世界最北酒吧喝一杯是很特別的體驗", en: "Drinking at the world's northernmost brewery pub is a unique experience" }
-  },
-  {
-    id: "tro-008", name: { zh: "Bubba Foodbar 炸鱈魚", en: "Bubba Foodbar" }, region: "tromsø", type: "restaurant",
-    tags: ["fish_and_chips", "restaurant"], coordinates: { lat: 69.6492, lng: 18.9555 },
-    desc: { zh: "人氣炸鱈魚和薯條，份量實在", en: "Popular fried cod and chips — generous portions." },
-    duration: 60, difficulty: "easy", emoji: "🍽️",
-    tip: { zh: "份量很大，可以兩人分享", en: "Portions are large — share between two" }
-  }
-];
+import { useSanityData } from "./hooks/useSanityData";
 
 const TYPE_COLORS = {
   nature: { bg: "#0f4c3a", text: "#6ee7b7", label: "自然景觀" },
@@ -170,33 +11,44 @@ const TYPE_COLORS = {
   aurora_spot: { bg: "#1a1a3e", text: "#a78bfa", label: "極光觀測" },
   landmark: { bg: "#3d2e1f", text: "#fcd34d", label: "地標景點" },
   hiking: { bg: "#1a3a2a", text: "#86efac", label: "登山步道" },
-  viewpoint: { bg: "#2d2d4e", text: "#93c5fd", label: "觀景台" }
+  viewpoint: { bg: "#2d2d4e", text: "#93c5fd", label: "觀景台" },
+  museum: { bg: "#3d2e1f", text: "#fcd34d", label: "博物館" },
+  market: { bg: "#4a2c17", text: "#fbbf24", label: "市集" },
+  palace: { bg: "#3b1f4a", text: "#c4b5fd", label: "宮殿" },
+  park: { bg: "#0f4c3a", text: "#6ee7b7", label: "公園" },
+  gallery: { bg: "#3b1f4a", text: "#c4b5fd", label: "藝廊" },
+  theatre: { bg: "#4a1d1d", text: "#fca5a5", label: "劇院" },
+  shopping: { bg: "#4a2c17", text: "#fbbf24", label: "購物" },
+  neighborhood: { bg: "#374151", text: "#d1d5db", label: "街區" },
+  day_trip: { bg: "#1e3a5f", text: "#7dd3fc", label: "一日遊" },
+  beach: { bg: "#1e3a5f", text: "#7dd3fc", label: "海灘" },
+  lake: { bg: "#1a1a3e", text: "#a78bfa", label: "湖泊" },
+  glacier: { bg: "#2d2d4e", text: "#93c5fd", label: "冰川" },
 };
 
-const UNSPLASH_IMAGES = {
-  "lof-001": "https://images.unsplash.com/photo-1516466723877-e4ec1d736c8a?w=600&h=400&fit=crop",
-  "lof-002": "https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=600&h=400&fit=crop",
-  "lof-003": "https://images.unsplash.com/photo-1520769669658-f07657f5a307?w=600&h=400&fit=crop",
-  "lof-004": "https://images.unsplash.com/photo-1601439678777-b2b3c56fa627?w=600&h=400&fit=crop",
-  "lof-005": "https://images.unsplash.com/photo-1534604973900-c43ab4c2e0ab?w=600&h=400&fit=crop",
-  "lof-006": "https://images.unsplash.com/photo-1533929736458-ca588d08c8be?w=600&h=400&fit=crop",
-  "lof-007": "https://images.unsplash.com/photo-1483347756197-71ef80e95f73?w=600&h=400&fit=crop",
-  "lof-008": "https://images.unsplash.com/photo-1507272931001-fc06c17e4f43?w=600&h=400&fit=crop",
-  "lof-009": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=600&h=400&fit=crop",
-  "lof-010": "https://images.unsplash.com/photo-1540979388789-6cee28a1cdc9?w=600&h=400&fit=crop",
-  "lof-011": "https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=600&h=400&fit=crop",
-  "lof-012": "https://images.unsplash.com/photo-1494500764479-0c8f2919a3d8?w=600&h=400&fit=crop",
-  "lof-013": "https://images.unsplash.com/photo-1500534623283-312aade485b7?w=600&h=400&fit=crop",
-  "lof-014": "https://images.unsplash.com/photo-1513519245088-0e12902e35ca?w=600&h=400&fit=crop",
-  "lof-015": "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=600&h=400&fit=crop",
-  "tro-001": "https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=600&h=400&fit=crop",
-  "tro-002": "https://images.unsplash.com/photo-1520769669658-f07657f5a307?w=600&h=400&fit=crop",
-  "tro-003": "https://images.unsplash.com/photo-1568430462989-44163eb1752f?w=600&h=400&fit=crop",
-  "tro-004": "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=600&h=400&fit=crop",
-  "tro-005": "https://images.unsplash.com/photo-1507272931001-fc06c17e4f43?w=600&h=400&fit=crop",
-  "tro-006": "https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?w=600&h=400&fit=crop",
-  "tro-007": "https://images.unsplash.com/photo-1575037614876-c38a4c44f4c4?w=600&h=400&fit=crop",
-  "tro-008": "https://images.unsplash.com/photo-1534604973900-c43ab4c2e0ab?w=600&h=400&fit=crop"
+const TYPE_EMOJI_FALLBACK = {
+  nature: "🏔️",
+  village: "🏘️",
+  accommodation: "🛖",
+  restaurant: "🍽️",
+  activity: "🎿",
+  town: "🏙️",
+  aurora_spot: "🌌",
+  landmark: "⛪",
+  hiking: "🥾",
+  viewpoint: "📸",
+  museum: "🏛️",
+  market: "🏪",
+  palace: "👑",
+  park: "🌳",
+  gallery: "🎨",
+  theatre: "🎭",
+  lake: "🧊",
+  glacier: "🧊",
+  beach: "🏖️",
+  shopping: "🛍️",
+  neighborhood: "🏘️",
+  day_trip: "🚐",
 };
 
 function Stars() {
@@ -219,9 +71,16 @@ function Stars() {
 
 function AttractionCard({ item, lang, selected, onToggle }) {
   const tc = TYPE_COLORS[item.type] || TYPE_COLORS.nature;
-  const isSelected = selected.includes(item.id);
+  const isSelected = selected.includes(item._id);
+  const emoji = TYPE_EMOJI_FALLBACK[item.type] || "📍";
+  const name = lang === "zh" ? item.nameZh : item.nameEn;
+  const desc = lang === "zh" ? item.descriptionZh : item.descriptionEn;
+  const tip = lang === "zh" ? item.insiderTipZh : item.insiderTipEn;
+  const regionName = item.region ? (lang === "zh" ? item.region.nameZh : item.region.nameEn) : "";
+  const duration = item.suggestedDuration;
+
   return (
-    <div onClick={() => onToggle(item.id)} style={{
+    <div onClick={() => onToggle(item._id)} style={{
       position: "relative", borderRadius: 16, overflow: "hidden", cursor: "pointer",
       border: isSelected ? "2px solid #6ee7b7" : "2px solid transparent",
       boxShadow: isSelected ? "0 0 24px rgba(110,231,183,0.3)" : "0 4px 20px rgba(0,0,0,0.3)",
@@ -229,8 +88,14 @@ function AttractionCard({ item, lang, selected, onToggle }) {
       background: "#111827"
     }}>
       <div style={{ position: "relative", height: 180, overflow: "hidden" }}>
-        <img src={UNSPLASH_IMAGES[item.id]} alt={item.name[lang]}
-          style={{ width: "100%", height: "100%", objectFit: "cover", filter: isSelected ? "brightness(0.7)" : "brightness(0.6)" }} />
+        {item.cardImageUrl ? (
+          <img src={item.cardImageUrl} alt={name}
+            style={{ width: "100%", height: "100%", objectFit: "cover", filter: isSelected ? "brightness(0.7)" : "brightness(0.6)" }} />
+        ) : (
+          <div style={{ width: "100%", height: "100%", background: "linear-gradient(135deg, #1e293b, #0f172a)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 48 }}>
+            {emoji}
+          </div>
+        )}
         <div style={{ position: "absolute", top: 12, left: 12, display: "flex", gap: 8 }}>
           <span style={{
             background: tc.bg, color: tc.text, padding: "4px 10px", borderRadius: 20,
@@ -246,21 +111,21 @@ function AttractionCard({ item, lang, selected, onToggle }) {
         </div>
         <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "40px 16px 12px",
           background: "linear-gradient(transparent, rgba(0,0,0,0.85))" }}>
-          <div style={{ fontSize: 22, marginBottom: 2 }}>{item.emoji}</div>
+          <div style={{ fontSize: 22, marginBottom: 2 }}>{emoji}</div>
           <h3 style={{ margin: 0, fontSize: 16, fontWeight: 700, color: "#f9fafb", letterSpacing: "-0.02em" }}>
-            {item.name[lang]}
+            {name}
           </h3>
         </div>
       </div>
       <div style={{ padding: "12px 16px 16px" }}>
-        <p style={{ margin: 0, fontSize: 13, color: "#9ca3af", lineHeight: 1.5 }}>{item.desc[lang]}</p>
+        <p style={{ margin: 0, fontSize: 13, color: "#9ca3af", lineHeight: 1.5 }}>{desc}</p>
         <div style={{ display: "flex", gap: 12, marginTop: 10, fontSize: 11, color: "#6b7280" }}>
-          <span>⏱ {item.duration >= 60 ? `${Math.round(item.duration / 60)}h` : `${item.duration}min`}</span>
-          <span>📍 {item.region === "lofoten" ? (lang === "zh" ? "羅弗敦" : "Lofoten") : (lang === "zh" ? "特羅姆瑟" : "Tromsø")}</span>
+          {duration && <span>⏱ {duration >= 60 ? `${Math.round(duration / 60)}h` : `${duration}min`}</span>}
+          {regionName && <span>📍 {regionName}</span>}
         </div>
-        {item.tip && (
+        {tip && (
           <div style={{ marginTop: 10, padding: "8px 10px", borderRadius: 8, background: "#1f2937", fontSize: 12, color: "#d1d5db", lineHeight: 1.4 }}>
-            💡 {item.tip[lang]}
+            💡 {tip}
           </div>
         )}
       </div>
@@ -384,6 +249,7 @@ function ItineraryPreview({ lang, itinerary, locked }) {
 }
 
 export default function App() {
+  const { attractions, regions, loading, error } = useSanityData();
   const [lang, setLang] = useState("zh");
   const [step, setStep] = useState(0);
   const [selected, setSelected] = useState([]);
@@ -397,24 +263,28 @@ export default function App() {
     setSelected(prev => prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]);
   };
 
-  const filtered = ATTRACTIONS_DATA.filter(a => regionFilter === "all" || a.region === regionFilter);
+  const filtered = attractions.filter(a => regionFilter === "all" || a.region?.slug === regionFilter);
 
   const generateItinerary = () => {
     setGenerating(true);
-    const selectedAttractions = ATTRACTIONS_DATA.filter(a => selected.includes(a.id));
+    const selectedAttractions = attractions.filter(a => selected.includes(a._id));
     setTimeout(() => {
       const days = [];
       const perDay = Math.ceil(selectedAttractions.length / config.days);
       for (let d = 0; d < config.days; d++) {
         const dayAttractions = selectedAttractions.slice(d * perDay, (d + 1) * perDay);
         const timeSlots = ["08:00", "10:00", "12:00", "14:00", "16:00", "18:00", "20:00"];
+        const getName = (a) => lang === "zh" ? a.nameZh : a.nameEn;
+        const getDesc = (a) => lang === "zh" ? a.descriptionZh : a.descriptionEn;
         days.push({
           title: lang === "zh"
-            ? `第 ${d + 1} 天 — ${dayAttractions[0]?.name[lang] || "自由活動"}`
-            : `Day ${d + 1} — ${dayAttractions[0]?.name[lang] || "Free Time"}`,
+            ? `第 ${d + 1} 天 — ${dayAttractions[0] ? getName(dayAttractions[0]) : "自由活動"}`
+            : `Day ${d + 1} — ${dayAttractions[0] ? getName(dayAttractions[0]) : "Free Time"}`,
           items: dayAttractions.map((a, i) => ({
-            time: timeSlots[i] || "TBD", emoji: a.emoji, name: a.name[lang],
-            note: a.desc[lang]
+            time: timeSlots[i] || "TBD",
+            emoji: TYPE_EMOJI_FALLBACK[a.type] || "📍",
+            name: getName(a),
+            note: getDesc(a)
           }))
         });
       }
@@ -427,6 +297,48 @@ export default function App() {
   useEffect(() => {
     if (contentRef.current) contentRef.current.scrollTo({ top: 0, behavior: "smooth" });
   }, [step]);
+
+  // Build dynamic region filter options
+  const regionOptions = [
+    { val: "all", zh: "全部", en: "All" },
+    ...regions.map(r => ({
+      val: r.slug,
+      zh: r.nameZh,
+      en: r.nameEn,
+    }))
+  ];
+
+  if (loading) {
+    return (
+      <div style={{
+        minHeight: "100vh",
+        background: "linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        color: "#f9fafb",
+        fontSize: 18,
+      }}>
+        Loading attractions...
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div style={{
+        minHeight: "100vh",
+        background: "#0f172a",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        color: "#ef4444",
+        fontSize: 16,
+      }}>
+        Failed to load data. Please try again later.
+      </div>
+    );
+  }
 
   const titles = {
     0: { zh: "探索挪威極光之旅", en: "Discover Norway's Northern Lights" },
@@ -509,7 +421,7 @@ export default function App() {
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 10 }}>
               {[
                 { emoji: "🌌", zh: "極光觀測", en: "Aurora Spots", num: "4+" },
-                { emoji: "🏔️", zh: "精選景點", en: "Curated Spots", num: "23" },
+                { emoji: "🏔️", zh: "精選景點", en: "Curated Spots", num: `${attractions.length}` },
                 { emoji: "🤖", zh: "AI 行程", en: "AI Itinerary", num: "∞" }
               ].map((f, i) => (
                 <div key={i} style={{ background: "#111827", borderRadius: 14, padding: "16px 12px", textAlign: "center", border: "1px solid #1f2937" }}>
@@ -525,11 +437,7 @@ export default function App() {
         {step === 1 && (
           <div style={{ animation: "slideUp 0.5s ease" }}>
             <div style={{ display: "flex", gap: 6, marginBottom: 16, flexWrap: "wrap" }}>
-              {[
-                { val: "all", zh: "全部", en: "All" },
-                { val: "lofoten", zh: "🏔️ 羅弗敦", en: "🏔️ Lofoten" },
-                { val: "tromsø", zh: "🌌 特羅姆瑟", en: "🌌 Tromsø" }
-              ].map(r => (
+              {regionOptions.map(r => (
                 <button key={r.val} onClick={() => setRegionFilter(r.val)} style={{
                   padding: "8px 16px", borderRadius: 20, border: "none", cursor: "pointer",
                   background: regionFilter === r.val ? "#6ee7b7" : "#1f2937",
@@ -540,7 +448,7 @@ export default function App() {
             </div>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: 16 }}>
               {filtered.map(a => (
-                <AttractionCard key={a.id} item={a} lang={lang} selected={selected} onToggle={toggleSelect} />
+                <AttractionCard key={a._id} item={a} lang={lang} selected={selected} onToggle={toggleSelect} />
               ))}
             </div>
           </div>
@@ -554,9 +462,9 @@ export default function App() {
                 {lang === "zh" ? "📋 你選擇的景點" : "📋 Your Selected Spots"}
               </h4>
               <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
-                {ATTRACTIONS_DATA.filter(a => selected.includes(a.id)).map(a => (
-                  <span key={a.id} style={{ padding: "4px 10px", borderRadius: 20, background: "#1f2937", fontSize: 12, color: "#d1d5db" }}>
-                    {a.emoji} {a.name[lang]}
+                {attractions.filter(a => selected.includes(a._id)).map(a => (
+                  <span key={a._id} style={{ padding: "4px 10px", borderRadius: 20, background: "#1f2937", fontSize: 12, color: "#d1d5db" }}>
+                    {TYPE_EMOJI_FALLBACK[a.type] || "📍"} {lang === "zh" ? a.nameZh : a.nameEn}
                   </span>
                 ))}
               </div>
