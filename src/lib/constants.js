@@ -150,10 +150,31 @@ export const DURATION_OPTIONS = [
   { val: "long", zh: "8+ 天", en: "8+ days", min: 8, max: 99 },
 ];
 
+function getOptionLabel(options, value, lang) {
+  const match = options.find((option) => option.val === value);
+  return match ? (lang === "zh" ? match.zh : match.en) : value;
+}
+
 export function getCountryName(countryKey, lang) {
   const config = COUNTRY_CONFIG[countryKey];
   if (!config) return countryKey;
   return lang === "zh" ? config.zhName : config.enName;
+}
+
+export function getPurposeLabel(value, lang) {
+  return getOptionLabel(PURPOSE_OPTIONS, value, lang);
+}
+
+export function getTransportLabel(value, lang) {
+  return getOptionLabel(TRANSPORT_OPTIONS, value, lang);
+}
+
+export function getPaceLabel(value, lang) {
+  return getOptionLabel(PACE_OPTIONS, value, lang);
+}
+
+export function getBudgetLabel(value, lang) {
+  return getOptionLabel(BUDGET_OPTIONS, value, lang);
 }
 
 export function getTypeLabel(type, lang) {

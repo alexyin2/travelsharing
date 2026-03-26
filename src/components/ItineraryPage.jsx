@@ -1,4 +1,4 @@
-import { TYPE_EMOJI_FALLBACK } from "../lib/constants";
+import { TYPE_EMOJI_FALLBACK, getPaceLabel, getPurposeLabel, getTransportLabel } from "../lib/constants";
 import PremiumLock from "./PremiumLock";
 
 function ItineraryStop({ stop, lang, locked }) {
@@ -72,13 +72,13 @@ export default function ItineraryPage({ lang, itinerary }) {
             <span className="itinerary-meta-tag">{itinerary.durationDays} {lang === "zh" ? "天" : "days"}</span>
           ) : null}
           {itinerary.purpose ? (
-            <span className="itinerary-meta-tag">{itinerary.purpose}</span>
+            <span className="itinerary-meta-tag">{getPurposeLabel(itinerary.purpose, lang)}</span>
           ) : null}
           {itinerary.transportMode ? (
-            <span className="itinerary-meta-tag">{itinerary.transportMode}</span>
+            <span className="itinerary-meta-tag">{getTransportLabel(itinerary.transportMode, lang)}</span>
           ) : null}
           {itinerary.pace ? (
-            <span className="itinerary-meta-tag">{itinerary.pace}</span>
+            <span className="itinerary-meta-tag">{getPaceLabel(itinerary.pace, lang)}</span>
           ) : null}
         </div>
 

@@ -22,7 +22,7 @@ export default function LandingPage({ lang, attractions, regions, onCountryClick
     });
 
     attractions.forEach((attraction) => {
-      const country = attraction.region?.country;
+      const country = attraction.country || attraction.region?.country;
       if (!country) return;
       if (!groups[country]) groups[country] = { regionCount: 0, attractionCount: 0 };
       groups[country].attractionCount += 1;

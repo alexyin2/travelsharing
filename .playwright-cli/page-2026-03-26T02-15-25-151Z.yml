@@ -1,0 +1,126 @@
+- generic [ref=e3]:
+  - banner [ref=e8]:
+    - generic [ref=e9]:
+      - generic [ref=e10]:
+        - button "← 返回" [ref=e151]:
+          - generic [ref=e152]:
+            - generic [ref=e153]: ←
+            - text: 返回
+        - generic [ref=e12]:
+          - generic [ref=e13]: AlexTravelSharing
+          - generic [ref=e14]:
+            - generic [ref=e15]: 🇳🇴
+            - generic [ref=e16]: 挪威
+      - button "EN" [ref=e18]:
+        - generic [ref=e19]: EN
+  - generic [ref=e155]:
+    - generic [ref=e159]:
+      - paragraph [ref=e160]: Norway
+      - heading "挪威" [level=1] [ref=e161]
+      - paragraph [ref=e162]: 設定你的旅行偏好，我們會為你找到最合適的行程路線。
+      - generic [ref=e164]: 0 條符合的行程
+    - generic [ref=e165]:
+      - generic [ref=e166]:
+        - paragraph [ref=e167]: Trip Filters
+        - heading "告訴我們你的旅行偏好" [level=2] [ref=e168]
+        - generic [ref=e169]:
+          - generic [ref=e170]:
+            - generic [ref=e171]: 旅行目的
+            - generic [ref=e172]:
+              - button "🌿 休閒放鬆" [ref=e173] [cursor=pointer]:
+                - generic [ref=e174]: 🌿
+                - generic [ref=e175]: 休閒放鬆
+              - button "📸 景點全攻略" [ref=e176] [cursor=pointer]:
+                - generic [ref=e177]: 📸
+                - generic [ref=e178]: 景點全攻略
+              - button "🧗 冒險探索" [ref=e179] [cursor=pointer]:
+                - generic [ref=e180]: 🧗
+                - generic [ref=e181]: 冒險探索
+          - generic [ref=e182]:
+            - generic [ref=e183]: 旅行天數
+            - generic [ref=e184]:
+              - button "3-4 天" [ref=e185] [cursor=pointer]
+              - button "5-7 天" [ref=e186] [cursor=pointer]
+              - button "8+ 天" [ref=e187] [cursor=pointer]
+          - generic [ref=e188]:
+            - generic [ref=e189]: 交通方式
+            - generic [ref=e190]:
+              - button "🚗 租車自駕" [ref=e191] [cursor=pointer]:
+                - generic [ref=e192]: 🚗
+                - generic [ref=e193]: 租車自駕
+              - button "🚌 大眾運輸" [ref=e194] [cursor=pointer]:
+                - generic [ref=e195]: 🚌
+                - generic [ref=e196]: 大眾運輸
+              - button "🔀 混合" [ref=e197] [cursor=pointer]:
+                - generic [ref=e198]: 🔀
+                - generic [ref=e199]: 混合
+          - generic [ref=e200]:
+            - generic [ref=e201]: 旅行節奏
+            - generic [ref=e202]:
+              - button "🐢 悠閒" [ref=e203] [cursor=pointer]:
+                - generic [ref=e204]: 🐢
+                - generic [ref=e205]: 悠閒
+              - button "🚶 適中" [ref=e206] [cursor=pointer]:
+                - generic [ref=e207]: 🚶
+                - generic [ref=e208]: 適中
+              - button "🏃 緊湊" [ref=e209] [cursor=pointer]:
+                - generic [ref=e210]: 🏃
+                - generic [ref=e211]: 緊湊
+          - generic [ref=e212]:
+            - generic [ref=e213]: 季節
+            - generic [ref=e214]:
+              - button "🌸 春季 (3-5月)" [ref=e215] [cursor=pointer]:
+                - generic [ref=e216]: 🌸
+                - generic [ref=e217]: 春季 (3-5月)
+              - button "☀️ 夏季 (6-8月)" [ref=e218] [cursor=pointer]:
+                - generic [ref=e219]: ☀️
+                - generic [ref=e220]: 夏季 (6-8月)
+              - button "🍂 秋季 (9-11月)" [ref=e221] [cursor=pointer]:
+                - generic [ref=e222]: 🍂
+                - generic [ref=e223]: 秋季 (9-11月)
+              - button "❄️ 冬季 (12-2月)" [ref=e224] [cursor=pointer]:
+                - generic [ref=e225]: ❄️
+                - generic [ref=e226]: 冬季 (12-2月)
+          - generic [ref=e227]:
+            - generic [ref=e228]:
+              - generic [ref=e229]: 抵達時間
+              - generic [ref=e230]:
+                - button "🌅 上午 (06-12)" [ref=e231] [cursor=pointer]:
+                  - generic [ref=e232]: 🌅
+                  - generic [ref=e233]: 上午 (06-12)
+                - button "☀️ 中午 (12-15)" [ref=e234] [cursor=pointer]:
+                  - generic [ref=e235]: ☀️
+                  - generic [ref=e236]: 中午 (12-15)
+                - button "🌙 晚上 (18-24)" [ref=e237] [cursor=pointer]:
+                  - generic [ref=e238]: 🌙
+                  - generic [ref=e239]: 晚上 (18-24)
+            - generic [ref=e240]:
+              - generic [ref=e241]: 離開時間
+              - generic [ref=e242]:
+                - button "🌅 上午 (06-12)" [ref=e243] [cursor=pointer]:
+                  - generic [ref=e244]: 🌅
+                  - generic [ref=e245]: 上午 (06-12)
+                - button "☀️ 中午 (12-15)" [ref=e246] [cursor=pointer]:
+                  - generic [ref=e247]: ☀️
+                  - generic [ref=e248]: 中午 (12-15)
+                - button "🌙 晚上 (18-24)" [ref=e249] [cursor=pointer]:
+                  - generic [ref=e250]: 🌙
+                  - generic [ref=e251]: 晚上 (18-24)
+          - generic [ref=e252]:
+            - generic [ref=e253]: 預算等級
+            - generic [ref=e254]:
+              - button "💰 平價" [ref=e255] [cursor=pointer]:
+                - generic [ref=e256]: 💰
+                - generic [ref=e257]: 平價
+              - button "💳 中等" [ref=e258] [cursor=pointer]:
+                - generic [ref=e259]: 💳
+                - generic [ref=e260]: 中等
+              - button "💎 高級" [ref=e261] [cursor=pointer]:
+                - generic [ref=e262]: 💎
+                - generic [ref=e263]: 高級
+      - complementary [ref=e264]:
+        - generic [ref=e265]:
+          - paragraph [ref=e266]: 搜尋結果
+          - heading "0 條行程符合" [level=2] [ref=e267]
+          - paragraph [ref=e268]: 目前沒有完全符合的行程，試著放寬一些條件。
+  - button "沒有符合的行程 · 請調整條件" [disabled] [ref=e270]

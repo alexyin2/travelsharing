@@ -5,12 +5,13 @@ export const ALL_ATTRACTIONS_QUERY = `
     nameZh,
     nameEn,
     "slug": slug.current,
+    "country": coalesce(destination->country, region->destination->country, region->country),
     "region": region->{
       _id,
       nameZh,
       nameEn,
       "slug": slug.current,
-      country
+      "country": coalesce(country, destination->country)
     },
     subRegion,
     type,
@@ -42,7 +43,7 @@ export const ALL_REGIONS_QUERY = `
     nameZh,
     nameEn,
     "slug": slug.current,
-    country
+    "country": coalesce(country, destination->country)
   }
 `
 

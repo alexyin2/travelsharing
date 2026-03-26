@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import { sanityClient } from '../lib/sanityClient'
 import { ALL_ATTRACTIONS_QUERY, ALL_REGIONS_QUERY } from '../lib/queries'
+import { MOCK_ATTRACTIONS, MOCK_REGIONS } from '../lib/mockContent'
+import { shouldUseMockData } from '../lib/mockMode'
 
 export function useSanityData() {
   const [attractions, setAttractions] = useState([])
@@ -10,8 +12,17 @@ export function useSanityData() {
 
   useEffect(() => {
     async function fetchData() {
+      if (shouldUseMockData()) {
+        setAttractions(MOCK_ATTRACTIONS)
+        setRegions(MOCK_REGIONS)
+        setError(null)
+        setLoading(false)
+        return
+      }
+
       try {
         setLoading(true)
+        setError(null)
 
         const [attractionsData, regionsData] = await Promise.all([
           sanityClient.fetch(ALL_ATTRACTIONS_QUERY),
@@ -22,7 +33,8 @@ export function useSanityData() {
         setRegions(regionsData)
       } catch (err) {
         console.error('Failed to fetch data from Sanity:', err)
-        setError(err.message)
+        setAttractions(MOCK_ATTRACTIONS)
+        setRegions(MOCK_REGIONS)
       } finally {
         setLoading(false)
       }

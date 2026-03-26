@@ -1,4 +1,4 @@
-import { COUNTRY_CONFIG } from "../lib/constants";
+import { COUNTRY_CONFIG, getPurposeLabel } from "../lib/constants";
 
 export default function ItineraryCard({ itinerary, lang, onClick }) {
   const title = lang === "zh" ? itinerary.titleZh : itinerary.titleEn;
@@ -31,7 +31,7 @@ export default function ItineraryCard({ itinerary, lang, onClick }) {
             {itinerary.durationDays} {lang === "zh" ? "天" : "days"}
           </span>
           {itinerary.purpose ? (
-            <span className="editorial-card__country">{itinerary.purpose}</span>
+            <span className="editorial-card__country">{getPurposeLabel(itinerary.purpose, lang)}</span>
           ) : null}
         </div>
         <h3>{title}</h3>

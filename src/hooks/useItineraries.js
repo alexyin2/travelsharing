@@ -1,6 +1,8 @@
 import { useState, useEffect, useMemo } from "react";
 import { sanityClient } from "../lib/sanityClient";
 import { ITINERARIES_BY_COUNTRY_QUERY, FEATURED_ITINERARIES_QUERY } from "../lib/queries";
+import { getMockItinerariesByCountry, MOCK_FEATURED_ITINERARIES } from "../lib/mockItineraries";
+import { shouldUseMockData } from "../lib/mockMode";
 
 function scoreItinerary(itinerary, filters) {
   let score = 0;
@@ -44,6 +46,13 @@ export function useItineraries(country) {
       return;
     }
 
+    if (shouldUseMockData()) {
+      setAllItineraries(getMockItinerariesByCountry(country));
+      setLoading(false);
+      setError(null);
+      return;
+    }
+
     let cancelled = false;
 
     async function fetchItineraries() {
@@ -51,10 +60,15 @@ export function useItineraries(country) {
         setLoading(true);
         setError(null);
         const data = await sanityClient.fetch(ITINERARIES_BY_COUNTRY_QUERY, { country });
-        if (!cancelled) setAllItineraries(data);
+        if (!cancelled) {
+          setAllItineraries(data.length > 0 ? data : getMockItinerariesByCountry(country));
+        }
       } catch (err) {
         console.error("Failed to fetch itineraries:", err);
-        if (!cancelled) setError(err.message);
+        if (!cancelled) {
+          setAllItineraries(getMockItinerariesByCountry(country));
+          setError(err.message);
+        }
       } finally {
         if (!cancelled) setLoading(false);
       }
@@ -89,14 +103,21 @@ export function useFeaturedItineraries() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (shouldUseMockData()) {
+      setFeatured(MOCK_FEATURED_ITINERARIES);
+      setLoading(false);
+      return;
+    }
+
     let cancelled = false;
 
     async function fetchFeatured() {
       try {
         const data = await sanityClient.fetch(FEATURED_ITINERARIES_QUERY);
-        if (!cancelled) setFeatured(data);
+        if (!cancelled) setFeatured(data.length > 0 ? data : MOCK_FEATURED_ITINERARIES);
       } catch (err) {
         console.error("Failed to fetch featured itineraries:", err);
+        if (!cancelled) setFeatured(MOCK_FEATURED_ITINERARIES);
       } finally {
         if (!cancelled) setLoading(false);
       }
