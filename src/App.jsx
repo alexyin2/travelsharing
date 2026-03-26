@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import FiltersPage from "./components/FiltersPage";
+import BrowsePage from "./components/BrowsePage";
 import Header from "./components/Header";
 import ItineraryPage from "./components/ItineraryPage";
 import LandingPage from "./components/LandingPage";
@@ -24,31 +24,29 @@ export default function App() {
   const contentRef = useRef(null);
 
   const { allItineraries, loading: itLoading } = useItineraries(selectedCountry);
-  const { matched, bestMatch } = useFilteredItineraries(allItineraries, filters);
+  const { matched } = useFilteredItineraries(allItineraries, filters);
 
   const handleCountryClick = (countryKey) => {
     setSelectedCountry(countryKey);
     setFilters(EMPTY_FILTERS);
     setSelectedItinerary(null);
-    setStep("filters");
+    setStep("browse");
   };
 
   const handleBack = () => {
-    if (step === "filters") {
+    if (step === "browse") {
       setStep("landing");
       setSelectedCountry(null);
       setFilters(EMPTY_FILTERS);
     } else if (step === "itinerary") {
-      setStep("filters");
+      setStep("browse");
       setSelectedItinerary(null);
     }
   };
 
-  const handleViewItinerary = () => {
-    if (bestMatch) {
-      setSelectedItinerary(bestMatch);
-      setStep("itinerary");
-    }
+  const handleSelectItinerary = (itinerary) => {
+    setSelectedItinerary(itinerary);
+    setStep("itinerary");
   };
 
   useEffect(() => {
@@ -97,14 +95,15 @@ export default function App() {
       <Header lang={lang} onBack={handleBack} selectedCountry={selectedCountry} setLang={setLang} step={step} />
 
       <div ref={contentRef} className="inner-scroll">
-        {step === "filters" ? (
-          <FiltersPage
+        {step === "browse" ? (
+          <BrowsePage
             lang={lang}
             selectedCountry={selectedCountry}
             filters={filters}
             setFilters={setFilters}
-            matchCount={matched.length}
-            bestMatch={bestMatch}
+            matched={matched}
+            onSelectItinerary={handleSelectItinerary}
+            itLoading={itLoading}
           />
         ) : null}
 
@@ -113,68 +112,31 @@ export default function App() {
         ) : null}
       </div>
 
-      <div className="cta-dock-wrap">
-        <div className="cta-dock">
-          {step === "filters" ? (
-            <div className="cta-dock__filters">
-              <div className="cta-dock__meta">
-                <span className="cta-dock__eyebrow">{lang === "zh" ? "推薦狀態" : "Recommendation"}</span>
-                <strong className="cta-dock__title">
-                  {itLoading
-                    ? (lang === "zh" ? "正在整理可用行程" : "Preparing itinerary options")
-                    : matched.length > 0
-                      ? (lang === "zh" ? "最佳行程已準備好" : "Best-match itinerary is ready")
-                      : (lang === "zh" ? "再調整一下條件會更準" : "A small filter tweak will help")}
-                </strong>
-                <span className="cta-dock__sub">
-                  {bestMatch
-                    ? (lang === "zh"
-                      ? `${bestMatch.titleZh} · ${matched.length} 條符合`
-                      : `${bestMatch.titleEn} · ${matched.length} matches`)
-                    : (lang === "zh"
-                      ? "系統會依照你的偏好找出最接近的路線。"
-                      : "We will surface the closest route based on your filters.")}
-                </span>
-              </div>
-
-              <button
-                className="cta-button cta-button--dock"
-                disabled={matched.length === 0 || itLoading}
-                onClick={handleViewItinerary}
-                type="button"
-              >
-                {itLoading
-                  ? (lang === "zh" ? "載入行程中..." : "Loading...")
-                  : matched.length > 0
-                    ? (lang === "zh" ? "查看最佳行程" : "View best match")
-                    : (lang === "zh" ? "請調整條件" : "Adjust filters")}
-              </button>
-            </div>
-          ) : null}
-
-          {step === "itinerary" ? (
+      {step === "itinerary" ? (
+        <div className="cta-dock-wrap">
+          <div className="cta-dock">
             <div className="cta-dock__split">
               <button
                 className="secondary-button"
                 onClick={() => {
-                  setStep("filters");
+                  setStep("browse");
                   setSelectedItinerary(null);
                 }}
                 type="button"
               >
-                {lang === "zh" ? "重新篩選" : "Change filters"}
+                {lang === "zh" ? "返回瀏覽" : "Back to browse"}
               </button>
               <button
                 className="cta-button"
                 onClick={() => window.alert(lang === "zh" ? "付費解鎖功能開發中。" : "Unlock flow is coming soon.")}
                 type="button"
               >
-                {lang === "zh" ? "解鎖完整行程" : "Unlock full itinerary"}
+                {lang === "zh" ? "解鎖進階內容" : "Unlock premium content"}
               </button>
             </div>
-          ) : null}
+          </div>
         </div>
-      </div>
+      ) : null}
     </div>
   );
 }

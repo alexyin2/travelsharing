@@ -7,6 +7,7 @@ import {
   DURATION_OPTIONS,
   getCountryName,
 } from "../lib/constants";
+import ItineraryCard from "./ItineraryCard";
 
 const FILTER_SECTION_COPY = {
   purpose: {
@@ -83,7 +84,7 @@ function DurationFilter({ value, onChange, lang }) {
   );
 }
 
-export default function FiltersPage({ lang, selectedCountry, filters, setFilters, matchCount, bestMatch }) {
+export default function BrowsePage({ lang, selectedCountry, filters, setFilters, matched, onSelectItinerary, itLoading }) {
   const currentCountry = COUNTRY_CONFIG[selectedCountry];
 
   const update = (key) => (val) => setFilters((prev) => ({ ...prev, [key]: val }));
@@ -91,7 +92,7 @@ export default function FiltersPage({ lang, selectedCountry, filters, setFilters
   const activeFilterCount = Object.values(filters).filter((v) => v != null).length;
 
   return (
-    <div className={`inner-page inner-page--filters inner-page--${lang}`}>
+    <div className={`inner-page inner-page--browse inner-page--${lang}`}>
       <section className="inner-hero">
         <div className="inner-hero__media">
           <img alt="" src={currentCountry?.image} />
@@ -102,11 +103,11 @@ export default function FiltersPage({ lang, selectedCountry, filters, setFilters
           <h1>{getCountryName(selectedCountry, lang)}</h1>
           <p>
             {lang === "zh"
-              ? "設定你的旅行偏好，我們會為你找到最合適的行程路線。"
-              : "Set your travel preferences and we will find the best matching itinerary for you."}
+              ? "瀏覽所有行程路線，依照你的旅行偏好篩選最合適的選擇。"
+              : "Browse all itineraries and filter by your travel preferences."}
           </p>
           <div className="inner-hero__meta">
-            <span>{matchCount} {lang === "zh" ? "條符合的行程" : "matching itineraries"}</span>
+            <span>{matched.length} {lang === "zh" ? "條符合的行程" : "matching itineraries"}</span>
             {activeFilterCount > 0 ? (
               <span>{activeFilterCount} {lang === "zh" ? "個篩選條件" : "filters active"}</span>
             ) : null}
@@ -114,10 +115,14 @@ export default function FiltersPage({ lang, selectedCountry, filters, setFilters
         </div>
       </section>
 
-      <section className="page-container composer-layout composer-layout--filters">
-        <div className="composer-panel">
-          <p className="eyebrow">{lang === "zh" ? "Trip Filters" : "Trip Filters"}</p>
-          <h2 className="filters-heading">{lang === "zh" ? "告訴我們你的旅行偏好" : "Tell us your travel preferences"}</h2>
+      <section className="page-container browse-layout">
+        <div className="browse-filters">
+          <div className="browse-filters__header">
+            <div>
+              <p className="eyebrow">{lang === "zh" ? "Trip Filters" : "Trip Filters"}</p>
+              <h2 className="filters-heading">{lang === "zh" ? "告訴我們你的旅行偏好" : "Tell us your travel preferences"}</h2>
+            </div>
+          </div>
 
           <div className="form-stack">
             <FilterSection
@@ -160,61 +165,10 @@ export default function FiltersPage({ lang, selectedCountry, filters, setFilters
               onChange={update("season")}
               lang={lang}
             />
-
-          </div>
-        </div>
-
-        <aside className="composer-sidebar">
-          <div className="summary-card summary-card--results">
-            <p className="eyebrow">{lang === "zh" ? "搜尋結果" : "Results"}</p>
-            <h2>{lang === "zh" ? "目前最接近的路線方向" : "The closest route direction right now"}</h2>
-            <div className="summary-card__hero">
-              <strong className="summary-card__count">{matchCount}</strong>
-              <div className="summary-card__hero-copy">
-                <span>{lang === "zh" ? "條符合的行程" : "matching itineraries"}</span>
-                <p>
-                  {lang === "zh"
-                    ? "篩選條件越清楚，推薦結果就會越接近你真正會出發的版本。"
-                    : "The clearer the filters, the closer the recommendation gets to a route you would actually take."}
-                </p>
-              </div>
-            </div>
-            <div className="summary-card__facts">
-              <div className="summary-card__fact">
-                <span>{lang === "zh" ? "目的地" : "Destination"}</span>
-                <strong>{getCountryName(selectedCountry, lang)}</strong>
-              </div>
-              <div className="summary-card__fact">
-                <span>{lang === "zh" ? "已啟用條件" : "Active filters"}</span>
-                <strong>{activeFilterCount}</strong>
-              </div>
-            </div>
-            {matchCount === 0 ? (
-              <p className="summary-card__empty">
-                {lang === "zh"
-                  ? "目前沒有完全符合的行程，試著放寬一些條件。"
-                  : "No exact matches found. Try relaxing some filters."}
-              </p>
-            ) : null}
-            {bestMatch ? (
-              <div className="summary-card__preview">
-                <p className="summary-card__preview-eyebrow">{lang === "zh" ? "推薦路線" : "Suggested route"}</p>
-                <strong>{lang === "zh" ? bestMatch.titleZh : bestMatch.titleEn}</strong>
-                <span>{bestMatch.durationDays} {lang === "zh" ? "天" : "days"}</span>
-                <p>{lang === "zh" ? bestMatch.descriptionZh : bestMatch.descriptionEn}</p>
-              </div>
-            ) : null}
           </div>
 
           {activeFilterCount > 0 ? (
-            <div className="summary-card summary-card--soft">
-              <p className="eyebrow">{lang === "zh" ? "目前篩選" : "Active Filters"}</p>
-              <h2>{lang === "zh" ? "這次旅程的設定輪廓" : "The outline of this trip"}</h2>
-              <p>
-                {lang === "zh"
-                  ? "這些條件會一起決定停點密度、每日移動距離，以及餐廳和住宿的安排方式。"
-                  : "These filters shape stop density, daily travel distance, and how the route handles dining and stays."}
-              </p>
+            <div className="browse-active-filters">
               <div className="selected-chip-list">
                 {filters.purpose ? <span className="selected-chip">{PURPOSE_OPTIONS.find((o) => o.val === filters.purpose)?.[lang] || filters.purpose}</span> : null}
                 {filters.transport ? <span className="selected-chip">{TRANSPORT_OPTIONS.find((o) => o.val === filters.transport)?.[lang] || filters.transport}</span> : null}
@@ -231,7 +185,38 @@ export default function FiltersPage({ lang, selectedCountry, filters, setFilters
               </button>
             </div>
           ) : null}
-        </aside>
+        </div>
+
+        <section className="browse-results">
+          <div className="browse-results__header">
+            <h2 className="browse-results__heading">
+              {matched.length} {lang === "zh" ? "條符合的行程" : "matching itineraries"}
+            </h2>
+          </div>
+
+          {itLoading ? (
+            <p className="browse-results__loading">
+              {lang === "zh" ? "正在載入行程..." : "Loading itineraries..."}
+            </p>
+          ) : matched.length > 0 ? (
+            <div className="browse-grid">
+              {matched.map((it) => (
+                <ItineraryCard
+                  key={it._id}
+                  itinerary={it}
+                  lang={lang}
+                  onClick={() => onSelectItinerary(it)}
+                />
+              ))}
+            </div>
+          ) : (
+            <p className="browse-results__empty">
+              {lang === "zh"
+                ? "目前沒有完全符合的行程，試著放寬一些條件。"
+                : "No exact matches found. Try relaxing some filters."}
+            </p>
+          )}
+        </section>
       </section>
     </div>
   );

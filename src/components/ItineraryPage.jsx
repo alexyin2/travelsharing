@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { TYPE_EMOJI_FALLBACK, getPaceLabel, getPurposeLabel, getTransportLabel } from "../lib/constants";
 import PremiumLock from "./PremiumLock";
 
@@ -34,7 +35,7 @@ function getDurationLabel(durationMinutes, lang) {
   return lang === "zh" ? `${durationMinutes} 分鐘` : `${durationMinutes} min`;
 }
 
-function ItineraryStop({ stop, lang, locked }) {
+function ItineraryStop({ stop, lang }) {
   const attraction = stop.attraction;
   const name = attraction
     ? (lang === "zh" ? attraction.nameZh : attraction.nameEn)
@@ -63,7 +64,6 @@ function ItineraryStop({ stop, lang, locked }) {
           <strong>
             {emoji} {name}
           </strong>
-          {locked ? <span className="itinerary-stop__status">{lang === "zh" ? "鎖定" : "Locked"}</span> : null}
         </div>
 
         <div className="itinerary-stop__meta">
@@ -71,15 +71,7 @@ function ItineraryStop({ stop, lang, locked }) {
           {durationLabel ? <span className="itinerary-stop__meta-chip">{durationLabel}</span> : null}
         </div>
 
-        {locked ? (
-          <p className="itinerary-stop__locked-note">
-            {lang === "zh" ? "解鎖後查看完整說明" : "Unlock to see full details"}
-          </p>
-        ) : (
-          <>
-            {note ? <p>{note}</p> : null}
-          </>
-        )}
+        {note ? <p>{note}</p> : null}
 
         {hasPremium ? (
           <div className="itinerary-stop__premium">
@@ -95,17 +87,19 @@ function ItineraryStop({ stop, lang, locked }) {
 }
 
 export default function ItineraryPage({ lang, itinerary }) {
+  const [showEmailPopup, setShowEmailPopup] = useState(false);
+
   if (!itinerary) return null;
 
   const title = lang === "zh" ? itinerary.titleZh : itinerary.titleEn;
   const description = lang === "zh" ? itinerary.descriptionZh : itinerary.descriptionEn;
   const totalDays = itinerary.days?.length || itinerary.durationDays || 0;
-  const previewStops = itinerary.days?.[0]?.stops?.length || 0;
+  const totalStops = itinerary.days?.reduce((sum, day) => sum + (day.stops?.length || 0), 0) || 0;
 
   return (
     <section className="page-container itinerary-layout">
       <div className="composer-panel">
-        <p className="eyebrow">{lang === "zh" ? "Itinerary Preview" : "Itinerary Preview"}</p>
+        <p className="eyebrow">{lang === "zh" ? "Itinerary" : "Itinerary"}</p>
         <h1>{title}</h1>
         <p className="composer-panel__lead">{description}</p>
 
@@ -126,37 +120,29 @@ export default function ItineraryPage({ lang, itinerary }) {
 
         <div className="itinerary-overview">
           <div className="itinerary-overview__card">
-            <span className="itinerary-overview__label">{lang === "zh" ? "預覽開放" : "Preview Access"}</span>
-            <strong>{lang === "zh" ? "Day 1 完整可見" : "Day 1 fully visible"}</strong>
-            <p>{lang === "zh" ? "先看到時間段、用餐與住宿節奏。" : "See time blocks, dining ideas, and stay rhythm before unlock."}</p>
+            <span className="itinerary-overview__label">{lang === "zh" ? "免費內容" : "Free Content"}</span>
+            <strong>{lang === "zh" ? "所有每日行程可見" : "All daily schedules visible"}</strong>
+            <p>{lang === "zh" ? "每天的時間軸、景點名稱、基本說明與交通資訊。" : "Daily timeline, attraction names, basic notes, and transport info."}</p>
           </div>
           <div className="itinerary-overview__card">
-            <span className="itinerary-overview__label">{lang === "zh" ? "目前行程" : "Current Route"}</span>
-            <strong>{totalDays} {lang === "zh" ? "天 / 首日" : "days / first day"}</strong>
-            <p>{lang === "zh" ? `目前可預覽 ${previewStops} 個行程段落。` : `${previewStops} itinerary blocks are visible in the preview.`}</p>
+            <span className="itinerary-overview__label">{lang === "zh" ? "行程規模" : "Route Scale"}</span>
+            <strong>{totalDays} {lang === "zh" ? "天" : "days"} / {totalStops} {lang === "zh" ? "個行程段落" : "stops"}</strong>
+            <p>{lang === "zh" ? "完整路線從第一天到最後一天都已展開。" : "The full route is expanded from day one to the last day."}</p>
           </div>
           <div className="itinerary-overview__card">
-            <span className="itinerary-overview__label">{lang === "zh" ? "解鎖後可得" : "After Unlock"}</span>
-            <strong>{lang === "zh" ? "完整每日節奏" : "Full daily rhythm"}</strong>
-            <p>{lang === "zh" ? "包含餐廳、住宿、拍照與作者建議。" : "Includes dining, stays, photo notes, and editor guidance."}</p>
+            <span className="itinerary-overview__label">{lang === "zh" ? "Premium 內容" : "Premium Content"}</span>
+            <strong>{lang === "zh" ? "進階旅行建議" : "Expert travel advice"}</strong>
+            <p>{lang === "zh" ? "餐廳、住宿、拍照秘訣與作者私房建議。" : "Dining, stays, photo tips, and personal editor guidance."}</p>
           </div>
         </div>
 
         <div className="itinerary-board">
           {itinerary.days?.map((day, index) => {
-            const locked = index > 0;
             const dayTitle = lang === "zh" ? day.titleZh : day.titleEn;
             const daySummary = lang === "zh" ? day.summaryZh : day.summaryEn;
 
             return (
               <article key={day.dayNumber || index} className="itinerary-day">
-                {locked ? (
-                  <div className="itinerary-day__lock">
-                    <strong>{lang === "zh" ? "付費後解鎖完整日程" : "Unlock the full itinerary"}</strong>
-                    <span>{lang === "zh" ? "目前僅顯示第一天作為預覽。" : "Only day one is revealed in preview mode."}</span>
-                  </div>
-                ) : null}
-
                 <div className="itinerary-day__header">
                   <div className="itinerary-day__headline">
                     <span className="itinerary-day__index">D{day.dayNumber || index + 1}</span>
@@ -168,15 +154,8 @@ export default function ItineraryPage({ lang, itinerary }) {
 
                   <div className="itinerary-day__stats">
                     <span>{day.stops?.length || 0} {lang === "zh" ? "段行程" : "stops"}</span>
-                    <span>{locked ? (lang === "zh" ? "需解鎖" : "Locked") : (lang === "zh" ? "預覽中" : "Preview")}</span>
                   </div>
                 </div>
-
-                {locked ? (
-                  <div className="itinerary-day__teaser">
-                    <span>{lang === "zh" ? "完整版本會展開每個時段安排、餐廳建議、住宿節點與作者提示。" : "The full version expands each time block with dining, stay notes, and personal guidance."}</span>
-                  </div>
-                ) : null}
 
                 <div className="itinerary-day__items">
                   {day.stops?.map((stop, stopIndex) => (
@@ -184,7 +163,6 @@ export default function ItineraryPage({ lang, itinerary }) {
                       key={`${day.dayNumber}-${stopIndex}`}
                       stop={stop}
                       lang={lang}
-                      locked={locked}
                     />
                   ))}
                 </div>
@@ -195,21 +173,28 @@ export default function ItineraryPage({ lang, itinerary }) {
       </div>
 
       <aside className="composer-sidebar">
-        <div className="paywall-card">
-          <p className="eyebrow">{lang === "zh" ? "解鎖完整內容" : "Unlock"}</p>
-          <h2>{lang === "zh" ? "升級成完整路線包" : "Upgrade to the full route pack"}</h2>
+        <div className="download-card">
+          <p className="eyebrow">{lang === "zh" ? "下載行程" : "Download"}</p>
+          <h2>{lang === "zh" ? "取得完整行程檔案" : "Get the full itinerary file"}</h2>
           <p>
             {lang === "zh"
-              ? "把每日路線、餐廳、住宿與作者建議整理成真正可出發的 itinerary。"
-              : "Turn the preview into a travel-ready itinerary with full route, dining, stays, and editor notes."}
+              ? "將行程存成 PDF，隨時離線查看。"
+              : "Save the itinerary as a PDF for offline access anytime."}
           </p>
-          <div className="paywall-card__price">{lang === "zh" ? "NT$299" : "$9.99"}</div>
-          <div className="paywall-card__bullets">
-            <span>{lang === "zh" ? "完整每日時間表" : "Full day-by-day timing"}</span>
-            <span>{lang === "zh" ? "餐廳與住宿參考" : "Dining and stay references"}</span>
-            <span>{lang === "zh" ? "拍照與作者提示" : "Photo and editor notes"}</span>
-            <span>{lang === "zh" ? "出發前節奏建議" : "Trip rhythm guidance"}</span>
-          </div>
+          <button
+            className="cta-button"
+            onClick={() => setShowEmailPopup(true)}
+            type="button"
+          >
+            {lang === "zh" ? "免費下載 PDF" : "Download free PDF"}
+          </button>
+          <button
+            className="secondary-button"
+            onClick={() => window.alert(lang === "zh" ? "購買功能開發中" : "Purchase feature coming soon")}
+            type="button"
+          >
+            {lang === "zh" ? "購買完整版 NT$299" : "Buy full version NT$299"}
+          </button>
         </div>
 
         <div className="summary-card summary-card--soft">
@@ -233,8 +218,8 @@ export default function ItineraryPage({ lang, itinerary }) {
             <li>{itinerary.durationDays} {lang === "zh" ? "天行程" : "day itinerary"}</li>
             <li>
               {lang === "zh"
-                ? "第一天完整預覽，其餘天數需解鎖。"
-                : "Day one is fully visible; remaining days require unlock."}
+                ? "所有日程可見，進階建議（餐廳、住宿、拍照、私房）需解鎖。"
+                : "All daily schedules are visible. Premium advice (dining, stays, photos, tips) requires unlock."}
             </li>
             <li>
               {lang === "zh"
@@ -244,6 +229,41 @@ export default function ItineraryPage({ lang, itinerary }) {
           </ul>
         </div>
       </aside>
+
+      {showEmailPopup ? (
+        <div className="email-popup-overlay" onClick={() => setShowEmailPopup(false)}>
+          <div className="email-popup" onClick={(e) => e.stopPropagation()}>
+            <h3>{lang === "zh" ? "輸入你的 Email" : "Enter your email"}</h3>
+            <p>
+              {lang === "zh"
+                ? "我們會將免費版 PDF 寄到你的信箱。"
+                : "We will send the free PDF to your inbox."}
+            </p>
+            <input
+              type="email"
+              placeholder="email@example.com"
+              className="email-popup__input"
+            />
+            <button
+              className="cta-button"
+              type="button"
+              onClick={() => {
+                setShowEmailPopup(false);
+                window.alert(lang === "zh" ? "功能開發中" : "Coming soon");
+              }}
+            >
+              {lang === "zh" ? "送出" : "Submit"}
+            </button>
+            <button
+              className="secondary-button"
+              type="button"
+              onClick={() => setShowEmailPopup(false)}
+            >
+              {lang === "zh" ? "取消" : "Cancel"}
+            </button>
+          </div>
+        </div>
+      ) : null}
     </section>
   );
 }
