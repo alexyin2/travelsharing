@@ -1004,6 +1004,18 @@ img {
   overflow: hidden;
 }
 
+.inner-page--filters .inner-hero {
+  min-height: 390px;
+}
+
+.inner-page--filters .inner-hero::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 150px;
+  background: linear-gradient(180deg, rgba(246, 241, 232, 0), rgba(246, 241, 232, 0.88));
+}
+
 .inner-hero__media,
 .inner-hero__overlay {
   position: absolute;
@@ -1026,6 +1038,10 @@ img {
   margin: 0 auto;
   padding: 70px 0 46px;
   color: white;
+}
+
+.inner-page--filters .inner-hero__content {
+  padding: 74px 0 126px;
 }
 
 .inner-hero__content .eyebrow {
@@ -1217,6 +1233,13 @@ img {
   gap: 20px;
 }
 
+.composer-layout--filters {
+  position: relative;
+  z-index: 2;
+  margin-top: -88px;
+  padding-top: 0;
+}
+
 .composer-panel,
 .summary-card,
 .paywall-card,
@@ -1226,6 +1249,11 @@ img {
 
 .composer-panel {
   padding: 24px;
+}
+
+.composer-layout--filters .composer-panel,
+.composer-layout--filters .summary-card {
+  background: rgba(255, 253, 248, 0.88);
 }
 
 .composer-panel h1 {
@@ -1325,6 +1353,8 @@ img {
   font-size: 0.98rem;
   font-weight: 610;
   letter-spacing: -0.02em;
+  min-height: 1.35em;
+  text-wrap: balance;
 }
 
 .choice-chip__note {
@@ -1332,6 +1362,11 @@ img {
   color: var(--muted);
   font-size: 0.84rem;
   line-height: 1.5;
+  display: -webkit-box;
+  min-height: 2.9em;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 
 .form-grid {
@@ -1577,16 +1612,53 @@ img {
 }
 
 .cta-dock {
-  width: min(760px, calc(100vw - 28px));
-  margin: 0 auto 16px;
-  padding: 12px;
-  border-radius: 28px;
-  background: rgba(247, 242, 235, 0.82);
-  backdrop-filter: blur(18px);
+  width: min(780px, calc(100vw - 32px));
+  margin: 0 auto 20px;
+  padding: 10px;
+  border-radius: 24px;
+  background: rgba(249, 245, 239, 0.76);
+  backdrop-filter: blur(20px);
   box-shadow:
-    0 16px 40px rgba(34, 25, 10, 0.12),
-    inset 0 0 0 1px rgba(23, 20, 17, 0.1);
+    0 18px 42px rgba(34, 25, 10, 0.12),
+    inset 0 0 0 1px rgba(23, 20, 17, 0.08);
   pointer-events: auto;
+}
+
+.cta-dock__filters {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+}
+
+.cta-dock__meta {
+  display: grid;
+  gap: 3px;
+  padding: 4px 8px 4px 10px;
+  min-width: 0;
+}
+
+.cta-dock__eyebrow {
+  color: rgba(68, 64, 56, 0.74);
+  font-family: var(--font-mono);
+  font-size: 0.67rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.cta-dock__title {
+  color: var(--muted-strong);
+  font-size: 0.98rem;
+  font-weight: 620;
+  letter-spacing: -0.03em;
+}
+
+.cta-dock__sub {
+  overflow: hidden;
+  color: var(--muted);
+  font-size: 0.84rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .cta-dock__split {
@@ -1598,16 +1670,31 @@ img {
 .cta-button,
 .secondary-button {
   width: 100%;
-  min-height: 48px;
+  min-height: 50px;
   cursor: pointer;
   font-weight: 620;
   letter-spacing: -0.02em;
+  border-radius: 18px;
 }
 
 .cta-button {
   background: linear-gradient(180deg, var(--accent), var(--accent-strong));
   color: white;
   box-shadow: 0 12px 30px rgba(20, 84, 67, 0.24);
+}
+
+.cta-button--dock {
+  width: auto;
+  min-width: 248px;
+  padding: 0 24px;
+}
+
+.secondary-button {
+  background: rgba(255, 255, 255, 0.86);
+  color: var(--muted-strong);
+  box-shadow:
+    0 10px 24px rgba(34, 25, 10, 0.06),
+    inset 0 0 0 1px rgba(23, 20, 17, 0.1);
 }
 
 .cta-button:disabled {
@@ -1640,6 +1727,18 @@ img {
 .filters-heading {
   font-size: clamp(1.6rem, 4vw, 2.2rem);
   margin-bottom: 8px;
+  max-width: 12ch;
+  line-height: 1.04;
+  text-wrap: balance;
+}
+
+.inner-page--en .filters-heading {
+  max-width: 14ch;
+  font-size: clamp(1.52rem, 3.6vw, 2.05rem);
+}
+
+.summary-card h2 {
+  text-wrap: balance;
 }
 
 .filter-reset-button {
@@ -1683,6 +1782,8 @@ img {
 .summary-card__preview strong {
   display: block;
   margin: 10px 0 4px;
+  min-height: 2.2em;
+  text-wrap: balance;
 }
 
 .summary-card__preview span {
@@ -2054,6 +2155,15 @@ img {
   .cta-dock__split {
     grid-template-columns: 1fr;
   }
+
+  .cta-dock__filters {
+    grid-template-columns: 1fr;
+  }
+
+  .cta-button--dock {
+    width: 100%;
+    min-width: 0;
+  }
 }
 
 @media (max-width: 720px) {
@@ -2106,6 +2216,10 @@ img {
     grid-template-columns: 1fr;
   }
 
+  .composer-layout--filters {
+    margin-top: -56px;
+  }
+
   .field-group {
     padding: 16px;
   }
@@ -2116,6 +2230,19 @@ img {
 
   .choice-chip--wide {
     min-height: 80px;
+  }
+
+  .cta-dock {
+    width: min(100vw - 20px, 100%);
+    margin-bottom: 12px;
+  }
+
+  .cta-dock__meta {
+    padding: 2px 4px 6px;
+  }
+
+  .cta-dock__sub {
+    white-space: normal;
   }
 
   .itinerary-day__header,

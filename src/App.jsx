@@ -119,18 +119,40 @@ export default function App() {
       <div className="cta-dock-wrap">
         <div className="cta-dock">
           {step === "filters" ? (
-            <button
-              className="cta-button"
-              disabled={matched.length === 0 || itLoading}
-              onClick={handleViewItinerary}
-              type="button"
-            >
-              {itLoading
-                ? (lang === "zh" ? "載入行程中..." : "Loading itineraries...")
-                : matched.length > 0
-                  ? (lang === "zh" ? `查看最佳行程 · ${matched.length} 條符合` : `View best match · ${matched.length} found`)
-                  : (lang === "zh" ? "沒有符合的行程 · 請調整條件" : "No matches · adjust filters")}
-            </button>
+            <div className="cta-dock__filters">
+              <div className="cta-dock__meta">
+                <span className="cta-dock__eyebrow">{lang === "zh" ? "推薦狀態" : "Recommendation"}</span>
+                <strong className="cta-dock__title">
+                  {itLoading
+                    ? (lang === "zh" ? "正在整理可用行程" : "Preparing itinerary options")
+                    : matched.length > 0
+                      ? (lang === "zh" ? "最佳行程已準備好" : "Best-match itinerary is ready")
+                      : (lang === "zh" ? "再調整一下條件會更準" : "A small filter tweak will help")}
+                </strong>
+                <span className="cta-dock__sub">
+                  {bestMatch
+                    ? (lang === "zh"
+                      ? `${bestMatch.titleZh} · ${matched.length} 條符合`
+                      : `${bestMatch.titleEn} · ${matched.length} matches`)
+                    : (lang === "zh"
+                      ? "系統會依照你的偏好找出最接近的路線。"
+                      : "We will surface the closest route based on your filters.")}
+                </span>
+              </div>
+
+              <button
+                className="cta-button cta-button--dock"
+                disabled={matched.length === 0 || itLoading}
+                onClick={handleViewItinerary}
+                type="button"
+              >
+                {itLoading
+                  ? (lang === "zh" ? "載入行程中..." : "Loading...")
+                  : matched.length > 0
+                    ? (lang === "zh" ? "查看最佳行程" : "View best match")
+                    : (lang === "zh" ? "請調整條件" : "Adjust filters")}
+              </button>
+            </div>
           ) : null}
 
           {step === "itinerary" ? (

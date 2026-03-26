@@ -1,0 +1,180 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e6]:
+        - button "← 返回" [ref=e220]:
+          - generic [ref=e221]:
+            - generic [ref=e222]: ←
+            - text: 返回
+        - generic [ref=e8]:
+          - generic [ref=e9]: AlexTravelSharing
+          - generic [ref=e10]:
+            - generic [ref=e11]: 🇳🇴
+            - generic [ref=e12]: 挪威
+      - button "EN" [ref=e14]:
+        - generic [ref=e15]: EN
+  - generic [ref=e224]:
+    - generic [ref=e228]:
+      - paragraph [ref=e229]: Norway
+      - heading "挪威" [level=1] [ref=e230]
+      - paragraph [ref=e231]: 設定你的旅行偏好，我們會為你找到最合適的行程路線。
+      - generic [ref=e233]: 2 條符合的行程
+    - generic [ref=e234]:
+      - generic [ref=e235]:
+        - paragraph [ref=e236]: Trip Filters
+        - heading "告訴我們你的旅行偏好" [level=2] [ref=e237]
+        - generic [ref=e238]:
+          - generic [ref=e239]:
+            - generic [ref=e240]:
+              - generic [ref=e241]: 旅行目的
+              - paragraph [ref=e242]: 先決定這趟旅程要更接近放鬆、掃景點，還是帶一點探索感。
+            - generic [ref=e243]:
+              - button "Leisure 休閒放鬆 景觀、用餐與留白比較多" [ref=e244] [cursor=pointer]:
+                - generic [ref=e245]:
+                  - generic [ref=e246]: Leisure
+                  - generic [ref=e247]: 休閒放鬆
+                  - generic [ref=e248]: 景觀、用餐與留白比較多
+              - button "See All Attractions 景點全攻略 把代表性景點盡量串在同一條線上" [ref=e249] [cursor=pointer]:
+                - generic [ref=e250]:
+                  - generic [ref=e251]: See All Attractions
+                  - generic [ref=e252]: 景點全攻略
+                  - generic [ref=e253]: 把代表性景點盡量串在同一條線上
+              - button "Adventure 冒險探索 加入步道、活動與更高一點的移動強度" [ref=e254] [cursor=pointer]:
+                - generic [ref=e255]:
+                  - generic [ref=e256]: Adventure
+                  - generic [ref=e257]: 冒險探索
+                  - generic [ref=e258]: 加入步道、活動與更高一點的移動強度
+          - generic [ref=e259]:
+            - generic [ref=e260]:
+              - generic [ref=e261]: 旅行天數
+              - paragraph [ref=e262]: 旅行天數會直接影響我們如何安排移動距離與留白。
+            - generic [ref=e263]:
+              - button "3-4 天" [ref=e264] [cursor=pointer]:
+                - generic [ref=e265]: 3-4 天
+              - button "5-7 天" [ref=e266] [cursor=pointer]:
+                - generic [ref=e267]: 5-7 天
+              - button "8+ 天" [ref=e268] [cursor=pointer]:
+                - generic [ref=e269]: 8+ 天
+          - generic [ref=e270]:
+            - generic [ref=e271]:
+              - generic [ref=e272]: 交通方式
+              - paragraph [ref=e273]: 不同移動方式會改變停點密度，也會影響一天的節奏。
+            - generic [ref=e274]:
+              - button "Rent a car 租車自駕 最適合長距離公路與自由停點節奏" [ref=e275] [cursor=pointer]:
+                - generic [ref=e276]:
+                  - generic [ref=e277]: Rent a car
+                  - generic [ref=e278]: 租車自駕
+                  - generic [ref=e279]: 最適合長距離公路與自由停點節奏
+              - button "Public transit 大眾運輸 減少駕駛壓力，讓每天的移動更穩定" [ref=e280] [cursor=pointer]:
+                - generic [ref=e281]:
+                  - generic [ref=e282]: Public transit
+                  - generic [ref=e283]: 大眾運輸
+                  - generic [ref=e284]: 減少駕駛壓力，讓每天的移動更穩定
+              - button "Mixed 混合 重要段落自駕，其餘維持較輕的移動方式" [ref=e285] [cursor=pointer]:
+                - generic [ref=e286]:
+                  - generic [ref=e287]: Mixed
+                  - generic [ref=e288]: 混合
+                  - generic [ref=e289]: 重要段落自駕，其餘維持較輕的移動方式
+          - generic [ref=e290]:
+            - generic [ref=e291]:
+              - generic [ref=e292]: 旅行節奏
+              - paragraph [ref=e293]: 同樣的景點，可以排成舒服、平衡或更緊密的版本。
+            - generic [ref=e294]:
+              - button "Relaxed 悠閒 保留散步、咖啡與臨時改動的餘裕" [ref=e295] [cursor=pointer]:
+                - generic [ref=e296]:
+                  - generic [ref=e297]: Relaxed
+                  - generic [ref=e298]: 悠閒
+                  - generic [ref=e299]: 保留散步、咖啡與臨時改動的餘裕
+              - button "Moderate 適中 主景點完整，但不把每一天排得太滿" [ref=e300] [cursor=pointer]:
+                - generic [ref=e301]:
+                  - generic [ref=e302]: Moderate
+                  - generic [ref=e303]: 適中
+                  - generic [ref=e304]: 主景點完整，但不把每一天排得太滿
+              - button "Intensive 緊湊 停點更密，適合短天數或想多看一點的人" [ref=e305] [cursor=pointer]:
+                - generic [ref=e306]:
+                  - generic [ref=e307]: Intensive
+                  - generic [ref=e308]: 緊湊
+                  - generic [ref=e309]: 停點更密，適合短天數或想多看一點的人
+          - generic [ref=e310]:
+            - generic [ref=e311]:
+              - generic [ref=e312]: 季節
+              - paragraph [ref=e313]: 季節會影響光線、日照、步道條件與停留時間。
+            - generic [ref=e314]:
+              - button "春季 (3-5月)" [ref=e315] [cursor=pointer]:
+                - generic [ref=e317]: 春季 (3-5月)
+              - button "夏季 (6-8月)" [ref=e318] [cursor=pointer]:
+                - generic [ref=e320]: 夏季 (6-8月)
+              - button "秋季 (9-11月)" [ref=e321] [cursor=pointer]:
+                - generic [ref=e323]: 秋季 (9-11月)
+              - button "冬季 (12-2月)" [ref=e324] [cursor=pointer]:
+                - generic [ref=e326]: 冬季 (12-2月)
+          - generic [ref=e327]:
+            - generic [ref=e328]:
+              - generic [ref=e329]:
+                - generic [ref=e330]: 抵達時間
+                - paragraph [ref=e331]: 抵達與離開時間會影響第一天和最後一天能排進多少內容。
+              - generic [ref=e332]:
+                - button "上午 (06-12)" [ref=e333] [cursor=pointer]:
+                  - generic [ref=e335]: 上午 (06-12)
+                - button "中午 (12-15)" [ref=e336] [cursor=pointer]:
+                  - generic [ref=e338]: 中午 (12-15)
+                - button "晚上 (18-24)" [ref=e339] [cursor=pointer]:
+                  - generic [ref=e341]: 晚上 (18-24)
+            - generic [ref=e342]:
+              - generic [ref=e343]:
+                - generic [ref=e344]: 離開時間
+                - paragraph [ref=e345]: 抵達與離開時間會影響第一天和最後一天能排進多少內容。
+              - generic [ref=e346]:
+                - button "上午 (06-12)" [ref=e347] [cursor=pointer]:
+                  - generic [ref=e349]: 上午 (06-12)
+                - button "中午 (12-15)" [ref=e350] [cursor=pointer]:
+                  - generic [ref=e352]: 中午 (12-15)
+                - button "晚上 (18-24)" [ref=e353] [cursor=pointer]:
+                  - generic [ref=e355]: 晚上 (18-24)
+          - generic [ref=e356]:
+            - generic [ref=e357]:
+              - generic [ref=e358]: 預算等級
+              - paragraph [ref=e359]: 預算不是限制，而是幫助我們決定住宿、餐飲和停點的配置方式。
+            - generic [ref=e360]:
+              - button "Budget 平價 優先控制支出，把預算留給必要體驗" [ref=e361] [cursor=pointer]:
+                - generic [ref=e362]:
+                  - generic [ref=e363]: Budget
+                  - generic [ref=e364]: 平價
+                  - generic [ref=e365]: 優先控制支出，把預算留給必要體驗
+              - button "Mid-range 中等 在住宿舒適度、餐廳與花費之間取得平衡" [ref=e366] [cursor=pointer]:
+                - generic [ref=e367]:
+                  - generic [ref=e368]: Mid-range
+                  - generic [ref=e369]: 中等
+                  - generic [ref=e370]: 在住宿舒適度、餐廳與花費之間取得平衡
+              - button "Premium 高級 更重視住宿質感、餐飲與整體體驗密度" [ref=e371] [cursor=pointer]:
+                - generic [ref=e372]:
+                  - generic [ref=e373]: Premium
+                  - generic [ref=e374]: 高級
+                  - generic [ref=e375]: 更重視住宿質感、餐飲與整體體驗密度
+      - complementary [ref=e376]:
+        - generic [ref=e377]:
+          - paragraph [ref=e378]: 搜尋結果
+          - heading "目前最接近的路線方向" [level=2] [ref=e379]
+          - generic [ref=e380]:
+            - strong [ref=e381]: "2"
+            - generic [ref=e382]:
+              - generic [ref=e383]: 條符合的行程
+              - paragraph [ref=e384]: 篩選條件越清楚，推薦結果就會越接近你真正會出發的版本。
+          - generic [ref=e385]:
+            - generic [ref=e386]:
+              - generic [ref=e387]: 目的地
+              - strong [ref=e388]: 挪威
+            - generic [ref=e389]:
+              - generic [ref=e390]: 已啟用條件
+              - strong [ref=e391]: "0"
+          - generic [ref=e392]:
+            - paragraph [ref=e393]: 推薦路線
+            - strong [ref=e394]: 羅弗敦群島 5 天 Lofoten 精選
+            - generic [ref=e395]: 5 天
+            - paragraph [ref=e396]: 以 Leknes、Å、Reine、Svolvær 和 Henningsvær 串起來的 Lofoten 初訪經典線。
+  - generic [ref=e398]:
+    - generic [ref=e399]:
+      - generic [ref=e400]: 推薦狀態
+      - strong [ref=e401]: 最佳行程已準備好
+      - generic [ref=e402]: 羅弗敦群島 5 天 Lofoten 精選 · 2 條符合
+    - button "查看最佳行程" [ref=e403] [cursor=pointer]

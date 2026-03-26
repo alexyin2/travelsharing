@@ -57,7 +57,7 @@ function FilterSection({ label, description, options, value, onChange, lang, wid
             type="button"
           >
             <span className="choice-chip__copy">
-              {wide && lang === "zh" ? <span className="choice-chip__eyebrow">{opt.en}</span> : null}
+              {wide ? <span className="choice-chip__eyebrow">{lang === "zh" ? opt.en : opt.zh}</span> : null}
               <span className="choice-chip__label">{lang === "zh" ? opt.zh : opt.en}</span>
               {wide && (lang === "zh" ? opt.noteZh : opt.noteEn) ? (
                 <span className="choice-chip__note">{lang === "zh" ? opt.noteZh : opt.noteEn}</span>
@@ -101,7 +101,7 @@ export default function FiltersPage({ lang, selectedCountry, filters, setFilters
   const activeFilterCount = Object.values(filters).filter((v) => v != null).length;
 
   return (
-    <div className="inner-page">
+    <div className={`inner-page inner-page--filters inner-page--${lang}`}>
       <section className="inner-hero">
         <div className="inner-hero__media">
           <img alt="" src={currentCountry?.image} />
@@ -124,7 +124,7 @@ export default function FiltersPage({ lang, selectedCountry, filters, setFilters
         </div>
       </section>
 
-      <section className="page-container composer-layout">
+      <section className="page-container composer-layout composer-layout--filters">
         <div className="composer-panel">
           <p className="eyebrow">{lang === "zh" ? "Trip Filters" : "Trip Filters"}</p>
           <h2 className="filters-heading">{lang === "zh" ? "告訴我們你的旅行偏好" : "Tell us your travel preferences"}</h2>

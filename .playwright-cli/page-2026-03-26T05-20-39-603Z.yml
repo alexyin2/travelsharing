@@ -1,0 +1,180 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e6]:
+        - button "← Back" [ref=e220]:
+          - generic [ref=e221]:
+            - generic [ref=e222]: ←
+            - text: Back
+        - generic [ref=e8]:
+          - generic [ref=e9]: AlexTravelSharing
+          - generic [ref=e10]:
+            - generic [ref=e11]: 🇳🇴
+            - generic [ref=e12]: Norway
+      - button "中文" [ref=e223]:
+        - generic [ref=e15]: 中文
+  - generic [ref=e225]:
+    - generic [ref=e229]:
+      - paragraph [ref=e230]: Norway
+      - heading "Norway" [level=1] [ref=e231]
+      - paragraph [ref=e232]: Set your travel preferences and we will find the best matching itinerary for you.
+      - generic [ref=e234]: 2 matching itineraries
+    - generic [ref=e235]:
+      - generic [ref=e236]:
+        - paragraph [ref=e237]: Trip Filters
+        - heading "Tell us your travel preferences" [level=2] [ref=e238]
+        - generic [ref=e239]:
+          - generic [ref=e240]:
+            - generic [ref=e241]:
+              - generic [ref=e242]: Trip purpose
+              - paragraph [ref=e243]: Decide whether the route should feel relaxed, comprehensive, or a little more exploratory.
+            - generic [ref=e244]:
+              - button "休閒放鬆 Leisure Scenic rhythm with more room for meals and pauses" [ref=e245] [cursor=pointer]:
+                - generic [ref=e246]:
+                  - generic [ref=e247]: 休閒放鬆
+                  - generic [ref=e248]: Leisure
+                  - generic [ref=e249]: Scenic rhythm with more room for meals and pauses
+              - button "景點全攻略 See All Attractions Build the route around as many signature stops as possible" [ref=e250] [cursor=pointer]:
+                - generic [ref=e251]:
+                  - generic [ref=e252]: 景點全攻略
+                  - generic [ref=e253]: See All Attractions
+                  - generic [ref=e254]: Build the route around as many signature stops as possible
+              - button "冒險探索 Adventure Lean into hikes, activities, and a higher-energy route" [ref=e255] [cursor=pointer]:
+                - generic [ref=e256]:
+                  - generic [ref=e257]: 冒險探索
+                  - generic [ref=e258]: Adventure
+                  - generic [ref=e259]: Lean into hikes, activities, and a higher-energy route
+          - generic [ref=e260]:
+            - generic [ref=e261]:
+              - generic [ref=e262]: Trip duration
+              - paragraph [ref=e263]: Trip length shapes how aggressively we plan driving distances and breathing room.
+            - generic [ref=e264]:
+              - button "3-4 days" [ref=e265] [cursor=pointer]:
+                - generic [ref=e266]: 3-4 days
+              - button "5-7 days" [ref=e267] [cursor=pointer]:
+                - generic [ref=e268]: 5-7 days
+              - button "8+ days" [ref=e269] [cursor=pointer]:
+                - generic [ref=e270]: 8+ days
+          - generic [ref=e271]:
+            - generic [ref=e272]:
+              - generic [ref=e273]: Transportation
+              - paragraph [ref=e274]: Your transportation choice changes both stop density and the tempo of each day.
+            - generic [ref=e275]:
+              - button "租車自駕 Rent a car Best for long drives and flexible scenic stopovers" [ref=e276] [cursor=pointer]:
+                - generic [ref=e277]:
+                  - generic [ref=e278]: 租車自駕
+                  - generic [ref=e279]: Rent a car
+                  - generic [ref=e280]: Best for long drives and flexible scenic stopovers
+              - button "大眾運輸 Public transit Lower the driving load and keep the travel days steadier" [ref=e281] [cursor=pointer]:
+                - generic [ref=e282]:
+                  - generic [ref=e283]: 大眾運輸
+                  - generic [ref=e284]: Public transit
+                  - generic [ref=e285]: Lower the driving load and keep the travel days steadier
+              - button "混合 Mixed Mix key driving segments with easier transfers" [ref=e286] [cursor=pointer]:
+                - generic [ref=e287]:
+                  - generic [ref=e288]: 混合
+                  - generic [ref=e289]: Mixed
+                  - generic [ref=e290]: Mix key driving segments with easier transfers
+          - generic [ref=e291]:
+            - generic [ref=e292]:
+              - generic [ref=e293]: Travel pace
+              - paragraph [ref=e294]: The same places can be arranged into a softer, balanced, or denser travel rhythm.
+            - generic [ref=e295]:
+              - button "悠閒 Relaxed Leave room for walking, coffee stops, and flexibility" [ref=e296] [cursor=pointer]:
+                - generic [ref=e297]:
+                  - generic [ref=e298]: 悠閒
+                  - generic [ref=e299]: Relaxed
+                  - generic [ref=e300]: Leave room for walking, coffee stops, and flexibility
+              - button "適中 Moderate Cover the anchor stops without pushing every day too hard" [ref=e301] [cursor=pointer]:
+                - generic [ref=e302]:
+                  - generic [ref=e303]: 適中
+                  - generic [ref=e304]: Moderate
+                  - generic [ref=e305]: Cover the anchor stops without pushing every day too hard
+              - button "緊湊 Intensive Fit in more stops for shorter trips or denser travel days" [ref=e306] [cursor=pointer]:
+                - generic [ref=e307]:
+                  - generic [ref=e308]: 緊湊
+                  - generic [ref=e309]: Intensive
+                  - generic [ref=e310]: Fit in more stops for shorter trips or denser travel days
+          - generic [ref=e311]:
+            - generic [ref=e312]:
+              - generic [ref=e313]: Season
+              - paragraph [ref=e314]: Season shifts the light, daylight hours, trail conditions, and how long each stop deserves.
+            - generic [ref=e315]:
+              - button "Spring (Mar-May)" [ref=e316] [cursor=pointer]:
+                - generic [ref=e318]: Spring (Mar-May)
+              - button "Summer (Jun-Aug)" [ref=e319] [cursor=pointer]:
+                - generic [ref=e321]: Summer (Jun-Aug)
+              - button "Autumn (Sep-Nov)" [ref=e322] [cursor=pointer]:
+                - generic [ref=e324]: Autumn (Sep-Nov)
+              - button "Winter (Dec-Feb)" [ref=e325] [cursor=pointer]:
+                - generic [ref=e327]: Winter (Dec-Feb)
+          - generic [ref=e328]:
+            - generic [ref=e329]:
+              - generic [ref=e330]:
+                - generic [ref=e331]: Arrival time
+                - paragraph [ref=e332]: Arrival and departure windows shape how much we can fit into the first and last day.
+              - generic [ref=e333]:
+                - button "Morning (06-12)" [ref=e334] [cursor=pointer]:
+                  - generic [ref=e336]: Morning (06-12)
+                - button "Noon (12-15)" [ref=e337] [cursor=pointer]:
+                  - generic [ref=e339]: Noon (12-15)
+                - button "Night (18-24)" [ref=e340] [cursor=pointer]:
+                  - generic [ref=e342]: Night (18-24)
+            - generic [ref=e343]:
+              - generic [ref=e344]:
+                - generic [ref=e345]: Departure time
+                - paragraph [ref=e346]: Arrival and departure windows shape how much we can fit into the first and last day.
+              - generic [ref=e347]:
+                - button "Morning (06-12)" [ref=e348] [cursor=pointer]:
+                  - generic [ref=e350]: Morning (06-12)
+                - button "Noon (12-15)" [ref=e351] [cursor=pointer]:
+                  - generic [ref=e353]: Noon (12-15)
+                - button "Night (18-24)" [ref=e354] [cursor=pointer]:
+                  - generic [ref=e356]: Night (18-24)
+          - generic [ref=e357]:
+            - generic [ref=e358]:
+              - generic [ref=e359]: Budget level
+              - paragraph [ref=e360]: Budget is less a limit than a signal for how to allocate stays, dining, and route choices.
+            - generic [ref=e361]:
+              - button "平價 Budget Value-led choices that protect budget for essentials" [ref=e362] [cursor=pointer]:
+                - generic [ref=e363]:
+                  - generic [ref=e364]: 平價
+                  - generic [ref=e365]: Budget
+                  - generic [ref=e366]: Value-led choices that protect budget for essentials
+              - button "中等 Mid-range Balance comfort, dining, and overall trip spend" [ref=e367] [cursor=pointer]:
+                - generic [ref=e368]:
+                  - generic [ref=e369]: 中等
+                  - generic [ref=e370]: Mid-range
+                  - generic [ref=e371]: Balance comfort, dining, and overall trip spend
+              - button "高級 Premium Prioritize stronger stays, meals, and overall polish" [ref=e372] [cursor=pointer]:
+                - generic [ref=e373]:
+                  - generic [ref=e374]: 高級
+                  - generic [ref=e375]: Premium
+                  - generic [ref=e376]: Prioritize stronger stays, meals, and overall polish
+      - complementary [ref=e377]:
+        - generic [ref=e378]:
+          - paragraph [ref=e379]: Results
+          - heading "The closest route direction right now" [level=2] [ref=e380]
+          - generic [ref=e381]:
+            - strong [ref=e382]: "2"
+            - generic [ref=e383]:
+              - generic [ref=e384]: matching itineraries
+              - paragraph [ref=e385]: The clearer the filters, the closer the recommendation gets to a route you would actually take.
+          - generic [ref=e386]:
+            - generic [ref=e387]:
+              - generic [ref=e388]: Destination
+              - strong [ref=e389]: Norway
+            - generic [ref=e390]:
+              - generic [ref=e391]: Active filters
+              - strong [ref=e392]: "0"
+          - generic [ref=e393]:
+            - paragraph [ref=e394]: Suggested route
+            - strong [ref=e395]: Lofoten Essentials in 5 Days
+            - generic [ref=e396]: 5 days
+            - paragraph [ref=e397]: A first-time Lofoten route built around Leknes, Å, Reine, Svolvaer, and Henningsvaer.
+  - generic [ref=e399]:
+    - generic [ref=e400]:
+      - generic [ref=e401]: Recommendation
+      - strong [ref=e402]: Best-match itinerary is ready
+      - generic [ref=e403]: Lofoten Essentials in 5 Days · 2 matches
+    - button "View best match" [ref=e404] [cursor=pointer]
