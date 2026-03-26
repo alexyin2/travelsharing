@@ -438,7 +438,7 @@ img {
 .product-shot__panel {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 16px;
   height: 100%;
   padding: 18px;
   border-radius: 24px;
@@ -459,6 +459,24 @@ img {
   background: rgba(20, 84, 67, 0.1);
   color: var(--accent-strong);
   font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.product-shot__pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.product-shot__pill {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(23, 20, 17, 0.05);
+  color: var(--muted-strong);
+  font-size: 0.75rem;
   font-weight: 600;
 }
 
@@ -502,6 +520,159 @@ img {
   gap: 14px;
   padding: 12px 0;
   border-top: 1px solid rgba(23, 20, 17, 0.08);
+}
+
+.product-shot__days {
+  display: grid;
+  gap: 12px;
+}
+
+.product-shot__day {
+  display: grid;
+  gap: 12px;
+  padding: 14px;
+  border-radius: 20px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(248, 244, 236, 0.9)),
+    rgba(23, 20, 17, 0.03);
+  box-shadow:
+    0 10px 24px rgba(34, 25, 10, 0.06),
+    inset 0 0 0 1px rgba(23, 20, 17, 0.08);
+}
+
+.product-shot__day--featured {
+  gap: 10px;
+}
+
+.product-shot__compact-days {
+  display: grid;
+  gap: 10px;
+}
+
+.product-shot__day--compact {
+  gap: 8px;
+  padding: 12px;
+}
+
+.product-shot__day-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.product-shot__day-index {
+  display: inline-flex;
+  margin-bottom: 6px;
+  color: rgba(68, 64, 56, 0.78);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.product-shot__day-tag {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(20, 84, 67, 0.1);
+  color: var(--accent-strong);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.product-shot__slots {
+  display: grid;
+  gap: 8px;
+}
+
+.product-shot__slot {
+  display: grid;
+  grid-template-columns: 88px minmax(0, 1fr);
+  gap: 10px;
+  align-items: start;
+  padding-top: 8px;
+  border-top: 1px solid rgba(23, 20, 17, 0.08);
+}
+
+.product-shot__slot:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.product-shot__slot-time {
+  color: var(--accent-strong);
+  font-family: var(--font-mono);
+  font-size: 0.73rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+.product-shot__slot-copy {
+  color: var(--muted-strong);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.product-shot__notes {
+  display: grid;
+  gap: 8px;
+  padding-top: 2px;
+}
+
+.product-shot__notes span {
+  display: block;
+  padding: 9px 12px;
+  border-radius: 14px;
+  background: rgba(23, 20, 17, 0.045);
+  color: var(--muted);
+  font-size: 0.77rem;
+  line-height: 1.45;
+}
+
+.product-shot__compact-slots {
+  display: grid;
+  gap: 6px;
+}
+
+.product-shot__compact-slot {
+  display: grid;
+  grid-template-columns: 84px minmax(0, 1fr);
+  gap: 10px;
+  align-items: start;
+}
+
+.product-shot__compact-slot span {
+  color: var(--accent-strong);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+.product-shot__compact-slot p {
+  color: var(--muted-strong);
+  font-size: 0.76rem;
+  line-height: 1.42;
+}
+
+.product-shot__compact-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.product-shot__compact-meta span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  padding: 5px 9px;
+  border-radius: 999px;
+  background: rgba(23, 20, 17, 0.05);
+  color: var(--muted);
+  font-size: 0.72rem;
 }
 
 .section-intro {
@@ -1173,6 +1344,7 @@ img {
   display: flex;
   gap: 14px;
   align-items: flex-start;
+  justify-content: space-between;
 }
 
 .itinerary-day__index {
@@ -1383,13 +1555,53 @@ img {
   color: var(--muted-strong);
 }
 
+.itinerary-overview {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.itinerary-overview__card {
+  display: grid;
+  gap: 8px;
+  padding: 16px;
+  border-radius: 22px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(250, 245, 238, 0.88)),
+    rgba(23, 20, 17, 0.03);
+  box-shadow:
+    0 10px 24px rgba(34, 25, 10, 0.06),
+    inset 0 0 0 1px rgba(23, 20, 17, 0.08);
+}
+
+.itinerary-overview__label {
+  color: rgba(68, 64, 56, 0.78);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.itinerary-overview__card strong {
+  font-size: 1rem;
+  font-weight: 650;
+  letter-spacing: -0.03em;
+}
+
+.itinerary-overview__card p {
+  color: var(--muted);
+  font-size: 0.84rem;
+  line-height: 1.52;
+}
+
 /* ── Premium lock ── */
 
 .itinerary-stop__premium {
-  margin-top: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
 }
 
 .itinerary-stop__region {
@@ -1398,17 +1610,61 @@ img {
   font-size: 0.85rem;
 }
 
+.itinerary-stop__rail {
+  display: grid;
+  align-content: start;
+  gap: 8px;
+}
+
 .itinerary-stop__locked-note {
   font-size: 0.85rem;
   color: var(--muted);
   font-style: italic;
 }
 
-.itinerary-stop__duration {
-  display: inline-block;
-  margin-top: 4px;
-  font-size: 0.78rem;
-  color: var(--muted);
+.itinerary-stop__eyebrow {
+  color: rgba(68, 64, 56, 0.72);
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.itinerary-stop__title-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.itinerary-stop__status {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding: 4px 9px;
+  border-radius: 999px;
+  background: rgba(23, 20, 17, 0.06);
+  color: var(--muted-strong);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.itinerary-stop__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.itinerary-stop__meta-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: rgba(23, 20, 17, 0.05);
+  color: var(--muted-strong);
+  font-size: 0.75rem;
 }
 
 .premium-lock {
@@ -1454,6 +1710,88 @@ img {
 
 .premium-lock__icon {
   font-size: 1rem;
+}
+
+.itinerary-day__headline {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.itinerary-day__stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.itinerary-day__stats span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(23, 20, 17, 0.05);
+  color: var(--muted-strong);
+  font-size: 0.76rem;
+  font-weight: 600;
+}
+
+.itinerary-day__teaser {
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-radius: 18px;
+  background: rgba(23, 20, 17, 0.045);
+  color: var(--muted);
+  font-size: 0.86rem;
+  line-height: 1.56;
+}
+
+.itinerary-outline {
+  display: grid;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.itinerary-outline__item {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  gap: 12px;
+  align-items: start;
+  padding: 10px 0;
+  border-top: 1px solid rgba(23, 20, 17, 0.08);
+}
+
+.itinerary-outline__item:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.itinerary-outline__index {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 16px;
+  background: rgba(20, 84, 67, 0.08);
+  color: var(--accent-strong);
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+
+.itinerary-outline__item strong {
+  display: block;
+  font-size: 0.94rem;
+  font-weight: 620;
+  letter-spacing: -0.02em;
+}
+
+.itinerary-outline__item p {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 0.8rem;
 }
 
 @media (max-width: 1280px) {
@@ -1506,6 +1844,24 @@ img {
   .product-shot__sidebar {
     border-right: 0;
     border-bottom: 1px solid rgba(23, 20, 17, 0.08);
+  }
+
+  .product-shot__slot {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+
+  .product-shot__compact-slot {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+
+  .itinerary-overview {
+    grid-template-columns: 1fr;
+  }
+
+  .itinerary-stop__premium {
+    grid-template-columns: 1fr;
   }
 
   .cta-dock__split {
@@ -1561,6 +1917,15 @@ img {
   .form-grid,
   .choice-row--wide {
     grid-template-columns: 1fr;
+  }
+
+  .itinerary-day__header,
+  .itinerary-day__headline {
+    flex-direction: column;
+  }
+
+  .itinerary-day__stats {
+    justify-content: flex-start;
   }
 
   .attractions-grid {

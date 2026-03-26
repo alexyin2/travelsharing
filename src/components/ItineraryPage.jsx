@@ -1,6 +1,39 @@
 import { TYPE_EMOJI_FALLBACK, getPaceLabel, getPurposeLabel, getTransportLabel } from "../lib/constants";
 import PremiumLock from "./PremiumLock";
 
+function toMinutes(time) {
+  if (!time || !time.includes(":")) return null;
+  const [hours, minutes] = time.split(":").map(Number);
+  if (Number.isNaN(hours) || Number.isNaN(minutes)) return null;
+  return hours * 60 + minutes;
+}
+
+function toTimeLabel(totalMinutes) {
+  const normalized = ((totalMinutes % 1440) + 1440) % 1440;
+  const hours = String(Math.floor(normalized / 60)).padStart(2, "0");
+  const minutes = String(normalized % 60).padStart(2, "0");
+  return `${hours}:${minutes}`;
+}
+
+function getTimeRange(time, durationMinutes) {
+  if (!time) return "—";
+  if (!durationMinutes) return time;
+
+  const start = toMinutes(time);
+  if (start == null) return time;
+  return `${time} - ${toTimeLabel(start + durationMinutes)}`;
+}
+
+function getDurationLabel(durationMinutes, lang) {
+  if (!durationMinutes) return null;
+  if (durationMinutes >= 60) {
+    const hours = durationMinutes / 60;
+    const rounded = Number.isInteger(hours) ? hours : hours.toFixed(1);
+    return lang === "zh" ? `${rounded} 小時` : `${rounded} hr`;
+  }
+  return lang === "zh" ? `${durationMinutes} 分鐘` : `${durationMinutes} min`;
+}
+
 function ItineraryStop({ stop, lang, locked }) {
   const attraction = stop.attraction;
   const name = attraction
@@ -15,15 +48,29 @@ function ItineraryStop({ stop, lang, locked }) {
   const hotelAdvice = lang === "zh" ? stop.hotelAdviceZh : stop.hotelAdviceEn;
   const personalAdvice = lang === "zh" ? stop.personalAdviceZh : stop.personalAdviceEn;
   const hasPremium = photoTip || mealAdvice || hotelAdvice || personalAdvice;
+  const timeRange = getTimeRange(stop.time, stop.durationMinutes);
+  const durationLabel = getDurationLabel(stop.durationMinutes, lang);
 
   return (
     <div className="itinerary-stop">
-      <span className="itinerary-stop__time">{stop.time}</span>
+      <div className="itinerary-stop__rail">
+        <span className="itinerary-stop__time">{timeRange}</span>
+        <span className="itinerary-stop__eyebrow">{lang === "zh" ? "行程段落" : "Time Block"}</span>
+      </div>
+
       <div className="itinerary-stop__body">
-        <strong>
-          {emoji} {name}
-          {region ? <span className="itinerary-stop__region"> · {region}</span> : null}
-        </strong>
+        <div className="itinerary-stop__title-row">
+          <strong>
+            {emoji} {name}
+          </strong>
+          {locked ? <span className="itinerary-stop__status">{lang === "zh" ? "鎖定" : "Locked"}</span> : null}
+        </div>
+
+        <div className="itinerary-stop__meta">
+          {region ? <span className="itinerary-stop__meta-chip">{region}</span> : null}
+          {durationLabel ? <span className="itinerary-stop__meta-chip">{durationLabel}</span> : null}
+        </div>
+
         {locked ? (
           <p className="itinerary-stop__locked-note">
             {lang === "zh" ? "解鎖後查看完整說明" : "Unlock to see full details"}
@@ -31,13 +78,6 @@ function ItineraryStop({ stop, lang, locked }) {
         ) : (
           <>
             {note ? <p>{note}</p> : null}
-            {stop.durationMinutes ? (
-              <span className="itinerary-stop__duration">
-                {stop.durationMinutes >= 60
-                  ? `${Math.round(stop.durationMinutes / 60)}h`
-                  : `${stop.durationMinutes}m`}
-              </span>
-            ) : null}
           </>
         )}
 
@@ -59,6 +99,8 @@ export default function ItineraryPage({ lang, itinerary }) {
 
   const title = lang === "zh" ? itinerary.titleZh : itinerary.titleEn;
   const description = lang === "zh" ? itinerary.descriptionZh : itinerary.descriptionEn;
+  const totalDays = itinerary.days?.length || itinerary.durationDays || 0;
+  const previewStops = itinerary.days?.[0]?.stops?.length || 0;
 
   return (
     <section className="page-container itinerary-layout">
@@ -82,6 +124,24 @@ export default function ItineraryPage({ lang, itinerary }) {
           ) : null}
         </div>
 
+        <div className="itinerary-overview">
+          <div className="itinerary-overview__card">
+            <span className="itinerary-overview__label">{lang === "zh" ? "預覽開放" : "Preview Access"}</span>
+            <strong>{lang === "zh" ? "Day 1 完整可見" : "Day 1 fully visible"}</strong>
+            <p>{lang === "zh" ? "先看到時間段、用餐與住宿節奏。" : "See time blocks, dining ideas, and stay rhythm before unlock."}</p>
+          </div>
+          <div className="itinerary-overview__card">
+            <span className="itinerary-overview__label">{lang === "zh" ? "目前行程" : "Current Route"}</span>
+            <strong>{totalDays} {lang === "zh" ? "天 / 首日" : "days / first day"}</strong>
+            <p>{lang === "zh" ? `目前可預覽 ${previewStops} 個行程段落。` : `${previewStops} itinerary blocks are visible in the preview.`}</p>
+          </div>
+          <div className="itinerary-overview__card">
+            <span className="itinerary-overview__label">{lang === "zh" ? "解鎖後可得" : "After Unlock"}</span>
+            <strong>{lang === "zh" ? "完整每日節奏" : "Full daily rhythm"}</strong>
+            <p>{lang === "zh" ? "包含餐廳、住宿、拍照與作者建議。" : "Includes dining, stays, photo notes, and editor guidance."}</p>
+          </div>
+        </div>
+
         <div className="itinerary-board">
           {itinerary.days?.map((day, index) => {
             const locked = index > 0;
@@ -98,12 +158,25 @@ export default function ItineraryPage({ lang, itinerary }) {
                 ) : null}
 
                 <div className="itinerary-day__header">
-                  <span className="itinerary-day__index">D{day.dayNumber || index + 1}</span>
-                  <div>
-                    <h3>{dayTitle}</h3>
-                    {daySummary ? <p>{daySummary}</p> : null}
+                  <div className="itinerary-day__headline">
+                    <span className="itinerary-day__index">D{day.dayNumber || index + 1}</span>
+                    <div>
+                      <h3>{dayTitle}</h3>
+                      {daySummary ? <p>{daySummary}</p> : null}
+                    </div>
+                  </div>
+
+                  <div className="itinerary-day__stats">
+                    <span>{day.stops?.length || 0} {lang === "zh" ? "段行程" : "stops"}</span>
+                    <span>{locked ? (lang === "zh" ? "需解鎖" : "Locked") : (lang === "zh" ? "預覽中" : "Preview")}</span>
                   </div>
                 </div>
+
+                {locked ? (
+                  <div className="itinerary-day__teaser">
+                    <span>{lang === "zh" ? "完整版本會展開每個時段安排、餐廳建議、住宿節點與作者提示。" : "The full version expands each time block with dining, stay notes, and personal guidance."}</span>
+                  </div>
+                ) : null}
 
                 <div className="itinerary-day__items">
                   {day.stops?.map((stop, stopIndex) => (
@@ -127,15 +200,30 @@ export default function ItineraryPage({ lang, itinerary }) {
           <h2>{lang === "zh" ? "升級成完整路線包" : "Upgrade to the full route pack"}</h2>
           <p>
             {lang === "zh"
-              ? "包含每日詳細時間表、拍照秘訣、餐廳建議、住宿推薦與私人旅遊建議。"
-              : "Includes daily schedules, photo tips, dining suggestions, hotel recommendations, and personal travel advice."}
+              ? "把每日路線、餐廳、住宿與作者建議整理成真正可出發的 itinerary。"
+              : "Turn the preview into a travel-ready itinerary with full route, dining, stays, and editor notes."}
           </p>
           <div className="paywall-card__price">{lang === "zh" ? "NT$299" : "$9.99"}</div>
           <div className="paywall-card__bullets">
-            <span>{lang === "zh" ? "完整每日行程" : "Full daily schedule"}</span>
-            <span>{lang === "zh" ? "拍照秘訣" : "Photo spot tips"}</span>
-            <span>{lang === "zh" ? "餐廳與住宿建議" : "Dining & hotel advice"}</span>
-            <span>{lang === "zh" ? "私人旅遊建議" : "Personal travel advice"}</span>
+            <span>{lang === "zh" ? "完整每日時間表" : "Full day-by-day timing"}</span>
+            <span>{lang === "zh" ? "餐廳與住宿參考" : "Dining and stay references"}</span>
+            <span>{lang === "zh" ? "拍照與作者提示" : "Photo and editor notes"}</span>
+            <span>{lang === "zh" ? "出發前節奏建議" : "Trip rhythm guidance"}</span>
+          </div>
+        </div>
+
+        <div className="summary-card summary-card--soft">
+          <p className="eyebrow">{lang === "zh" ? "路線總覽" : "Route Outline"}</p>
+          <div className="itinerary-outline">
+            {itinerary.days?.map((day, index) => (
+              <div key={day.dayNumber || index} className="itinerary-outline__item">
+                <span className="itinerary-outline__index">D{day.dayNumber || index + 1}</span>
+                <div>
+                  <strong>{lang === "zh" ? day.titleZh : day.titleEn}</strong>
+                  <p>{day.stops?.length || 0} {lang === "zh" ? "段安排" : "stops"}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
 
