@@ -9,10 +9,7 @@ function scoreItinerary(itinerary, filters) {
   if (filters.purpose && itinerary.purpose === filters.purpose) score += 3;
   if (filters.transport && itinerary.transportMode === filters.transport) score += 2;
   if (filters.pace && itinerary.pace === filters.pace) score += 2;
-  if (filters.budget && itinerary.budget === filters.budget) score += 1;
   if (filters.season && itinerary.seasons?.includes(filters.season)) score += 2;
-  if (filters.arrivalTime && itinerary.arrivalTime === filters.arrivalTime) score += 1;
-  if (filters.departureTime && itinerary.departureTime === filters.departureTime) score += 1;
   if (filters.duration) {
     const days = itinerary.durationDays;
     if (days >= filters.duration.min && days <= filters.duration.max) score += 2;
@@ -24,10 +21,7 @@ function matchesFilters(itinerary, filters) {
   if (filters.purpose && itinerary.purpose !== filters.purpose) return false;
   if (filters.transport && itinerary.transportMode !== filters.transport) return false;
   if (filters.pace && itinerary.pace !== filters.pace) return false;
-  if (filters.budget && itinerary.budget !== filters.budget) return false;
   if (filters.season && !itinerary.seasons?.includes(filters.season)) return false;
-  if (filters.arrivalTime && itinerary.arrivalTime !== filters.arrivalTime) return false;
-  if (filters.departureTime && itinerary.departureTime !== filters.departureTime) return false;
   if (filters.duration) {
     const days = itinerary.durationDays;
     if (days < filters.duration.min || days > filters.duration.max) return false;

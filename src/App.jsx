@@ -10,11 +10,8 @@ const EMPTY_FILTERS = {
   purpose: null,
   transport: null,
   pace: null,
-  budget: null,
   season: null,
   duration: null,
-  arrivalTime: null,
-  departureTime: null,
 };
 
 export default function App() {

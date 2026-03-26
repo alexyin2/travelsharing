@@ -3,9 +3,7 @@ import {
   PURPOSE_OPTIONS,
   TRANSPORT_OPTIONS,
   PACE_OPTIONS,
-  BUDGET_OPTIONS,
   SEASON_OPTIONS,
-  ARRIVAL_DEPARTURE_OPTIONS,
   DURATION_OPTIONS,
   getCountryName,
 } from "../lib/constants";
@@ -30,14 +28,6 @@ const FILTER_SECTION_COPY = {
   season: {
     zh: "季節會影響光線、日照、步道條件與停留時間。",
     en: "Season shifts the light, daylight hours, trail conditions, and how long each stop deserves.",
-  },
-  timing: {
-    zh: "抵達與離開時間會影響第一天和最後一天能排進多少內容。",
-    en: "Arrival and departure windows shape how much we can fit into the first and last day.",
-  },
-  budget: {
-    zh: "預算不是限制，而是幫助我們決定住宿、餐飲和停點的配置方式。",
-    en: "Budget is less a limit than a signal for how to allocate stays, dining, and route choices.",
   },
 };
 
@@ -171,34 +161,6 @@ export default function FiltersPage({ lang, selectedCountry, filters, setFilters
               lang={lang}
             />
 
-            <div className="form-grid">
-              <FilterSection
-                label={lang === "zh" ? "抵達時間" : "Arrival time"}
-                description={lang === "zh" ? FILTER_SECTION_COPY.timing.zh : FILTER_SECTION_COPY.timing.en}
-                options={ARRIVAL_DEPARTURE_OPTIONS}
-                value={filters.arrivalTime}
-                onChange={update("arrivalTime")}
-                lang={lang}
-              />
-              <FilterSection
-                label={lang === "zh" ? "離開時間" : "Departure time"}
-                description={lang === "zh" ? FILTER_SECTION_COPY.timing.zh : FILTER_SECTION_COPY.timing.en}
-                options={ARRIVAL_DEPARTURE_OPTIONS}
-                value={filters.departureTime}
-                onChange={update("departureTime")}
-                lang={lang}
-              />
-            </div>
-
-            <FilterSection
-              label={lang === "zh" ? "預算等級" : "Budget level"}
-              description={lang === "zh" ? FILTER_SECTION_COPY.budget.zh : FILTER_SECTION_COPY.budget.en}
-              options={BUDGET_OPTIONS}
-              value={filters.budget}
-              onChange={update("budget")}
-              lang={lang}
-              wide
-            />
           </div>
         </div>
 
@@ -257,15 +219,12 @@ export default function FiltersPage({ lang, selectedCountry, filters, setFilters
                 {filters.purpose ? <span className="selected-chip">{PURPOSE_OPTIONS.find((o) => o.val === filters.purpose)?.[lang] || filters.purpose}</span> : null}
                 {filters.transport ? <span className="selected-chip">{TRANSPORT_OPTIONS.find((o) => o.val === filters.transport)?.[lang] || filters.transport}</span> : null}
                 {filters.pace ? <span className="selected-chip">{PACE_OPTIONS.find((o) => o.val === filters.pace)?.[lang] || filters.pace}</span> : null}
-                {filters.budget ? <span className="selected-chip">{BUDGET_OPTIONS.find((o) => o.val === filters.budget)?.[lang] || filters.budget}</span> : null}
                 {filters.season ? <span className="selected-chip">{SEASON_OPTIONS.find((o) => o.val === filters.season)?.[lang] || filters.season}</span> : null}
                 {filters.duration ? <span className="selected-chip">{lang === "zh" ? filters.duration.zh : filters.duration.en}</span> : null}
-                {filters.arrivalTime ? <span className="selected-chip">{ARRIVAL_DEPARTURE_OPTIONS.find((o) => o.val === filters.arrivalTime)?.[lang] || filters.arrivalTime}</span> : null}
-                {filters.departureTime ? <span className="selected-chip">{ARRIVAL_DEPARTURE_OPTIONS.find((o) => o.val === filters.departureTime)?.[lang] || filters.departureTime}</span> : null}
               </div>
               <button
                 className="filter-reset-button"
-                onClick={() => setFilters({ purpose: null, transport: null, pace: null, budget: null, season: null, duration: null, arrivalTime: null, departureTime: null })}
+                onClick={() => setFilters({ purpose: null, transport: null, pace: null, season: null, duration: null })}
                 type="button"
               >
                 {lang === "zh" ? "清除全部" : "Clear all"}
