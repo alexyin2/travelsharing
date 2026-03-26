@@ -16,7 +16,7 @@ const EMPTY_FILTERS = {
 
 export default function App() {
   const { attractions, regions, loading, error } = useSanityData();
-  const [lang, setLang] = useState("zh");
+  const [lang, setLang] = useState("en");
   const [step, setStep] = useState("landing");
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [filters, setFilters] = useState(EMPTY_FILTERS);

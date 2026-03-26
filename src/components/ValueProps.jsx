@@ -4,34 +4,34 @@ const PROPS = [
   {
     icon: "01",
     zh: {
-      title: "真實經驗先於清單整理",
-      desc: "每一條路線都從作者的實際旅程出發，不是從 SEO 關鍵字或旅遊書模板拼出來。",
+      title: "真實走訪後才整理成路線",
+      desc: "每一條路線都來自實際走過、開過、住過之後的整理，不是從網路清單和旅遊模板拼起來的。",
     },
     en: {
-      title: "Firsthand notes before generic listicles",
-      desc: "Every route starts from real trips and field notes, not from SEO-driven boilerplate.",
+      title: "Built from actual trips, not desk research",
+      desc: "These routes come from places that were actually driven, walked, stayed in, and adjusted on the road.",
     },
   },
   {
     icon: "02",
     zh: {
-      title: "策展感與產品感並存",
-      desc: "不是只有好看照片，而是能直接往下接篩選偏好、行程配對與完整路線預覽。",
+      title: "節奏是照真實旅行去排的",
+      desc: "不是把景點硬塞滿，而是考慮開車距離、體力、光線和每天真正能承受的節奏。",
     },
     en: {
-      title: "Editorial feel, product-grade flow",
-      desc: "It is not just visual inspiration. You can move directly into filter-based itinerary matching and route preview.",
+      title: "Paced the way real travel days unfold",
+      desc: "The routes are shaped around driving time, daylight, energy, and what a day actually feels like on the ground.",
     },
   },
   {
     icon: "03",
     zh: {
-      title: "雙語內容一起成立",
-      desc: "中英雙語不是附加功能，而是整個頁面與 CTA 都一起設計好的閱讀體驗。",
+      title: "幫你縮小真正要做的決定",
+      desc: "重點不是給你更多清單，而是幫你先整理出哪些停點值得、哪裡適合住、哪些安排可以略過。",
     },
     en: {
-      title: "Bilingual by design",
-      desc: "Chinese and English are treated as first-class reading experiences across the whole flow.",
+      title: "Useful decisions are narrowed down for you",
+      desc: "Instead of giving you more tabs to compare, the guide helps narrow where to stop, stay, and spend your time.",
     },
   },
 ];
@@ -41,12 +41,12 @@ export default function ValueProps({ lang }) {
     <section className="canvas-section">
       <div className="page-container">
         <SectionIntro
-          eyebrow={lang === "zh" ? "Design Intent" : "Design Intent"}
-          title={lang === "zh" ? "不是一般旅遊站，而是旅遊內容與規劃工具的交界" : "Not a generic travel site, but a meeting point between story and planning"}
+          eyebrow={lang === "zh" ? "Why This Helps" : "Why This Helps"}
+          title={lang === "zh" ? "把實際走過的經驗，整理成比較值得參考的路線" : "Field-tested routes for travelers who want more than saved pins"}
           description={
             lang === "zh"
-              ? "這次 redesign 的重點，是讓內容品牌與產品流程用同一套語言成立。"
-              : "The redesign makes the editorial brand and the product flow feel like one coherent system."
+              ? "這裡想提供的不是抽象靈感，而是更接近真實旅行決策的參考方式。"
+              : "The goal is not more inspiration for your bookmarks, but something closer to practical travel judgment."
           }
         />
 

@@ -6,7 +6,6 @@ import FeaturedSection from "./FeaturedSection";
 import Footer from "./Footer";
 import ProductShot from "./ProductShot";
 import SectionIntro from "./SectionIntro";
-import StatsBar from "./StatsBar";
 import ValueProps from "./ValueProps";
 
 export default function LandingPage({ lang, attractions, regions, onCountryClick }) {
@@ -110,7 +109,6 @@ export default function LandingPage({ lang, attractions, regions, onCountryClick
 
       <FeaturedSection itineraries={featuredItineraries} lang={lang} onCountryClick={onCountryClick} />
       <ValueProps lang={lang} />
-      <StatsBar attractionCount={attractions.length} regionCount={regions.length} lang={lang} />
       <Footer lang={lang} />
     </div>
   );
