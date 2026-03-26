@@ -1,72 +1,161 @@
+import { useState } from "react";
 import { COUNTRY_CONFIG, COUNTRY_ORDER } from "../lib/constants";
 
 export default function ProductShot({ lang }) {
-  const countries = COUNTRY_ORDER.map((countryKey) => COUNTRY_CONFIG[countryKey]);
-  const previewDays = [
-    {
-      day: "Day 1",
-      titleZh: "抵達與港口暖身",
-      titleEn: "Arrival and Harbor Warm-up",
-      slots: [
+  const countries = COUNTRY_ORDER.map((countryKey) => ({
+    key: countryKey,
+    ...COUNTRY_CONFIG[countryKey],
+  }));
+  const [selectedCountry, setSelectedCountry] = useState("Norway");
+  const previewPresets = {
+    Norway: {
+      eyebrowZh: "Lofoten 示意路線",
+      eyebrowEn: "Lofoten Sample",
+      titleZh: "羅弗敦 3 日節奏範本",
+      titleEn: "3-Day Lofoten Rhythm",
+      routeZh: "Hauklandstranda -> Å -> Reine -> Svolvær",
+      routeEn: "Hauklandstranda -> Å -> Reine -> Svolvaer",
+      days: [
         {
-          time: "10:00 - 12:00",
-          zh: "入住後舊城與港口慢走，先把節奏放慢。",
-          en: "Ease in with an old-town and harbor walk after check-in.",
+          day: "Day 1",
+          titleZh: "抵達 Leknes，南下到 Å",
+          titleEn: "Arrive in Leknes, then head south to Å",
+          slots: [
+            {
+              time: "07:30 - 11:30",
+              zh: "Leknes 取車後先去 Hauklandstranda Beach，沿途熟悉路況與停車節奏。",
+              en: "Pick up the car in Leknes, then start with Hauklandstranda Beach to settle into the roads.",
+            },
+            {
+              time: "13:00 - 16:00",
+              zh: "經過超市採買後往南開，傍晚抵達 Å 鎮沿途停車拍照。",
+              en: "Stock up at the supermarket, then drive south and stop along the way before reaching Å.",
+            },
+          ],
+          mealZh: "餐廳：Anita's Sjomat 魚漢堡備選",
+          mealEn: "Food: Anita's Sjomat as the fish-burger stop",
+          stayZh: "住宿：Eliassen Rorbuer",
+          stayEn: "Stay: Eliassen Rorbuer",
         },
         {
-          time: "13:00 - 16:00",
-          zh: "挑一個主景點 + 一段沿海步行，不把第一天塞滿。",
-          en: "Pair one anchor stop with a scenic coastal walk instead of overpacking day one.",
+          day: "Day 2",
+          titleZh: "Reine / Anita's / Svolvær",
+          titleEn: "Reine / Anita's / Svolvaer",
+          slots: [
+            {
+              time: "08:00 - 12:00",
+              zh: "橋上拍 Eliassen Rorbuer，接著去 Reine 補經典角度。",
+              en: "Start with the bridge view over Eliassen Rorbuer, then move on to classic Reine angles.",
+            },
+            {
+              time: "13:30 - 18:00",
+              zh: "中午吃 Anita's Sjomat，下午沿 E10 開到 Svolvær。",
+              en: "Lunch at Anita's Sjomat, then drive the E10 all the way to Svolvaer.",
+            },
+          ],
+          mealZh: "晚餐：Svolvær 市中心熟食 / 超市採買",
+          mealEn: "Dinner: Svolvaer center takeaway or groceries",
+          stayZh: "住宿：Repslagergata 11 Airbnb",
+          stayEn: "Stay: Airbnb on Repslagergata 11",
+        },
+        {
+          day: "Day 3",
+          titleZh: "Kabelvåg / Tjeldbergtind / Henningsvær",
+          titleEn: "Kabelvag / Tjeldbergtind / Henningsvaer",
+          slots: [
+            {
+              time: "09:30 - 12:30",
+              zh: "早上先去 Kabelvåg，再安排 Tjeldbergtind 輕量登山。",
+              en: "Begin in Kabelvag, then fit in the short Tjeldbergtind hike.",
+            },
+            {
+              time: "14:00 - 18:00",
+              zh: "下午到 Henningsvær 和 Uttakleiv strand，收海灘與小鎮節奏。",
+              en: "Spend the afternoon in Henningsvaer and Uttakleiv strand for village and beach rhythm.",
+            },
+          ],
+          mealZh: "加值：Uttakleiv strand 黃昏停留",
+          mealEn: "Extra: sunset stop at Uttakleiv strand",
+          stayZh: "住宿：Sennesvik Airbnb",
+          stayEn: "Stay: Airbnb in Sennesvik",
         },
       ],
-      mealZh: "午餐：海港海鮮小館",
-      mealEn: "Lunch: harbor seafood bistro",
-      stayZh: "住宿：海景旅館 / 方便隔天出發",
-      stayEn: "Stay: seaside hotel for an easy day-two start",
     },
-    {
-      day: "Day 2",
-      titleZh: "主景點與拍照時段",
-      titleEn: "Anchor Stops and Photo Windows",
-      slots: [
+    "New Zealand": {
+      eyebrowZh: "南島示意路線",
+      eyebrowEn: "South Island Sample",
+      titleZh: "紐西蘭南島 3 日示意版",
+      titleEn: "3-Day South Island Sample",
+      routeZh: "Christchurch -> Akaroa -> Tekapo -> Mount Cook",
+      routeEn: "Christchurch -> Akaroa -> Tekapo -> Mount Cook",
+      days: [
         {
-          time: "09:30 - 12:00",
-          zh: "安排最重要的觀景點，早一點避開人潮與逆光。",
-          en: "Hit the main viewpoint early for calmer light and lighter crowds.",
+          day: "Day 1",
+          titleZh: "Christchurch 到 Akaroa",
+          titleEn: "Christchurch to Akaroa",
+          slots: [
+            {
+              time: "15:30 - 18:00",
+              zh: "基督城落地後先到 Woolworths Hornby 採買，再往 Akaroa Harbour View / Hilltop 看風景。",
+              en: "After landing in Christchurch, stop by Woolworths Hornby and continue to Akaroa Harbour View / Hilltop.",
+            },
+            {
+              time: "18:30 - 20:30",
+              zh: "進阿卡羅阿市區，走 Peninsula War Memorial 與海邊主街。",
+              en: "Head into Akaroa town for the Peninsula War Memorial and a waterfront stroll.",
+            },
+          ],
+          mealZh: "餐廳：Ma Maison / Akaroa Fish & Chips",
+          mealEn: "Food: Ma Maison or Akaroa Fish & Chips",
+          stayZh: "住宿：Akaroa Waterfront Motels",
+          stayEn: "Stay: Akaroa Waterfront Motels",
         },
         {
-          time: "14:00 - 17:30",
-          zh: "接續兩個順路停點，中段插入正式午餐。",
-          en: "Link two nearby stops and place a real lunch in the middle to keep the day balanced.",
+          day: "Day 2",
+          titleZh: "Akaroa 到 Lake Tekapo",
+          titleEn: "Akaroa to Lake Tekapo",
+          slots: [
+            {
+              time: "11:00 - 13:00",
+              zh: "上午先去 Shamarra Alpacas，沿路在 Ashburton South 補給。",
+              en: "Visit Shamarra Alpacas in the morning, then restock near Ashburton South.",
+            },
+            {
+              time: "16:30 - 19:00",
+              zh: "Fairlie Bakehouse 吃派後進 Tekapo，看好牧羊人教堂與湖邊步道。",
+              en: "Stop for pies at Fairlie Bakehouse before arriving in Tekapo for the church and lake walk.",
+            },
+          ],
+          mealZh: "餐廳：Fairlie Bakehouse / The Better Batter NZ",
+          mealEn: "Food: Fairlie Bakehouse / The Better Batter NZ",
+          stayZh: "住宿：Olive Sanctuary - Discover Tekapo",
+          stayEn: "Stay: Olive Sanctuary - Discover Tekapo",
+        },
+        {
+          day: "Day 3",
+          titleZh: "Lake Tekapo 到 Mount Cook",
+          titleEn: "Lake Tekapo to Mount Cook",
+          slots: [
+            {
+              time: "09:00 - 12:00",
+              zh: "Tekapo 飛行體驗或 Mt John Observatory，途中停 Lake Pukaki Viewing Spot。",
+              en: "Start with Tekapo air experience or Mt John Observatory, then pause at Lake Pukaki Viewing Spot.",
+            },
+            {
+              time: "13:00 - 17:30",
+              zh: "中午吃 Mt Cook Alpine Salmon Shop，下午 Glacier Explorers 或 Hooker Valley Track。",
+              en: "Lunch at Mt Cook Alpine Salmon Shop, then Glacier Explorers or Hooker Valley Track in the afternoon.",
+            },
+          ],
+          mealZh: "餐廳：Mt Cook Alpine Salmon Shop",
+          mealEn: "Food: Mt Cook Alpine Salmon Shop",
+          stayZh: "住宿：回 Tekapo 續住",
+          stayEn: "Stay: return to Tekapo for the night",
         },
       ],
-      mealZh: "晚餐：作者私藏餐廳推薦",
-      mealEn: "Dinner: editor's favorite dinner pick",
-      stayZh: "住宿：留在同一區，減少搬行李",
-      stayEn: "Stay: remain in the same base to avoid re-packing",
     },
-    {
-      day: "Day 3",
-      titleZh: "留白探索與回程銜接",
-      titleEn: "Open Exploration and Return Rhythm",
-      slots: [
-        {
-          time: "10:30 - 13:00",
-          zh: "用半天補喜歡的點，或改成咖啡館 / 市區散策。",
-          en: "Use a half-day for a revisit or switch to cafes and a lighter city rhythm.",
-        },
-        {
-          time: "14:30 - 18:00",
-          zh: "把回程、採買與 sunset stop 收成一個順暢段落。",
-          en: "Blend the drive back, a quick supply stop, and a final sunset window.",
-        },
-      ],
-      mealZh: "加值：甜點 / 咖啡名單",
-      mealEn: "Extra: dessert and coffee shortlist",
-      stayZh: "延伸：隔天機場 / 車站動線提醒",
-      stayEn: "Extra: airport and station notes for the next day",
-    },
-  ];
+  };
+  const activePreset = previewPresets[selectedCountry];
 
   return (
     <div className="product-shot">
@@ -82,13 +171,18 @@ export default function ProductShot({ lang }) {
           <h3>{lang === "zh" ? "目的地章節" : "Destination Chapters"}</h3>
           <div className="product-shot__destinations">
             {countries.map((country) => (
-              <div key={country.enName} className="product-shot__destination">
+              <button
+                key={country.key}
+                className={`product-shot__destination ${selectedCountry === country.key ? "product-shot__destination--active" : ""}`}
+                onClick={() => setSelectedCountry(country.key)}
+                type="button"
+              >
                 <img alt="" src={country.image} />
                 <div>
                   <strong>{lang === "zh" ? country.zhName : country.enName}</strong>
                   <span>{country.marketingEn}</span>
                 </div>
-              </div>
+              </button>
             ))}
           </div>
         </aside>
@@ -97,11 +191,13 @@ export default function ProductShot({ lang }) {
           <div className="product-shot__panel">
             <div className="product-shot__panel-header">
               <div>
-                <p className="eyebrow">{lang === "zh" ? "行程預覽" : "Itinerary Flow"}</p>
-                <h4>{lang === "zh" ? "篩選偏好，找到最佳行程" : "Filter preferences, find the best itinerary"}</h4>
+                <p className="eyebrow">{lang === "zh" ? activePreset.eyebrowZh : activePreset.eyebrowEn}</p>
+                <h4>{lang === "zh" ? activePreset.titleZh : activePreset.titleEn}</h4>
               </div>
               <span className="product-shot__badge">{lang === "zh" ? "精選路線" : "Curated"}</span>
             </div>
+
+            <p className="product-shot__route-note">{lang === "zh" ? activePreset.routeZh : activePreset.routeEn}</p>
 
             <div className="product-shot__pills">
               <span className="product-shot__pill">{lang === "zh" ? "3 日節奏" : "3-day rhythm"}</span>
@@ -113,15 +209,15 @@ export default function ProductShot({ lang }) {
               <article className="product-shot__day product-shot__day--featured">
                 <div className="product-shot__day-header">
                   <div>
-                    <span className="product-shot__day-index">{previewDays[0].day}</span>
-                    <strong>{lang === "zh" ? previewDays[0].titleZh : previewDays[0].titleEn}</strong>
+                    <span className="product-shot__day-index">{activePreset.days[0].day}</span>
+                    <strong>{lang === "zh" ? activePreset.days[0].titleZh : activePreset.days[0].titleEn}</strong>
                   </div>
                   <span className="product-shot__day-tag">{lang === "zh" ? "預覽" : "Preview"}</span>
                 </div>
 
                 <div className="product-shot__slots">
-                  {previewDays[0].slots.map((slot) => (
-                    <div key={`${previewDays[0].day}-${slot.time}`} className="product-shot__slot">
+                  {activePreset.days[0].slots.map((slot) => (
+                    <div key={`${activePreset.days[0].day}-${slot.time}`} className="product-shot__slot">
                       <span className="product-shot__slot-time">{slot.time}</span>
                       <p className="product-shot__slot-copy">{lang === "zh" ? slot.zh : slot.en}</p>
                     </div>
@@ -129,13 +225,13 @@ export default function ProductShot({ lang }) {
                 </div>
 
                 <div className="product-shot__notes">
-                  <span>{lang === "zh" ? previewDays[0].mealZh : previewDays[0].mealEn}</span>
-                  <span>{lang === "zh" ? previewDays[0].stayZh : previewDays[0].stayEn}</span>
+                  <span>{lang === "zh" ? activePreset.days[0].mealZh : activePreset.days[0].mealEn}</span>
+                  <span>{lang === "zh" ? activePreset.days[0].stayZh : activePreset.days[0].stayEn}</span>
                 </div>
               </article>
 
               <div className="product-shot__compact-days">
-                {previewDays.slice(1).map((day) => (
+                {activePreset.days.slice(1).map((day) => (
                   <article key={day.day} className="product-shot__day product-shot__day--compact">
                     <div className="product-shot__day-header">
                       <div>

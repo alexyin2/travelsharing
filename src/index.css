@@ -399,10 +399,30 @@ img {
   grid-template-columns: 56px minmax(0, 1fr);
   gap: 12px;
   align-items: center;
+  width: 100%;
   padding: 10px;
   border-radius: 18px;
   background: rgba(23, 20, 17, 0.04);
   box-shadow: inset 0 0 0 1px rgba(23, 20, 17, 0.06);
+  text-align: left;
+  cursor: pointer;
+  transition: transform 180ms ease, background 180ms ease, box-shadow 180ms ease;
+}
+
+.product-shot__destination:hover {
+  transform: translateY(-1px);
+}
+
+.product-shot__destination--active {
+  background: rgba(20, 84, 67, 0.1);
+  box-shadow:
+    0 10px 24px rgba(34, 25, 10, 0.06),
+    inset 0 0 0 1px rgba(20, 84, 67, 0.16);
+}
+
+.product-shot__destination:focus-visible {
+  outline: 2px solid rgba(20, 84, 67, 0.5);
+  outline-offset: 2px;
 }
 
 .product-shot__destination img {
@@ -466,6 +486,12 @@ img {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+}
+
+.product-shot__route-note {
+  color: var(--muted);
+  font-size: 0.84rem;
+  line-height: 1.5;
 }
 
 .product-shot__pill {
