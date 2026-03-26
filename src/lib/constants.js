@@ -108,27 +108,27 @@ export const COUNTRY_CONFIG = {
 };
 
 export const PURPOSE_OPTIONS = [
-  { val: "leisure", zh: "休閒放鬆", en: "Leisure", icon: "🌿" },
-  { val: "see_all", zh: "景點全攻略", en: "See All Attractions", icon: "📸" },
-  { val: "adventure", zh: "冒險探索", en: "Adventure", icon: "🧗" },
+  { val: "leisure", zh: "休閒放鬆", en: "Leisure", noteZh: "景觀、用餐與留白比較多", noteEn: "Scenic rhythm with more room for meals and pauses", icon: "🌿" },
+  { val: "see_all", zh: "景點全攻略", en: "See All Attractions", noteZh: "把代表性景點盡量串在同一條線上", noteEn: "Build the route around as many signature stops as possible", icon: "📸" },
+  { val: "adventure", zh: "冒險探索", en: "Adventure", noteZh: "加入步道、活動與更高一點的移動強度", noteEn: "Lean into hikes, activities, and a higher-energy route", icon: "🧗" },
 ];
 
 export const TRANSPORT_OPTIONS = [
-  { val: "car", zh: "租車自駕", en: "Rent a car", icon: "🚗" },
-  { val: "bus", zh: "大眾運輸", en: "Public transit", icon: "🚌" },
-  { val: "mixed", zh: "混合", en: "Mixed", icon: "🔀" },
+  { val: "car", zh: "租車自駕", en: "Rent a car", noteZh: "最適合長距離公路與自由停點節奏", noteEn: "Best for long drives and flexible scenic stopovers", icon: "🚗" },
+  { val: "bus", zh: "大眾運輸", en: "Public transit", noteZh: "減少駕駛壓力，讓每天的移動更穩定", noteEn: "Lower the driving load and keep the travel days steadier", icon: "🚌" },
+  { val: "mixed", zh: "混合", en: "Mixed", noteZh: "重要段落自駕，其餘維持較輕的移動方式", noteEn: "Mix key driving segments with easier transfers", icon: "🔀" },
 ];
 
 export const PACE_OPTIONS = [
-  { val: "relaxed", zh: "悠閒", en: "Relaxed", icon: "🐢" },
-  { val: "moderate", zh: "適中", en: "Moderate", icon: "🚶" },
-  { val: "intensive", zh: "緊湊", en: "Intensive", icon: "🏃" },
+  { val: "relaxed", zh: "悠閒", en: "Relaxed", noteZh: "保留散步、咖啡與臨時改動的餘裕", noteEn: "Leave room for walking, coffee stops, and flexibility", icon: "🐢" },
+  { val: "moderate", zh: "適中", en: "Moderate", noteZh: "主景點完整，但不把每一天排得太滿", noteEn: "Cover the anchor stops without pushing every day too hard", icon: "🚶" },
+  { val: "intensive", zh: "緊湊", en: "Intensive", noteZh: "停點更密，適合短天數或想多看一點的人", noteEn: "Fit in more stops for shorter trips or denser travel days", icon: "🏃" },
 ];
 
 export const BUDGET_OPTIONS = [
-  { val: "budget", zh: "平價", en: "Budget", icon: "💰" },
-  { val: "mid_range", zh: "中等", en: "Mid-range", icon: "💳" },
-  { val: "premium", zh: "高級", en: "Premium", icon: "💎" },
+  { val: "budget", zh: "平價", en: "Budget", noteZh: "優先控制支出，把預算留給必要體驗", noteEn: "Value-led choices that protect budget for essentials", icon: "💰" },
+  { val: "mid_range", zh: "中等", en: "Mid-range", noteZh: "在住宿舒適度、餐廳與花費之間取得平衡", noteEn: "Balance comfort, dining, and overall trip spend", icon: "💳" },
+  { val: "premium", zh: "高級", en: "Premium", noteZh: "更重視住宿質感、餐飲與整體體驗密度", noteEn: "Prioritize stronger stays, meals, and overall polish", icon: "💎" },
 ];
 
 export const SEASON_OPTIONS = [

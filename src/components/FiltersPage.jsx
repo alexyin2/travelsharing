@@ -10,10 +10,44 @@ import {
   getCountryName,
 } from "../lib/constants";
 
-function FilterSection({ label, options, value, onChange, lang, wide }) {
+const FILTER_SECTION_COPY = {
+  purpose: {
+    zh: "先決定這趟旅程要更接近放鬆、掃景點，還是帶一點探索感。",
+    en: "Decide whether the route should feel relaxed, comprehensive, or a little more exploratory.",
+  },
+  duration: {
+    zh: "旅行天數會直接影響我們如何安排移動距離與留白。",
+    en: "Trip length shapes how aggressively we plan driving distances and breathing room.",
+  },
+  transport: {
+    zh: "不同移動方式會改變停點密度，也會影響一天的節奏。",
+    en: "Your transportation choice changes both stop density and the tempo of each day.",
+  },
+  pace: {
+    zh: "同樣的景點，可以排成舒服、平衡或更緊密的版本。",
+    en: "The same places can be arranged into a softer, balanced, or denser travel rhythm.",
+  },
+  season: {
+    zh: "季節會影響光線、日照、步道條件與停留時間。",
+    en: "Season shifts the light, daylight hours, trail conditions, and how long each stop deserves.",
+  },
+  timing: {
+    zh: "抵達與離開時間會影響第一天和最後一天能排進多少內容。",
+    en: "Arrival and departure windows shape how much we can fit into the first and last day.",
+  },
+  budget: {
+    zh: "預算不是限制，而是幫助我們決定住宿、餐飲和停點的配置方式。",
+    en: "Budget is less a limit than a signal for how to allocate stays, dining, and route choices.",
+  },
+};
+
+function FilterSection({ label, description, options, value, onChange, lang, wide }) {
   return (
     <div className="field-group">
-      <label>{label}</label>
+      <div className="field-group__header">
+        <label>{label}</label>
+        {description ? <p className="field-group__hint">{description}</p> : null}
+      </div>
       <div className={`choice-row ${wide ? "choice-row--wide" : ""}`}>
         {options.map((opt) => (
           <button
@@ -22,8 +56,13 @@ function FilterSection({ label, options, value, onChange, lang, wide }) {
             onClick={() => onChange(value === opt.val ? null : opt.val)}
             type="button"
           >
-            <span>{opt.icon}</span>
-            <span>{lang === "zh" ? opt.zh : opt.en}</span>
+            <span className="choice-chip__copy">
+              {wide && lang === "zh" ? <span className="choice-chip__eyebrow">{opt.en}</span> : null}
+              <span className="choice-chip__label">{lang === "zh" ? opt.zh : opt.en}</span>
+              {wide && (lang === "zh" ? opt.noteZh : opt.noteEn) ? (
+                <span className="choice-chip__note">{lang === "zh" ? opt.noteZh : opt.noteEn}</span>
+              ) : null}
+            </span>
           </button>
         ))}
       </div>
@@ -34,7 +73,10 @@ function FilterSection({ label, options, value, onChange, lang, wide }) {
 function DurationFilter({ value, onChange, lang }) {
   return (
     <div className="field-group">
-      <label>{lang === "zh" ? "旅行天數" : "Trip duration"}</label>
+      <div className="field-group__header">
+        <label>{lang === "zh" ? "旅行天數" : "Trip duration"}</label>
+        <p className="field-group__hint">{lang === "zh" ? FILTER_SECTION_COPY.duration.zh : FILTER_SECTION_COPY.duration.en}</p>
+      </div>
       <div className="choice-row">
         {DURATION_OPTIONS.map((opt) => (
           <button
@@ -43,7 +85,7 @@ function DurationFilter({ value, onChange, lang }) {
             onClick={() => onChange(value?.val === opt.val ? null : opt)}
             type="button"
           >
-            {lang === "zh" ? opt.zh : opt.en}
+            <span className="choice-chip__label">{lang === "zh" ? opt.zh : opt.en}</span>
           </button>
         ))}
       </div>
@@ -90,6 +132,7 @@ export default function FiltersPage({ lang, selectedCountry, filters, setFilters
           <div className="form-stack">
             <FilterSection
               label={lang === "zh" ? "旅行目的" : "Trip purpose"}
+              description={lang === "zh" ? FILTER_SECTION_COPY.purpose.zh : FILTER_SECTION_COPY.purpose.en}
               options={PURPOSE_OPTIONS}
               value={filters.purpose}
               onChange={update("purpose")}
@@ -101,6 +144,7 @@ export default function FiltersPage({ lang, selectedCountry, filters, setFilters
 
             <FilterSection
               label={lang === "zh" ? "交通方式" : "Transportation"}
+              description={lang === "zh" ? FILTER_SECTION_COPY.transport.zh : FILTER_SECTION_COPY.transport.en}
               options={TRANSPORT_OPTIONS}
               value={filters.transport}
               onChange={update("transport")}
@@ -110,6 +154,7 @@ export default function FiltersPage({ lang, selectedCountry, filters, setFilters
 
             <FilterSection
               label={lang === "zh" ? "旅行節奏" : "Travel pace"}
+              description={lang === "zh" ? FILTER_SECTION_COPY.pace.zh : FILTER_SECTION_COPY.pace.en}
               options={PACE_OPTIONS}
               value={filters.pace}
               onChange={update("pace")}
@@ -119,6 +164,7 @@ export default function FiltersPage({ lang, selectedCountry, filters, setFilters
 
             <FilterSection
               label={lang === "zh" ? "季節" : "Season"}
+              description={lang === "zh" ? FILTER_SECTION_COPY.season.zh : FILTER_SECTION_COPY.season.en}
               options={SEASON_OPTIONS}
               value={filters.season}
               onChange={update("season")}
@@ -128,6 +174,7 @@ export default function FiltersPage({ lang, selectedCountry, filters, setFilters
             <div className="form-grid">
               <FilterSection
                 label={lang === "zh" ? "抵達時間" : "Arrival time"}
+                description={lang === "zh" ? FILTER_SECTION_COPY.timing.zh : FILTER_SECTION_COPY.timing.en}
                 options={ARRIVAL_DEPARTURE_OPTIONS}
                 value={filters.arrivalTime}
                 onChange={update("arrivalTime")}
@@ -135,6 +182,7 @@ export default function FiltersPage({ lang, selectedCountry, filters, setFilters
               />
               <FilterSection
                 label={lang === "zh" ? "離開時間" : "Departure time"}
+                description={lang === "zh" ? FILTER_SECTION_COPY.timing.zh : FILTER_SECTION_COPY.timing.en}
                 options={ARRIVAL_DEPARTURE_OPTIONS}
                 value={filters.departureTime}
                 onChange={update("departureTime")}
@@ -144,6 +192,7 @@ export default function FiltersPage({ lang, selectedCountry, filters, setFilters
 
             <FilterSection
               label={lang === "zh" ? "預算等級" : "Budget level"}
+              description={lang === "zh" ? FILTER_SECTION_COPY.budget.zh : FILTER_SECTION_COPY.budget.en}
               options={BUDGET_OPTIONS}
               value={filters.budget}
               onChange={update("budget")}
@@ -154,9 +203,30 @@ export default function FiltersPage({ lang, selectedCountry, filters, setFilters
         </div>
 
         <aside className="composer-sidebar">
-          <div className="summary-card">
+          <div className="summary-card summary-card--results">
             <p className="eyebrow">{lang === "zh" ? "搜尋結果" : "Results"}</p>
-            <h2>{matchCount} {lang === "zh" ? "條行程符合" : "itineraries match"}</h2>
+            <h2>{lang === "zh" ? "目前最接近的路線方向" : "The closest route direction right now"}</h2>
+            <div className="summary-card__hero">
+              <strong className="summary-card__count">{matchCount}</strong>
+              <div className="summary-card__hero-copy">
+                <span>{lang === "zh" ? "條符合的行程" : "matching itineraries"}</span>
+                <p>
+                  {lang === "zh"
+                    ? "篩選條件越清楚，推薦結果就會越接近你真正會出發的版本。"
+                    : "The clearer the filters, the closer the recommendation gets to a route you would actually take."}
+                </p>
+              </div>
+            </div>
+            <div className="summary-card__facts">
+              <div className="summary-card__fact">
+                <span>{lang === "zh" ? "目的地" : "Destination"}</span>
+                <strong>{getCountryName(selectedCountry, lang)}</strong>
+              </div>
+              <div className="summary-card__fact">
+                <span>{lang === "zh" ? "已啟用條件" : "Active filters"}</span>
+                <strong>{activeFilterCount}</strong>
+              </div>
+            </div>
             {matchCount === 0 ? (
               <p className="summary-card__empty">
                 {lang === "zh"
@@ -166,6 +236,7 @@ export default function FiltersPage({ lang, selectedCountry, filters, setFilters
             ) : null}
             {bestMatch ? (
               <div className="summary-card__preview">
+                <p className="summary-card__preview-eyebrow">{lang === "zh" ? "推薦路線" : "Suggested route"}</p>
                 <strong>{lang === "zh" ? bestMatch.titleZh : bestMatch.titleEn}</strong>
                 <span>{bestMatch.durationDays} {lang === "zh" ? "天" : "days"}</span>
                 <p>{lang === "zh" ? bestMatch.descriptionZh : bestMatch.descriptionEn}</p>
@@ -176,6 +247,12 @@ export default function FiltersPage({ lang, selectedCountry, filters, setFilters
           {activeFilterCount > 0 ? (
             <div className="summary-card summary-card--soft">
               <p className="eyebrow">{lang === "zh" ? "目前篩選" : "Active Filters"}</p>
+              <h2>{lang === "zh" ? "這次旅程的設定輪廓" : "The outline of this trip"}</h2>
+              <p>
+                {lang === "zh"
+                  ? "這些條件會一起決定停點密度、每日移動距離，以及餐廳和住宿的安排方式。"
+                  : "These filters shape stop density, daily travel distance, and how the route handles dining and stays."}
+              </p>
               <div className="selected-chip-list">
                 {filters.purpose ? <span className="selected-chip">{PURPOSE_OPTIONS.find((o) => o.val === filters.purpose)?.[lang] || filters.purpose}</span> : null}
                 {filters.transport ? <span className="selected-chip">{TRANSPORT_OPTIONS.find((o) => o.val === filters.transport)?.[lang] || filters.transport}</span> : null}
