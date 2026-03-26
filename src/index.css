@@ -241,6 +241,22 @@ img {
   color: var(--text);
 }
 
+.pill-button--language {
+  gap: 10px;
+}
+
+.pill-button__text {
+  font-weight: 560;
+}
+
+.pill-button__meta {
+  color: rgba(68, 64, 56, 0.7);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
 .pill-button__icon {
   font-size: 0.95rem;
 }
@@ -320,6 +336,54 @@ img {
   height: 4px;
   border-radius: 50%;
   background: rgba(68, 64, 56, 0.42);
+}
+
+.language-menu {
+  position: relative;
+}
+
+.language-menu__panel {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  min-width: 184px;
+  padding: 8px;
+  border-radius: 18px;
+  background: rgba(255, 253, 248, 0.96);
+  backdrop-filter: blur(18px);
+  box-shadow:
+    0 18px 36px rgba(34, 25, 10, 0.12),
+    inset 0 0 0 1px rgba(23, 20, 17, 0.08);
+}
+
+.language-menu__option {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  padding: 11px 12px;
+  border-radius: 12px;
+  color: var(--muted-strong);
+  cursor: pointer;
+  text-align: left;
+  transition: background 160ms ease, color 160ms ease;
+}
+
+.language-menu__option:hover {
+  background: rgba(23, 20, 17, 0.05);
+}
+
+.language-menu__option--active {
+  background: rgba(20, 84, 67, 0.08);
+  color: var(--accent-strong);
+}
+
+.language-menu__abbr {
+  color: rgba(68, 64, 56, 0.7);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
 }
 
 .hero-visual {

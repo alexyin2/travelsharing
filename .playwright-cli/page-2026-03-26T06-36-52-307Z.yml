@@ -1,0 +1,192 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e6]:
+        - generic [ref=e7]: AT
+        - generic [ref=e8]:
+          - generic [ref=e9]: AlexTravelSharing
+          - generic [ref=e10]:
+            - generic [ref=e11]: Editorial itineraries
+            - generic [ref=e13]: Real travel stories
+      - generic [ref=e14]:
+        - button "Language LN" [expanded] [active] [ref=e15]:
+          - generic [ref=e16]:
+            - generic [ref=e17]: Language
+            - generic [ref=e18]: LN
+        - menu [ref=e206]:
+          - menuitemradio "English EN" [checked] [ref=e207] [cursor=pointer]:
+            - generic [ref=e208]: English
+            - generic [ref=e209]: EN
+          - menuitemradio "繁體中文 ZH" [ref=e210] [cursor=pointer]:
+            - generic [ref=e211]: 繁體中文
+            - generic [ref=e212]: ZH
+  - generic [ref=e19]:
+    - generic [ref=e21]:
+      - generic [ref=e22]:
+        - paragraph [ref=e23]: Editorial travel / Curated itinerary studio
+        - heading "Turn firsthand travel stories into routes you can actually take." [level=1] [ref=e24]
+      - generic [ref=e25]:
+        - generic [ref=e26]:
+          - paragraph [ref=e27]: From Norwegian fjords to New Zealand drives, AlexTravelSharing blends firsthand notes, destination curation, and curated itinerary planning into one polished travel workflow.
+          - generic [ref=e28]:
+            - button "Start Planning" [ref=e29]:
+              - generic [ref=e30]: Start Planning
+            - button "Browse Destinations" [ref=e31]:
+              - generic [ref=e32]: Browse Destinations
+        - generic [ref=e39]:
+          - complementary [ref=e40]:
+            - paragraph [ref=e41]: Live Product Preview
+            - heading "Destination Chapters" [level=3] [ref=e42]
+            - generic [ref=e43]:
+              - button "Norway Arctic fjords and aurora routes" [ref=e44] [cursor=pointer]:
+                - generic [ref=e45]:
+                  - strong [ref=e46]: Norway
+                  - generic [ref=e47]: Arctic fjords and aurora routes
+              - button "New Zealand South Island Lakes, peaks, and slow scenic drives" [ref=e48] [cursor=pointer]:
+                - generic [ref=e49]:
+                  - strong [ref=e50]: New Zealand South Island
+                  - generic [ref=e51]: Lakes, peaks, and slow scenic drives
+          - generic [ref=e53]:
+            - generic [ref=e54]:
+              - generic [ref=e55]:
+                - paragraph [ref=e56]: Lofoten Sample
+                - heading "3-Day Lofoten Rhythm" [level=4] [ref=e57]
+              - generic [ref=e58]: Curated
+            - paragraph [ref=e59]: Hauklandstranda -> Å -> Reine -> Svolvaer
+            - generic [ref=e60]:
+              - generic [ref=e61]: 3-day rhythm
+              - generic [ref=e62]: Dining picks
+              - generic [ref=e63]: Stay notes
+            - generic [ref=e64]:
+              - article [ref=e65]:
+                - generic [ref=e66]:
+                  - generic [ref=e67]:
+                    - generic [ref=e68]: Day 1
+                    - strong [ref=e69]: Arrive in Leknes, then head south to Å
+                  - generic [ref=e70]: Preview
+                - generic [ref=e71]:
+                  - generic [ref=e72]:
+                    - generic [ref=e73]: 07:30 - 11:30
+                    - paragraph [ref=e74]: Pick up the car in Leknes, then start with Hauklandstranda Beach to settle into the roads.
+                  - generic [ref=e75]:
+                    - generic [ref=e76]: 13:00 - 16:00
+                    - paragraph [ref=e77]: Stock up at the supermarket, then drive south and stop along the way before reaching Å.
+                - generic [ref=e78]:
+                  - generic [ref=e79]: "Food: Anita's Sjomat as the fish-burger stop"
+                  - generic [ref=e80]: "Stay: Eliassen Rorbuer"
+              - generic [ref=e81]:
+                - article [ref=e82]:
+                  - generic [ref=e83]:
+                    - generic [ref=e84]:
+                      - generic [ref=e85]: Day 2
+                      - strong [ref=e86]: Reine / Anita's / Svolvaer
+                    - generic [ref=e87]: Curated
+                  - generic [ref=e88]:
+                    - generic [ref=e89]:
+                      - generic [ref=e90]: 08:00 - 12:00
+                      - paragraph [ref=e91]: Start with the bridge view over Eliassen Rorbuer, then move on to classic Reine angles.
+                    - generic [ref=e92]:
+                      - generic [ref=e93]: 13:30 - 18:00
+                      - paragraph [ref=e94]: Lunch at Anita's Sjomat, then drive the E10 all the way to Svolvaer.
+                  - generic [ref=e95]:
+                    - generic [ref=e96]: "Dinner: Svolvaer center takeaway or groceries"
+                    - generic [ref=e97]: "Stay: Airbnb on Repslagergata 11"
+                - article [ref=e98]:
+                  - generic [ref=e99]:
+                    - generic [ref=e100]:
+                      - generic [ref=e101]: Day 3
+                      - strong [ref=e102]: Kabelvag / Tjeldbergtind / Henningsvaer
+                    - generic [ref=e103]: Curated
+                  - generic [ref=e104]:
+                    - generic [ref=e105]:
+                      - generic [ref=e106]: 09:30 - 12:30
+                      - paragraph [ref=e107]: Begin in Kabelvag, then fit in the short Tjeldbergtind hike.
+                    - generic [ref=e108]:
+                      - generic [ref=e109]: 14:00 - 18:00
+                      - paragraph [ref=e110]: Spend the afternoon in Henningsvaer and Uttakleiv strand for village and beach rhythm.
+                  - generic [ref=e111]:
+                    - generic [ref=e112]: "Extra: sunset stop at Uttakleiv strand"
+                    - generic [ref=e113]: "Stay: Airbnb in Sennesvik"
+    - generic [ref=e115]:
+      - generic [ref=e116]:
+        - paragraph [ref=e117]: Destinations
+        - paragraph [ref=e118]:
+          - strong [ref=e119]: Two destinations, one sharper planning flow
+          - generic [ref=e120]: Each destination keeps the editorial storytelling, then moves you quickly into filtering and itinerary matching.
+      - generic [ref=e121]:
+        - button "Norway Norway 🇳🇴 Norway Aurora routes, fjords, and fishing villages shaped into a practical Nordic playbook. 1 regions 1 spots Browse itineraries ↗" [ref=e122] [cursor=pointer]:
+          - img "Norway" [ref=e124]
+          - generic [ref=e125]:
+            - generic [ref=e126]:
+              - paragraph [ref=e127]: Norway
+              - generic [ref=e128]:
+                - generic [ref=e129]: 🇳🇴
+                - heading "Norway" [level=3] [ref=e130]
+            - paragraph [ref=e131]: Aurora routes, fjords, and fishing villages shaped into a practical Nordic playbook.
+            - generic [ref=e132]:
+              - generic [ref=e133]: 1 regions
+              - generic [ref=e134]: 1 spots
+            - generic [ref=e135]:
+              - generic [ref=e136]: Browse itineraries
+              - generic [ref=e137]: ↗
+        - button "New Zealand South Island New Zealand 🇳🇿 New Zealand South Island Glaciers, lakes, trails, and long scenic drives curated for South Island itineraries. 7 regions 30 spots Browse itineraries ↗" [ref=e138] [cursor=pointer]:
+          - img "New Zealand South Island" [ref=e140]
+          - generic [ref=e141]:
+            - generic [ref=e142]:
+              - paragraph [ref=e143]: New Zealand
+              - generic [ref=e144]:
+                - generic [ref=e145]: 🇳🇿
+                - heading "New Zealand South Island" [level=3] [ref=e146]
+            - paragraph [ref=e147]: Glaciers, lakes, trails, and long scenic drives curated for South Island itineraries.
+            - generic [ref=e148]:
+              - generic [ref=e149]: 7 regions
+              - generic [ref=e150]: 30 spots
+            - generic [ref=e151]:
+              - generic [ref=e152]: Browse itineraries
+              - generic [ref=e153]: ↗
+    - generic [ref=e155]:
+      - generic [ref=e156]:
+        - paragraph [ref=e157]: Featured Itineraries
+        - paragraph [ref=e158]:
+          - strong [ref=e159]: Featured itineraries to feel the rhythm of each route
+          - generic [ref=e160]: Routes shaped from firsthand trips, ready to inspire your own itinerary.
+      - generic [ref=e161]:
+        - button "🇳🇴 5 days Leisure Lofoten Essentials in 5 Days A first-time Lofoten route built around Leknes, Å, Reine, Svolvaer, and Henningsvaer." [ref=e162] [cursor=pointer]:
+          - generic [ref=e165]: 🇳🇴
+          - generic [ref=e166]:
+            - generic [ref=e167]:
+              - generic [ref=e168]: 5 days
+              - generic [ref=e169]: Leisure
+            - heading "Lofoten Essentials in 5 Days" [level=3] [ref=e170]
+            - paragraph [ref=e171]: A first-time Lofoten route built around Leknes, Å, Reine, Svolvaer, and Henningsvaer.
+        - button "🇳🇿 7 days See All Attractions Classic South Island Drive in 7 Days A South Island classic whose early rhythm is built around Christchurch, Akaroa, Tekapo, and Mount Cook." [ref=e172] [cursor=pointer]:
+          - generic [ref=e175]: 🇳🇿
+          - generic [ref=e176]:
+            - generic [ref=e177]:
+              - generic [ref=e178]: 7 days
+              - generic [ref=e179]: See All Attractions
+            - heading "Classic South Island Drive in 7 Days" [level=3] [ref=e180]
+            - paragraph [ref=e181]: A South Island classic whose early rhythm is built around Christchurch, Akaroa, Tekapo, and Mount Cook.
+    - generic [ref=e183]:
+      - generic [ref=e184]:
+        - paragraph [ref=e185]: Why This Helps
+        - paragraph [ref=e186]:
+          - strong [ref=e187]: Field-tested routes for travelers who want more than saved pins
+          - generic [ref=e188]: The goal is not more inspiration for your bookmarks, but something closer to practical travel judgment.
+      - generic [ref=e189]:
+        - article [ref=e190]:
+          - generic [ref=e191]: "01"
+          - heading "Built from actual trips, not desk research" [level=3] [ref=e192]
+          - paragraph [ref=e193]: These routes come from places that were actually driven, walked, stayed in, and adjusted on the road.
+        - article [ref=e194]:
+          - generic [ref=e195]: "02"
+          - heading "Paced the way real travel days unfold" [level=3] [ref=e196]
+          - paragraph [ref=e197]: The routes are shaped around driving time, daylight, energy, and what a day actually feels like on the ground.
+        - article [ref=e198]:
+          - generic [ref=e199]: "03"
+          - heading "Useful decisions are narrowed down for you" [level=3] [ref=e200]
+          - paragraph [ref=e201]: Instead of giving you more tabs to compare, the guide helps narrow where to stop, stay, and spend your time.
+    - contentinfo [ref=e202]:
+      - generic [ref=e203]:
+        - paragraph [ref=e204]: © 2026 AlexTravelSharing
+        - paragraph [ref=e205]: Real travel stories, shaped into itineraries you can leave with.
