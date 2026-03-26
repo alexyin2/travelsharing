@@ -48,7 +48,6 @@ function FilterSection({ label, description, options, value, onChange, lang, wid
             type="button"
           >
             <span className="choice-chip__copy">
-              {wide ? <span className="choice-chip__eyebrow">{lang === "zh" ? opt.en : opt.zh}</span> : null}
               <span className="choice-chip__label">{lang === "zh" ? opt.zh : opt.en}</span>
               {wide && (lang === "zh" ? opt.noteZh : opt.noteEn) ? (
                 <span className="choice-chip__note">{lang === "zh" ? opt.noteZh : opt.noteEn}</span>

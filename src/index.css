@@ -1455,6 +1455,13 @@ img {
   display: grid;
   gap: 16px;
   align-self: start;
+  align-content: start;
+}
+
+.itinerary-layout > .composer-sidebar {
+  align-self: start;
+  position: sticky;
+  top: 24px;
 }
 
 .summary-card--soft {
@@ -2179,6 +2186,7 @@ img {
   .value-grid,
   .composer-layout,
   .itinerary-layout,
+  .browse-layout,
   .product-shot__canvas {
     grid-template-columns: 1fr;
   }
@@ -2339,7 +2347,8 @@ img {
 
 .browse-layout {
   display: grid;
-  gap: 32px;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr);
+  gap: 24px;
 }
 
 .browse-filters__header {
@@ -2401,8 +2410,6 @@ img {
 /* ── Download Card ── */
 
 .download-card {
-  position: sticky;
-  top: 92px;
   display: grid;
   gap: 14px;
   padding: 22px;
